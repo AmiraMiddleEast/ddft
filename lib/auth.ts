@@ -14,7 +14,11 @@ export const auth = betterAuth({
 
   emailAndPassword: {
     enabled: true,              // D-08
-    disableSignUp: true,        // D-10 — no self-service signup
+    // D-10: no self-service signup in production.
+    // ALLOW_SIGNUP=1 can be set ONLY for the seed-user script and integration
+    // tests to call auth.api.signUpEmail server-side (A1 workaround). Never
+    // set this in a real environment — production default is disabled.
+    disableSignUp: process.env.ALLOW_SIGNUP === "1" ? false : true,
     minPasswordLength: 12,      // D-14
     autoSignIn: false,
   },
