@@ -1,7 +1,7 @@
 # Requirements: Angela App
 
 **Defined:** 2026-04-16
-**Core Value:** Upload documents, get a correct and complete Laufliste PDF with the right authorities for each document — fast and without manual research.
+**Core Value:** Upload documents, get a correct and complete Laufliste PDF with the right authorities for each document -- fast and without manual research.
 
 ## v1 Requirements
 
@@ -40,7 +40,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Laufliste / PDF Generation
 
-- [ ] **LAFL-01**: System generates a PDF Laufliste with the full authentication chain per document (Vorbeglaubigung → Endbeglaubigung → Legalisation)
+- [ ] **LAFL-01**: System generates a PDF Laufliste with the full authentication chain per document (Vorbeglaubigung -> Endbeglaubigung -> Legalisation)
 - [ ] **LAFL-02**: PDF matches the existing Laufliste format with professional layout and correct German characters (umlauts)
 - [ ] **LAFL-03**: User can download the generated PDF
 
@@ -80,10 +80,10 @@ Explicitly excluded. Documented to prevent scope creep.
 
 | Feature | Reason |
 |---------|--------|
-| Multi-country support | UAE only — no other embassy data needed for now |
+| Multi-country support | UAE only -- no other embassy data needed for now |
 | Client self-service portal | Internal tool only, operator shares PDF manually |
 | Email/notification system | Single user, no async workflows needed |
-| Document status tracking through legalization steps | Laufliste shows WHERE to go, not whether you went — that's a different product |
+| Document status tracking through legalization steps | Laufliste shows WHERE to go, not whether you went -- that's a different product |
 | OCR/text extraction fallback | Claude Vision handles PDFs directly; bad scans get re-uploaded |
 | Mobile app | Desktop workflow, responsive web sufficient |
 | Payment/billing integration | Handled externally |
@@ -98,40 +98,40 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | — | Pending |
-| AUTH-02 | — | Pending |
-| AUTH-03 | — | Pending |
-| UPLD-01 | — | Pending |
-| UPLD-02 | — | Pending |
-| UPLD-03 | — | Pending |
-| EXTR-01 | — | Pending |
-| EXTR-02 | — | Pending |
-| REVW-01 | — | Pending |
-| REVW-02 | — | Pending |
-| REVW-03 | — | Pending |
-| REVW-04 | — | Pending |
-| LKUP-01 | — | Pending |
-| LKUP-02 | — | Pending |
-| LKUP-03 | — | Pending |
-| LKUP-04 | — | Pending |
-| LAFL-01 | — | Pending |
-| LAFL-02 | — | Pending |
-| LAFL-03 | — | Pending |
-| CASE-01 | — | Pending |
-| CASE-02 | — | Pending |
-| CASE-03 | — | Pending |
-| HIST-01 | — | Pending |
-| HIST-02 | — | Pending |
-| HIST-03 | — | Pending |
-| ADMN-01 | — | Pending |
-| ADMN-02 | — | Pending |
-| ADMN-03 | — | Pending |
+| AUTH-01 | Phase 1 | Pending |
+| AUTH-02 | Phase 1 | Pending |
+| AUTH-03 | Phase 1 | Pending |
+| UPLD-01 | Phase 2 | Pending |
+| UPLD-02 | Phase 2 | Pending |
+| UPLD-03 | Phase 5 | Pending |
+| EXTR-01 | Phase 2 | Pending |
+| EXTR-02 | Phase 2 | Pending |
+| REVW-01 | Phase 3 | Pending |
+| REVW-02 | Phase 3 | Pending |
+| REVW-03 | Phase 3 | Pending |
+| REVW-04 | Phase 3 | Pending |
+| LKUP-01 | Phase 3 | Pending |
+| LKUP-02 | Phase 3 | Pending |
+| LKUP-03 | Phase 3 | Pending |
+| LKUP-04 | Phase 3 | Pending |
+| LAFL-01 | Phase 4 | Pending |
+| LAFL-02 | Phase 4 | Pending |
+| LAFL-03 | Phase 4 | Pending |
+| CASE-01 | Phase 4 | Pending |
+| CASE-02 | Phase 4 | Pending |
+| CASE-03 | Phase 4 | Pending |
+| HIST-01 | Phase 5 | Pending |
+| HIST-02 | Phase 5 | Pending |
+| HIST-03 | Phase 5 | Pending |
+| ADMN-01 | Phase 5 | Pending |
+| ADMN-02 | Phase 5 | Pending |
+| ADMN-03 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 28 total
-- Mapped to phases: 0
-- Unmapped: 28
+- Mapped to phases: 28
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-16*
-*Last updated: 2026-04-16 after initial definition*
+*Last updated: 2026-04-16 after roadmap creation*

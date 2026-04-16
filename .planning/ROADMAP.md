@@ -1,0 +1,95 @@
+# Roadmap: Angela App
+
+## Overview
+
+The Angela App delivers a complete pipeline from document upload to Laufliste PDF output. The roadmap follows the natural workflow: establish the foundation with auth, build the input pipeline (upload and AI extraction), connect it through review and authority lookup, produce the PDF output organized by cases, then layer on history and admin capabilities. Each phase delivers a verifiable, end-to-end capability.
+
+## Phases
+
+**Phase Numbering:**
+- Integer phases (1, 2, 3): Planned milestone work
+- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+
+Decimal phases appear between their surrounding integers in numeric order.
+
+- [ ] **Phase 1: Foundation & Authentication** - Project scaffolding, database setup, and password-based login
+- [ ] **Phase 2: Document Upload & AI Extraction** - Upload PDFs and extract structured data via Claude Vision
+- [ ] **Phase 3: Review & Authority Lookup** - Review/edit extraction results and resolve correct Vorbeglaubigung authorities
+- [ ] **Phase 4: Laufliste Generation & Cases** - Generate PDF Laufliste output and organize documents into cases
+- [ ] **Phase 5: History, Re-upload & Admin** - Browse past Lauflisten, re-upload documents, and maintain Behoerden database
+
+## Phase Details
+
+### Phase 1: Foundation & Authentication
+**Goal**: User can access a running web application with secure login
+**Depends on**: Nothing (first phase)
+**Requirements**: AUTH-01, AUTH-02, AUTH-03
+**Success Criteria** (what must be TRUE):
+  1. User can log in with username and password and see the main application screen
+  2. User can close the browser, reopen it, and still be logged in
+  3. User can log out and be prevented from accessing the app without logging in again
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 2: Document Upload & AI Extraction
+**Goal**: User can upload PDF documents and receive AI-extracted structured data from them
+**Depends on**: Phase 1
+**Requirements**: UPLD-01, UPLD-02, EXTR-01, EXTR-02
+**Success Criteria** (what must be TRUE):
+  1. User can upload a single PDF via file picker or drag-and-drop and see it accepted by the system
+  2. User can upload multiple PDFs at once and see each one processed
+  3. After upload, system displays extracted fields (dokumenten_typ, ausstellende_behoerde, ausstellungsort, bundesland, ausstellungsdatum, voller_name) for the document
+  4. Each extracted field shows a confidence indicator (high/medium/low) so the user knows what needs review
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 3: Review & Authority Lookup
+**Goal**: User can verify and correct AI extraction results, then trigger authority lookup to see the correct Vorbeglaubigung authority with full contact details
+**Depends on**: Phase 2
+**Requirements**: REVW-01, REVW-02, REVW-03, REVW-04, LKUP-01, LKUP-02, LKUP-03, LKUP-04
+**Success Criteria** (what must be TRUE):
+  1. User sees the original PDF side-by-side with extracted data and can compare them visually
+  2. User can edit any extracted field inline, with Bundesland and Dokumententyp selectable from constrained dropdown lists
+  3. User can approve extraction results, triggering the system to look up the correct Vorbeglaubigung authority from the Behoerden database
+  4. After approval, system displays the resolved authority with full contact details (name, address, phone, email, office hours, website)
+  5. System correctly handles Regierungsbezirk sub-routing and displays special routing rules and exceptions where applicable
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 4: Laufliste Generation & Cases
+**Goal**: User can organize documents into cases and generate a complete, professionally formatted Laufliste PDF covering the full authentication chain
+**Depends on**: Phase 3
+**Requirements**: LAFL-01, LAFL-02, LAFL-03, CASE-01, CASE-02, CASE-03
+**Success Criteria** (what must be TRUE):
+  1. User can create a named case for a person and add multiple documents to it
+  2. System generates a PDF Laufliste showing the full chain per document (Vorbeglaubigung -> Endbeglaubigung -> Legalisation) with correct authority details
+  3. Generated PDF matches the existing Laufliste format with professional layout and correct German characters (umlauts)
+  4. User can download the generated PDF to their local machine
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 5: History, Re-upload & Admin
+**Goal**: User can browse and search past Lauflisten, replace document scans, and maintain the Behoerden database without code changes
+**Depends on**: Phase 4
+**Requirements**: HIST-01, HIST-02, HIST-03, UPLD-03, ADMN-01, ADMN-02, ADMN-03
+**Success Criteria** (what must be TRUE):
+  1. User can view a list of past Lauflisten showing date, person name, and document count
+  2. User can search and filter history by name or date and re-download any previously generated PDF
+  3. User can re-upload a better scan for an existing document without recreating the case, and the system re-processes it
+  4. User can view, search, and filter the Behoerden database and edit authority contact details
+  5. User can add new document types or modify routing rules through the admin interface
+**Plans**: TBD
+**UI hint**: yes
+
+## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
+
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 1. Foundation & Authentication | 0/0 | Not started | - |
+| 2. Document Upload & AI Extraction | 0/0 | Not started | - |
+| 3. Review & Authority Lookup | 0/0 | Not started | - |
+| 4. Laufliste Generation & Cases | 0/0 | Not started | - |
+| 5. History, Re-upload & Admin | 0/0 | Not started | - |
