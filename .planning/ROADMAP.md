@@ -31,7 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 5 plans
 Plans:
 - [x] 01-01-PLAN.md — Scaffold Next.js 16.2 + Tailwind v4 + shadcn (new-york) + Vitest (Wave 1)
-- [ ] 01-02-PLAN.md — Install better-sqlite3 + Drizzle ORM, write db/client.ts + drizzle.config.ts (Wave 2)
+- [x] 01-02-PLAN.md — Install better-sqlite3 + Drizzle ORM, write db/client.ts + drizzle.config.ts (Wave 2)
 - [ ] 01-03-PLAN.md — better-auth config + schema generation + catch-all route + proxy.ts (Wave 3)
 - [ ] 01-04-PLAN.md — Login page + protected layout + logout button + German copy (Wave 4)
 - [ ] 01-05-PLAN.md — Seed user script + integration tests + human verification (Wave 5)
