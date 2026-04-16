@@ -28,7 +28,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. User can log in with username and password and see the main application screen
   2. User can close the browser, reopen it, and still be logged in
   3. User can log out and be prevented from accessing the app without logging in again
-**Plans**: TBD
+**Plans:** 5 plans
+Plans:
+- [ ] 01-01-PLAN.md — Scaffold Next.js 16.2 + Tailwind v4 + shadcn (new-york) + Vitest (Wave 1)
+- [ ] 01-02-PLAN.md — Install better-sqlite3 + Drizzle ORM, write db/client.ts + drizzle.config.ts (Wave 2)
+- [ ] 01-03-PLAN.md — better-auth config + schema generation + catch-all route + proxy.ts (Wave 3)
+- [ ] 01-04-PLAN.md — Login page + protected layout + logout button + German copy (Wave 4)
+- [ ] 01-05-PLAN.md — Seed user script + integration tests + human verification (Wave 5)
 **UI hint**: yes
 
 ### Phase 2: Document Upload & AI Extraction
@@ -88,7 +94,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Authentication | 0/0 | Not started | - |
+| 1. Foundation & Authentication | 0/5 | Not started | - |
 | 2. Document Upload & AI Extraction | 0/0 | Not started | - |
 | 3. Review & Authority Lookup | 0/0 | Not started | - |
 | 4. Laufliste Generation & Cases | 0/0 | Not started | - |
