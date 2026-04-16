@@ -1,10 +1,11 @@
 ---
 phase: 1
 slug: foundation-authentication
-status: draft
+status: approved
 shadcn_initialized: false
 preset: new-york (to be initialized during Phase 1 scaffolding)
 created: 2026-04-17
+reviewed_at: 2026-04-17
 ---
 
 # Phase 1 — UI Design Contract
