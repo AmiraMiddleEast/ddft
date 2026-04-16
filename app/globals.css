@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  /* UI-SPEC neutral palette — OKLCH with hex fallbacks for clarity */
+  --color-background: oklch(1 0 0);              /* #FFFFFF dominant */
+  --color-foreground: oklch(0.145 0 0);          /* #0A0A0A */
+  --color-muted: oklch(0.968 0 0);               /* #F5F5F5 secondary */
+  --color-muted-foreground: oklch(0.45 0 0);     /* #525252 */
+  --color-border: oklch(0.922 0 0);              /* #E5E5E5 */
+  --color-input: oklch(0.922 0 0);
+  --color-primary: oklch(0.205 0.02 256);        /* #0F172A slate-900 accent */
+  --color-primary-foreground: oklch(1 0 0);
+  --color-destructive: oklch(0.577 0.245 27);    /* #DC2626 red-600 */
+  --color-ring: oklch(0.205 0.02 256);
+
+  --radius: 0.5rem;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
