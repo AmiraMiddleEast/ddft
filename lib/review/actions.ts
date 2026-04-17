@@ -93,38 +93,33 @@ export async function approveAndResolve(input: {
   const lookupStatus = result.status; // 'matched' | 'ambiguous' | 'not_found'
 
   // 5. Transactional persist — SYNC callback (see file header).
+  // Uses onConflictDoUpdate for a true atomic upsert keyed on the unique
+  // constraint doc_review_doc_uniq (documentId). This eliminates the TOCTOU
+  // race that the previous select-then-insert pattern had.
   // There is intentionally NO await before db.transaction().
   try {
     db.transaction((tx) => {
-      const existing = tx
-        .select()
-        .from(documentReview)
-        .where(eq(documentReview.documentId, parsed.data.documentId))
-        .all();
-
-      if (existing.length > 0) {
-        tx.update(documentReview)
-          .set({
+      tx.insert(documentReview)
+        .values({
+          id: crypto.randomUUID(),
+          documentId: parsed.data.documentId,
+          approvedByUserId: session.user.id,
+          approvedAt: new Date(),
+          correctedFields: parsed.data.corrected,
+          resolvedAuthorityId,
+          lookupStatus,
+        })
+        .onConflictDoUpdate({
+          target: documentReview.documentId,
+          set: {
             approvedByUserId: session.user.id,
             approvedAt: new Date(),
             correctedFields: parsed.data.corrected,
             resolvedAuthorityId,
             lookupStatus,
-          })
-          .where(eq(documentReview.id, existing[0].id))
-          .run();
-      } else {
-        tx.insert(documentReview)
-          .values({
-            id: crypto.randomUUID(),
-            documentId: parsed.data.documentId,
-            approvedByUserId: session.user.id,
-            correctedFields: parsed.data.corrected,
-            resolvedAuthorityId,
-            lookupStatus,
-          })
-          .run();
-      }
+          },
+        })
+        .run();
 
       tx.update(document)
         .set({ reviewStatus: "approved", reviewedAt: new Date() })

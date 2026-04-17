@@ -341,7 +341,7 @@ export const documentReview = sqliteTable(
     lookupStatus: text("lookup_status", { enum: LOOKUP_STATUS }).notNull(),
   },
   (t) => [
-    index("doc_review_doc_idx").on(t.documentId),
+    uniqueIndex("doc_review_doc_uniq").on(t.documentId),
     check(
       "doc_review_status_ck",
       sql`${t.lookupStatus} IN ('matched','ambiguous','not_found')`,
