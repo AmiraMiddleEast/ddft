@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-04-PLAN.md
-last_updated: "2026-04-17T09:58:41.235Z"
+stopped_at: Completed 03-05-PLAN.md
+last_updated: "2026-04-17T10:08:44.248Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 18
-  completed_plans: 16
-  percent: 89
+  completed_plans: 17
+  percent: 94
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 3 (review-authority-lookup) — EXECUTING
-Plan: 5 of 6
+Plan: 6 of 6
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -69,6 +69,7 @@ Progress: [..........] 0%
 | Phase 03-review-authority-lookup P02 | 7min | 3 tasks | 6 files |
 | Phase 03 P03 | 8min | 4 tasks | 8 files |
 | Phase 03 P04 | 5min | 2 tasks tasks | 4 files files |
+| Phase 03-review-authority-lookup P05 | 6min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -121,6 +122,9 @@ Recent decisions affecting current work:
 - [Phase 03]: Plan 03-03: In-memory sqlite.exec(DDL) in resolver tests (no drizzle-kit push subprocess) — hermetic, fast, avoids parallel-test flakiness
 - [Phase 03]: Plan 03-03: Pure resolver accepts db as 2nd arg (not imported) so tests inject in-memory DB without vi.mock
 - [Phase 03]: Plan 04: review Server Actions use plain-object input (not FormData) to match Phase 2 extractDocumentAction convention; upsert via intra-transaction existence check instead of UNIQUE+onConflictDoUpdate to avoid Plan 01 schema migration.
+- [Phase 03-review-authority-lookup]: Plan 05: DiscardDialog hand-rolled (role=alertdialog + focus + Escape) rather than adding shadcn AlertDialog — CONTEXT D-17 locks new components this phase to select only.
+- [Phase 03-review-authority-lookup]: Plan 05: Dokumenttyp/Bundesland Selects store display_name/name (not slug); resolver slugifies at lookup time — keeps UI human-readable.
+- [Phase 03-review-authority-lookup]: Plan 05: Controlled useState instead of react-hook-form — small form, Zod safeParse on submit is sufficient; focus first invalid field by id.
 
 ### Pending Todos
 
@@ -132,6 +136,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T09:58:32.253Z
-Stopped at: Completed 03-04-PLAN.md
+Last session: 2026-04-17T10:08:44.245Z
+Stopped at: Completed 03-05-PLAN.md
 Resume file: None
