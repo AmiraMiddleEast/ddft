@@ -89,7 +89,7 @@ Plans:
 **Plans:** 6 plans
 Plans:
 - [x] 04-01-PLAN.md — Schema additions (case, case_document, laufliste) + [BLOCKING] drizzle-kit push + install @react-pdf/renderer@4.5.1 + vendor shadcn dialog/sheet/checkbox/textarea (Wave 1)
-- [ ] 04-02-PLAN.md — Cases queries + Server Actions: create, addDocs, remove, reorder (Wave 2)
+- [x] 04-02-PLAN.md — Cases queries + Server Actions: create, addDocs, remove, reorder (Wave 2)
 - [ ] 04-03-PLAN.md — Laufliste PDF generator: static BVA/BfJ + UAE Embassy + React-PDF document tree + renderLaufliste + storage helper + slug util (Wave 3)
 - [ ] 04-04-PLAN.md — buildLauflisteInput composer + generateLauflisteAction + laufliste queries (Wave 4)
 - [ ] 04-05-PLAN.md — Cases UI: /cases, /cases/new, /cases/[id] + AddDocumentsSheet + Remove/Regenerate dialogs (Wave 5)

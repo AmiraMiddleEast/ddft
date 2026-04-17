@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-04-17T11:07:47.581Z"
+stopped_at: Completed 04-02-PLAN.md
+last_updated: "2026-04-17T11:17:00.299Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 3
   total_plans: 24
-  completed_plans: 19
-  percent: 79
+  completed_plans: 20
+  percent: 83
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 4 (laufliste-generation-cases) — EXECUTING
-Plan: 2 of 6
+Plan: 3 of 6
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -73,6 +73,7 @@ Progress: [..........] 0%
 | Phase 03-review-authority-lookup P05 | 6min | 3 tasks | 9 files |
 | Phase 03 P06 | 4min | 3 tasks | 2 files |
 | Phase 04 P01 | 4min | 3 tasks | 11 files |
+| Phase 04 P02 | 6min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -132,6 +133,8 @@ Recent decisions affecting current work:
 - [Phase 04]: Plan 04-01: uniqueIndex on case_document.document_id enforces D-02 one-case-per-doc globally at DB layer (belt-and-suspenders vs compound unique)
 - [Phase 04]: Plan 04-01: @react-pdf/renderer added to next.config.ts serverExternalPackages preemptively — avoids Turbopack vs fontkit CJS tree-shaking issues before any import exists
 - [Phase 04]: Plan 04-01: Retroactively committed drizzle/meta/0003_snapshot.json (missing from Phase 3) so drizzle-kit migrate works on clean clones
+- [Phase 04]: Plan 04-02: DOC_ALREADY_ASSIGNED error returns details.documentId via post-failure lookup so 04-04 picker can offer a move flow
+- [Phase 04]: Plan 04-02: Parking-sentinel (position=-1) pattern used for BOTH reorder swap and post-remove renumber — keeps logic future-proof if a compound UNIQUE(case_id, position) is ever added
 
 ### Pending Todos
 
@@ -143,6 +146,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T11:07:30.214Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-04-17T11:17:00.295Z
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None
