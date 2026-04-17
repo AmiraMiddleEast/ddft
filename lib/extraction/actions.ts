@@ -59,13 +59,17 @@ export async function extractDocumentAction(
     .limit(1);
   if (!doc) return { ok: false, documentId, error: "not_found" };
 
-  // If already done, no-op (idempotent).
-  if (doc.extractionStatus === "done") return { ok: true, documentId };
+  // If already done or currently extracting, no-op (idempotent — WR-02).
+  if (doc.extractionStatus === "done" || doc.extractionStatus === "extracting") {
+    return { ok: true, documentId };
+  }
 
+  // Ownership already confirmed above. Include userId in WHERE to ensure the
+  // UPDATE cannot affect a row that does not belong to this user (CR-01).
   await db
     .update(document)
     .set({ extractionStatus: "extracting", errorCode: null })
-    .where(eq(document.id, documentId));
+    .where(and(eq(document.id, documentId), eq(document.userId, session.user.id)));
 
   let result: Awaited<ReturnType<typeof extractFields>>;
   try {
@@ -77,7 +81,7 @@ export async function extractDocumentAction(
     await db
       .update(document)
       .set({ extractionStatus: "error", errorCode: code })
-      .where(eq(document.id, documentId));
+      .where(and(eq(document.id, documentId), eq(document.userId, session.user.id)));
     return { ok: false, documentId, error: code };
   }
 
@@ -124,14 +128,14 @@ export async function extractDocumentAction(
           extractedAt: new Date(now),
           errorCode: null,
         })
-        .where(eq(document.id, documentId))
+        .where(and(eq(document.id, documentId), eq(document.userId, session.user.id)))
         .run();
     });
   } catch {
     await db
       .update(document)
       .set({ extractionStatus: "error", errorCode: "unknown" })
-      .where(eq(document.id, documentId));
+      .where(and(eq(document.id, documentId), eq(document.userId, session.user.id)));
     return { ok: false, documentId, error: "unknown" };
   }
 
