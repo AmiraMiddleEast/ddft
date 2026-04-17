@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-04-PLAN.md (Claude extraction Server Action + 15 tests)
-last_updated: "2026-04-17T05:06:24.798Z"
+stopped_at: Completed 02-05-PLAN.md
+last_updated: "2026-04-17T05:13:39.969Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 12
-  completed_plans: 9
-  percent: 75
+  completed_plans: 10
+  percent: 83
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 2 (document-upload-ai-extraction) — EXECUTING
-Plan: 5 of 7
+Plan: 6 of 7
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -61,6 +61,7 @@ Progress: [..........] 0%
 | Phase 02 P02 | 4min | 2 tasks | 4 files |
 | Phase 02-document-upload-ai-extraction P03 | 4m | 2 tasks | 11 files |
 | Phase 02 P04 | 10min | 3 tasks | 8 files |
+| Phase 02-document-upload-ai-extraction P05 | 4min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -98,6 +99,7 @@ Recent decisions affecting current work:
 - [Phase 02-document-upload-ai-extraction]: Plan 02-03: Extended vitest include to lib/**/*.test.ts — enables co-located unit+integration tests
 - [Phase 02]: Plan 02-04: Use better-sqlite3 sync transaction with .run() — async transaction callbacks rejected with 'cannot return a promise'
 - [Phase 02]: Plan 02-04: vi.doMock after vi.resetModules to mock relative imports inside dynamically loaded modules (the established hoisted vi.mock doesn't re-apply after resetModules for transitive static imports)
+- [Phase 02-document-upload-ai-extraction]: Plan 02-05: /upload orchestrates upload+extract Server Actions per-file via p-limit(3); Button is @base-ui/react (no asChild) — use buttonVariants() on Link for styled navigation.
 
 ### Pending Todos
 
@@ -109,6 +111,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T05:06:24.795Z
-Stopped at: Completed 02-04-PLAN.md (Claude extraction Server Action + 15 tests)
+Last session: 2026-04-17T05:13:39.966Z
+Stopped at: Completed 02-05-PLAN.md
 Resume file: None
