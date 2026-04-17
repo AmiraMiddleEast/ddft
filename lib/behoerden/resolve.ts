@@ -77,7 +77,13 @@ export async function resolveAuthority(
     .map((d) => ({ d, dist: distance(candidateSlug, d.id) }))
     .sort((a, b) => a.dist - b.dist);
   const best = scored[0];
-  const threshold = Math.min(FUZZY_MAX, Math.floor(candidateSlug.length / 4));
+  // Require slug length >= 5 before allowing any fuzzy matching. Short slugs
+  // (e.g. "pass", 4 chars) get threshold 0, forcing an exact match and
+  // preventing accidental fuzzy hits on similar short names.
+  const threshold =
+    candidateSlug.length < 5
+      ? 0
+      : Math.min(FUZZY_MAX, Math.floor(candidateSlug.length / 4));
   if (!best || best.dist > threshold) {
     return { status: "not_found", reason: "unknown_doc_type" };
   }
