@@ -27,7 +27,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Review & Edit
 
 - [ ] **REVW-01**: User sees side-by-side view of original PDF and extracted data
-- [ ] **REVW-02**: User can edit all extracted fields inline
+- [x] **REVW-02**: User can edit all extracted fields inline
 - [x] **REVW-03**: User can select Bundesland and Dokumententyp from constrained dropdown lists
 - [x] **REVW-04**: User can approve extraction results to trigger authority lookup
 
@@ -107,7 +107,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EXTR-01 | Phase 2 | Complete |
 | EXTR-02 | Phase 2 | Complete |
 | REVW-01 | Phase 3 | Pending |
-| REVW-02 | Phase 3 | Pending |
+| REVW-02 | Phase 3 | Complete |
 | REVW-03 | Phase 3 | Complete |
 | REVW-04 | Phase 3 | Complete |
 | LKUP-01 | Phase 3 | Complete |

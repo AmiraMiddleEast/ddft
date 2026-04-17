@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-03-PLAN.md
-last_updated: "2026-04-17T09:50:54.438Z"
+stopped_at: Completed 03-04-PLAN.md
+last_updated: "2026-04-17T09:58:41.235Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 18
-  completed_plans: 15
-  percent: 83
+  completed_plans: 16
+  percent: 89
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 3 (review-authority-lookup) — EXECUTING
-Plan: 4 of 6
+Plan: 5 of 6
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -68,6 +68,7 @@ Progress: [..........] 0%
 | Phase 03 P01 | 5min | 2 tasks | 7 files |
 | Phase 03-review-authority-lookup P02 | 7min | 3 tasks | 6 files |
 | Phase 03 P03 | 8min | 4 tasks | 8 files |
+| Phase 03 P04 | 5min | 2 tasks tasks | 4 files files |
 
 ## Accumulated Context
 
@@ -119,6 +120,7 @@ Recent decisions affecting current work:
 - [Phase 03-review-authority-lookup]: CLI entry uses fileURLToPath (not string comparison) because iCloud project path contains spaces/tilde
 - [Phase 03]: Plan 03-03: In-memory sqlite.exec(DDL) in resolver tests (no drizzle-kit push subprocess) — hermetic, fast, avoids parallel-test flakiness
 - [Phase 03]: Plan 03-03: Pure resolver accepts db as 2nd arg (not imported) so tests inject in-memory DB without vi.mock
+- [Phase 03]: Plan 04: review Server Actions use plain-object input (not FormData) to match Phase 2 extractDocumentAction convention; upsert via intra-transaction existence check instead of UNIQUE+onConflictDoUpdate to avoid Plan 01 schema migration.
 
 ### Pending Todos
 
@@ -130,6 +132,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T09:50:54.435Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-04-17T09:58:32.253Z
+Stopped at: Completed 03-04-PLAN.md
 Resume file: None
