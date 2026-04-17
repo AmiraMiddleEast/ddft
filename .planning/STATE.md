@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-02-PLAN.md (Phase 2 Drizzle schema + migration)
-last_updated: "2026-04-17T04:46:03.084Z"
+stopped_at: Completed 02-03-PLAN.md (upload Server Action + SHA-256 dedup)
+last_updated: "2026-04-17T04:54:16.661Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 12
-  completed_plans: 7
-  percent: 58
+  completed_plans: 8
+  percent: 67
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 2 (document-upload-ai-extraction) — EXECUTING
-Plan: 3 of 7
+Plan: 4 of 7
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -59,6 +59,7 @@ Progress: [..........] 0%
 | Phase 01-foundation-authentication P05 | 15 | 4 tasks | 11 files |
 | Phase 02 P01 | 4 | 3 tasks | 7 files |
 | Phase 02 P02 | 4min | 2 tasks | 4 files |
+| Phase 02-document-upload-ai-extraction P03 | 4m | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -90,6 +91,10 @@ Recent decisions affecting current work:
 - [Phase 02]: Plan 02-02: Layered enum enforcement — Drizzle { enum } for TS + check() SQL constraint for DB-level safety
 - [Phase 02]: Plan 02-02: Compound UNIQUE (user_id, sha256) for per-user SHA-256 dedup (CONTEXT D-08)
 - [Phase 02]: Plan 02-02: drizzle-kit push --force fallback (migrate stalled due to Phase 1 push-applied 0000); plan explicitly permits this
+- [Phase 02-document-upload-ai-extraction]: Plan 02-03: Hand-crafted encrypted-PDF fixture (scripts/make-encrypted-pdf.mjs) — qpdf not installed and pdf-lib cannot emit encrypted PDFs
+- [Phase 02-document-upload-ai-extraction]: Plan 02-03: Server Action returns discriminated-union; never throws for user errors (RESEARCH Anti-Patterns)
+- [Phase 02-document-upload-ai-extraction]: Plan 02-03: sha256Hex + onConflictDoNothing before writeUploadToDisk — no bytes on disk on dedup hit (Pitfalls 5 & 8)
+- [Phase 02-document-upload-ai-extraction]: Plan 02-03: Extended vitest include to lib/**/*.test.ts — enables co-located unit+integration tests
 
 ### Pending Todos
 
@@ -101,6 +106,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T04:46:03.081Z
-Stopped at: Completed 02-02-PLAN.md (Phase 2 Drizzle schema + migration)
+Last session: 2026-04-17T04:53:59.723Z
+Stopped at: Completed 02-03-PLAN.md (upload Server Action + SHA-256 dedup)
 Resume file: None
