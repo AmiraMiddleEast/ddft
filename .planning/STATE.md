@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-05-PLAN.md
-last_updated: "2026-04-17T05:13:39.969Z"
+stopped_at: Completed 02-06-PLAN.md
+last_updated: "2026-04-17T05:20:35.924Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 12
-  completed_plans: 10
-  percent: 83
+  completed_plans: 11
+  percent: 92
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 2 (document-upload-ai-extraction) — EXECUTING
-Plan: 6 of 7
+Plan: 7 of 7
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -62,6 +62,7 @@ Progress: [..........] 0%
 | Phase 02-document-upload-ai-extraction P03 | 4m | 2 tasks | 11 files |
 | Phase 02 P04 | 10min | 3 tasks | 8 files |
 | Phase 02-document-upload-ai-extraction P05 | 4min | 2 tasks | 9 files |
+| Phase 02-document-upload-ai-extraction P06 | 18min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -100,6 +101,8 @@ Recent decisions affecting current work:
 - [Phase 02]: Plan 02-04: Use better-sqlite3 sync transaction with .run() — async transaction callbacks rejected with 'cannot return a promise'
 - [Phase 02]: Plan 02-04: vi.doMock after vi.resetModules to mock relative imports inside dynamically loaded modules (the established hoisted vi.mock doesn't re-apply after resetModules for transitive static imports)
 - [Phase 02-document-upload-ai-extraction]: Plan 02-05: /upload orchestrates upload+extract Server Actions per-file via p-limit(3); Button is @base-ui/react (no asChild) — use buttonVariants() on Link for styled navigation.
+- [Phase 02-document-upload-ai-extraction]: PDF preview streamed through /api/documents/[id]/pdf Route Handler with per-request owner check; data/uploads never exposed publicly
+- [Phase 02-document-upload-ai-extraction]: Link-as-button via buttonVariants() on <Link> (project Button primitive is base-ui, not Radix Slot, so asChild unsupported)
 
 ### Pending Todos
 
@@ -111,6 +114,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T05:13:39.966Z
-Stopped at: Completed 02-05-PLAN.md
+Last session: 2026-04-17T05:20:35.920Z
+Stopped at: Completed 02-06-PLAN.md
 Resume file: None
