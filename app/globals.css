@@ -28,6 +28,8 @@ body {
 }
 
 @theme inline {
+  --color-warning: oklch(0.77 0.15 80);
+  --color-warning-foreground: oklch(0.2 0 0);
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
