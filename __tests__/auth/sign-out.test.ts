@@ -29,6 +29,7 @@ beforeAll(async () => {
 });
 
 afterAll(() => {
+  delete process.env.ALLOW_SIGNUP;
   cleanup?.();
 });
 
