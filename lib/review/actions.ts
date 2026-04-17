@@ -13,9 +13,11 @@ import {
 import {
   ApproveSchema,
   ChooseAuthoritySchema,
+  CorrectedFieldsSchema,
 } from "@/lib/validations/review";
 import { resolveAuthority } from "@/lib/behoerden/resolve";
 import type { AuthorityRow, ResolverResult } from "@/lib/behoerden/resolve";
+import { slugify } from "@/lib/behoerden/slug";
 
 /**
  * Phase 3 Plan 04 — review Server Actions.
@@ -194,6 +196,16 @@ export async function chooseAmbiguousAuthority(input: {
     .limit(1);
   const chosen = authRows[0];
   if (!chosen) return { ok: false, error: "invalid_choice" };
+
+  // Scope check — verify the chosen authority belongs to the same state that
+  // was recorded in correctedFields during approveAndResolve. This prevents
+  // an operator from passing any arbitrary authority ID from a different state.
+  const parsedFields = CorrectedFieldsSchema.safeParse(review.correctedFields);
+  if (!parsedFields.success) return { ok: false, error: "invalid_choice" };
+  const expectedStateSlug = slugify(parsedFields.data.bundesland);
+  if (chosen.stateId !== expectedStateSlug) {
+    return { ok: false, error: "invalid_choice" };
+  }
 
   // Sync transaction — no async inside.
   try {
