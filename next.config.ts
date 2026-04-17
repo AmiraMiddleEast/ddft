@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Phase 4 Pitfall 6: keep @react-pdf/renderer out of Turbopack's bundler tree.
+  // Its transitive deps (fontkit, @react-pdf/textkit) are CJS and rely on dynamic require,
+  // which Turbopack cannot tree-shake safely. Must run as a real Node import in Server Actions.
+  serverExternalPackages: ["@react-pdf/renderer"],
   experimental: {
     serverActions: {
       // Per RESEARCH §Next 16 Server Action body size limit.
