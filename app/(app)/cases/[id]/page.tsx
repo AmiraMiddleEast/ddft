@@ -16,6 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DocumentsTable } from "./DocumentsTable";
 import { CaseDetailClient } from "./CaseDetailClient";
 import { AddDocumentsSheet } from "./AddDocumentsSheet";
+import { HistorieTable } from "./HistorieTable";
 
 function formatDateDe(ts: Date) {
   return new Intl.DateTimeFormat("de-DE", {
@@ -226,37 +227,7 @@ export default async function CaseDetailPage({
                 Frühere Lauflisten dieses Falls.
               </p>
             </div>
-            {historie.length === 0 ? (
-              <p className="text-sm text-muted-foreground">
-                Noch keine früheren Lauflisten vorhanden.
-              </p>
-            ) : (
-              <ul className="divide-y">
-                {historie.map((l) => (
-                  <li
-                    key={l.id}
-                    className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
-                  >
-                    <div className="flex flex-col gap-0.5 text-sm">
-                      <span className="font-medium">
-                        Erstellt am{" "}
-                        {formatDateTimeDe(new Date(l.generatedAt))}
-                      </span>
-                      <span className="text-muted-foreground">
-                        {l.documentCount} Dokumente ·{" "}
-                        {formatBytes(l.fileSize)}
-                      </span>
-                    </div>
-                    <a
-                      href={`/api/cases/${id}/laufliste/${l.id}/download`}
-                      className="text-sm font-medium underline-offset-2 hover:underline"
-                    >
-                      Herunterladen
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <HistorieTable caseId={id} lauflisten={historie} />
           </CardContent>
         </Card>
       </div>
