@@ -164,6 +164,7 @@ export const document = sqliteTable(
       .notNull()
       .default("pending"),
     reviewedAt: integer("reviewed_at", { mode: "timestamp_ms" }),
+    version: integer("version").notNull().default(1),
   },
   (t) => [
     uniqueIndex("document_user_sha_uniq").on(t.userId, t.sha256),
@@ -491,4 +492,37 @@ export const laufliste = sqliteTable(
     index("laufliste_case_idx").on(t.caseId),
     index("laufliste_case_generated_idx").on(t.caseId, t.generatedAt),
   ],
+);
+
+// ======== Phase 5: History, Re-upload & Admin (D-06..D-10) ========
+
+export const documentVersion = sqliteTable(
+  "document_version",
+  {
+    id: text("id").primaryKey(),
+    documentId: text("document_id")
+      .notNull()
+      .references(() => document.id, { onDelete: "cascade" }),
+    versionNumber: integer("version_number").notNull(),
+    storagePath: text("storage_path").notNull(),
+    sha256: text("sha256").notNull(),
+    size: integer("size").notNull(),
+    uploadedAt: integer("uploaded_at", { mode: "timestamp_ms" })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .notNull(),
+  },
+  (t) => [
+    uniqueIndex("doc_version_doc_num_uniq").on(t.documentId, t.versionNumber),
+    index("doc_version_doc_idx").on(t.documentId),
+  ],
+);
+
+export const documentVersionRelations = relations(
+  documentVersion,
+  ({ one }) => ({
+    document: one(document, {
+      fields: [documentVersion.documentId],
+      references: [document.id],
+    }),
+  }),
 );
