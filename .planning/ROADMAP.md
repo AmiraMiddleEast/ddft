@@ -49,7 +49,7 @@ Plans:
 **Plans**: 7 plans
 Plans:
 - [x] 02-01-PLAN.md — Next config body limits + install react-dropzone/pdf-lib/p-limit/@anthropic-ai/sdk + env setup (Wave 1)
-- [ ] 02-02-PLAN.md — Drizzle schema: document/extraction/extraction_log + BLOCKING migration push (Wave 2)
+- [x] 02-02-PLAN.md — Drizzle schema: document/extraction/extraction_log + BLOCKING migration push (Wave 2)
 - [ ] 02-03-PLAN.md — Upload Server Action: validate + hash + pdf-lib check + dedup + fs persist (Wave 3)
 - [ ] 02-04-PLAN.md — Extraction Server Action: Claude SDK + prompt + Zod + cost log + transactional writes (Wave 3)
 - [ ] 02-05-PLAN.md — /upload page: react-dropzone + useActionState + p-limit(3) client orchestration (Wave 4)

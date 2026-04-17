@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Completed 02-01-PLAN.md (Phase 2 prerequisites: body limits, deps, env scaffold)"
-last_updated: "2026-04-17T04:39:36.888Z"
+stopped_at: Completed 02-02-PLAN.md (Phase 2 Drizzle schema + migration)
+last_updated: "2026-04-17T04:46:03.084Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 12
-  completed_plans: 6
-  percent: 50
+  completed_plans: 7
+  percent: 58
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 2 (document-upload-ai-extraction) — EXECUTING
-Plan: 2 of 7
+Plan: 3 of 7
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -58,6 +58,7 @@ Progress: [..........] 0%
 | Phase 01-foundation-authentication P04 | 4 | 2 tasks | 9 files |
 | Phase 01-foundation-authentication P05 | 15 | 4 tasks | 11 files |
 | Phase 02 P01 | 4 | 3 tasks | 7 files |
+| Phase 02 P02 | 4min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,9 @@ Recent decisions affecting current work:
 - [Phase 02]: Plan 02-01: Locked Option A for Server Action body limits — bodySizeLimit=15mb covers one 10MB PDF per call (not 110MB batched); set BOTH serverActions.bodySizeLimit AND proxyClientMaxBodySize (required for VPS production target per Next 15.5+).
 - [Phase 02]: Plan 02-01: Honored CLAUDE.md pin of @anthropic-ai/sdk@0.88.0 (not latest 0.90); exact-pinned react-dropzone@15.0.0, pdf-lib@1.17.1, p-limit@7.3.0 — matches Phase 1 reproducibility pattern.
 - [Phase 02]: Plan 02-01: Placed ANTHROPIC_API_KEY=sk-ant-PLACEHOLDER in .env.local (gitignored) so downstream imports don't crash at module-load. Operator must swap to real key before first live Claude extraction.
+- [Phase 02]: Plan 02-02: Layered enum enforcement — Drizzle { enum } for TS + check() SQL constraint for DB-level safety
+- [Phase 02]: Plan 02-02: Compound UNIQUE (user_id, sha256) for per-user SHA-256 dedup (CONTEXT D-08)
+- [Phase 02]: Plan 02-02: drizzle-kit push --force fallback (migrate stalled due to Phase 1 push-applied 0000); plan explicitly permits this
 
 ### Pending Todos
 
@@ -97,6 +101,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T04:39:36.884Z
-Stopped at: Completed 02-01-PLAN.md (Phase 2 prerequisites: body limits, deps, env scaffold)
+Last session: 2026-04-17T04:46:03.081Z
+Stopped at: Completed 02-02-PLAN.md (Phase 2 Drizzle schema + migration)
 Resume file: None
