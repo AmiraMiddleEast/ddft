@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 01-05-PLAN.md (Phase 1 ready for verification)
-last_updated: "2026-04-17T04:01:19.279Z"
+status: executing
+stopped_at: "Completed 02-01-PLAN.md (Phase 2 prerequisites: body limits, deps, env scaffold)"
+last_updated: "2026-04-17T04:39:36.888Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 5
-  completed_plans: 5
-  percent: 100
+  total_plans: 12
+  completed_plans: 6
+  percent: 50
 ---
 
 # Project State
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-16)
 
 **Core value:** Upload documents, get a correct and complete Laufliste PDF with the right authorities for each document -- fast and without manual research.
-**Current focus:** Phase 01 — foundation-authentication
+**Current focus:** Phase 2 — document-upload-ai-extraction
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
-Status: Phase complete — ready for verification
+Phase: 2 (document-upload-ai-extraction) — EXECUTING
+Plan: 2 of 7
+Status: Ready to execute
 Last activity: 2026-04-17
 
 Progress: [..........] 0%
@@ -57,6 +57,7 @@ Progress: [..........] 0%
 | Phase 01 P03 | 7 | 3 tasks | 10 files |
 | Phase 01-foundation-authentication P04 | 4 | 2 tasks | 9 files |
 | Phase 01-foundation-authentication P05 | 15 | 4 tasks | 11 files |
+| Phase 02 P01 | 4 | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -82,6 +83,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation-authentication]: Plan 05: A1 assumption invalidated — auth.api.signUpEmail DOES respect disableSignUp: true. Added ALLOW_SIGNUP=1 env escape hatch in lib/auth.ts (production default unchanged).
 - [Phase 01-foundation-authentication]: Plan 05: A2 confirmed — better-auth session cookie name is 'better-auth.session_token' with Max-Age=2592000 (30 days, matches D-11).
 - [Phase 01-foundation-authentication]: Plan 05: Integration tests use returnHeaders (not asResponse) and req.cookies.set() (not Headers{cookie}) — happy-dom quirks documented in test files.
+- [Phase 02]: Plan 02-01: Locked Option A for Server Action body limits — bodySizeLimit=15mb covers one 10MB PDF per call (not 110MB batched); set BOTH serverActions.bodySizeLimit AND proxyClientMaxBodySize (required for VPS production target per Next 15.5+).
+- [Phase 02]: Plan 02-01: Honored CLAUDE.md pin of @anthropic-ai/sdk@0.88.0 (not latest 0.90); exact-pinned react-dropzone@15.0.0, pdf-lib@1.17.1, p-limit@7.3.0 — matches Phase 1 reproducibility pattern.
+- [Phase 02]: Plan 02-01: Placed ANTHROPIC_API_KEY=sk-ant-PLACEHOLDER in .env.local (gitignored) so downstream imports don't crash at module-load. Operator must swap to real key before first live Claude extraction.
 
 ### Pending Todos
 
@@ -93,6 +97,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T03:49:09.130Z
-Stopped at: Completed 01-05-PLAN.md (Phase 1 ready for verification)
+Last session: 2026-04-17T04:39:36.884Z
+Stopped at: Completed 02-01-PLAN.md (Phase 2 prerequisites: body limits, deps, env scaffold)
 Resume file: None

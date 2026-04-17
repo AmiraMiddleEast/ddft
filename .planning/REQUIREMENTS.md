@@ -15,14 +15,14 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Document Upload
 
-- [ ] **UPLD-01**: User can upload a single PDF via file picker or drag-and-drop
-- [ ] **UPLD-02**: User can upload multiple PDFs at once (batch upload)
+- [x] **UPLD-01**: User can upload a single PDF via file picker or drag-and-drop
+- [x] **UPLD-02**: User can upload multiple PDFs at once (batch upload)
 - [ ] **UPLD-03**: User can re-upload a better scan for an existing document without recreating the case
 
 ### AI Extraction
 
-- [ ] **EXTR-01**: System extracts structured data from uploaded PDF via Claude Vision (dokumenten_typ, ausstellende_behoerde, ausstellungsort, bundesland, ausstellungsdatum, voller_name)
-- [ ] **EXTR-02**: System displays confidence indicators (high/medium/low) per extracted field
+- [x] **EXTR-01**: System extracts structured data from uploaded PDF via Claude Vision (dokumenten_typ, ausstellende_behoerde, ausstellungsort, bundesland, ausstellungsdatum, voller_name)
+- [x] **EXTR-02**: System displays confidence indicators (high/medium/low) per extracted field
 
 ### Review & Edit
 
@@ -101,11 +101,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-01 | Phase 1 | Complete |
 | AUTH-02 | Phase 1 | Complete |
 | AUTH-03 | Phase 1 | Complete |
-| UPLD-01 | Phase 2 | Pending |
-| UPLD-02 | Phase 2 | Pending |
+| UPLD-01 | Phase 2 | Complete |
+| UPLD-02 | Phase 2 | Complete |
 | UPLD-03 | Phase 5 | Pending |
-| EXTR-01 | Phase 2 | Pending |
-| EXTR-02 | Phase 2 | Pending |
+| EXTR-01 | Phase 2 | Complete |
+| EXTR-02 | Phase 2 | Complete |
 | REVW-01 | Phase 3 | Pending |
 | REVW-02 | Phase 3 | Pending |
 | REVW-03 | Phase 3 | Pending |

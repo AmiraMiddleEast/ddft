@@ -46,7 +46,15 @@ Plans:
   2. User can upload multiple PDFs at once and see each one processed
   3. After upload, system displays extracted fields (dokumenten_typ, ausstellende_behoerde, ausstellungsort, bundesland, ausstellungsdatum, voller_name) for the document
   4. Each extracted field shows a confidence indicator (high/medium/low) so the user knows what needs review
-**Plans**: TBD
+**Plans**: 7 plans
+Plans:
+- [x] 02-01-PLAN.md — Next config body limits + install react-dropzone/pdf-lib/p-limit/@anthropic-ai/sdk + env setup (Wave 1)
+- [ ] 02-02-PLAN.md — Drizzle schema: document/extraction/extraction_log + BLOCKING migration push (Wave 2)
+- [ ] 02-03-PLAN.md — Upload Server Action: validate + hash + pdf-lib check + dedup + fs persist (Wave 3)
+- [ ] 02-04-PLAN.md — Extraction Server Action: Claude SDK + prompt + Zod + cost log + transactional writes (Wave 3)
+- [ ] 02-05-PLAN.md — /upload page: react-dropzone + useActionState + p-limit(3) client orchestration (Wave 4)
+- [ ] 02-06-PLAN.md — /documents/[id] + /api/documents/[id]/pdf Route Handler + home page update (Wave 5)
+- [ ] 02-07-PLAN.md — Integration tests + human-verify checkpoint (Wave 6)
 **UI hint**: yes
 
 ### Phase 3: Review & Authority Lookup
@@ -95,7 +103,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Authentication | 0/5 | Not started | - |
-| 2. Document Upload & AI Extraction | 0/0 | Not started | - |
+| 2. Document Upload & AI Extraction | 0/7 | Not started | - |
 | 3. Review & Authority Lookup | 0/0 | Not started | - |
 | 4. Laufliste Generation & Cases | 0/0 | Not started | - |
 | 5. History, Re-upload & Admin | 0/0 | Not started | - |
