@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
 import { createTestDb } from "../_fixtures/test-db";
 import {
