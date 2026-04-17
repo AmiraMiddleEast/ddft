@@ -17,10 +17,16 @@ import { z } from "zod";
  * field may legitimately be blank when Claude could not extract it).
  */
 export const CorrectedFieldsSchema = z.object({
-  dokumenten_typ: z.string().max(200),
+  dokumenten_typ: z
+    .string()
+    .min(1, "Bitte einen Dokumenttyp auswählen.")
+    .max(200),
   ausstellende_behoerde: z.string().max(300),
-  ausstellungsort: z.string().max(200),
-  bundesland: z.string().max(100),
+  ausstellungsort: z
+    .string()
+    .min(1, "Bitte einen Ausstellungsort angeben.")
+    .max(200),
+  bundesland: z.string().min(1, "Bitte ein Bundesland auswählen.").max(100),
   ausstellungsdatum: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, {
