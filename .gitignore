@@ -49,5 +49,11 @@ data/*
 *.db-wal
 *.db-shm
 
+# Phase 2 — uploaded PDFs (D-06: data/uploads/{uuid}.pdf, never committed)
+# Re-include the uploads directory so .gitkeep can be tracked (parent data/* rule above excludes it).
+!data/uploads/
+data/uploads/*
+!data/uploads/.gitkeep
+
 # Drizzle
 drizzle/.migrations-lock.json
