@@ -74,7 +74,7 @@ Plans:
 - [x] 03-03-PLAN.md — Resolver library (slug, city-map, fuzzy resolveAuthority) + unit tests (Wave 2)
 - [x] 03-04-PLAN.md — approveAndResolve Server Action + Zod validations + chooseAmbiguousAuthority (Wave 3)
 - [x] 03-05-PLAN.md — Review page UI: ReviewForm + FieldRow + AuthorityResultPanel + enabled review link (Wave 4)
-- [ ] 03-06-PLAN.md — Integration tests + human-verify checkpoint (Wave 5)
+- [x] 03-06-PLAN.md — Integration tests + human-verify checkpoint (Wave 5)
 **UI hint**: yes
 
 ### Phase 4: Laufliste Generation & Cases
