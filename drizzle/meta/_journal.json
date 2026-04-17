@@ -15,6 +15,13 @@
       "when": 1776400941685,
       "tag": "0001_many_glorian",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1776417718337,
+      "tag": "0002_aspiring_queen_noir",
+      "breakpoints": true
     }
   ]
 }
