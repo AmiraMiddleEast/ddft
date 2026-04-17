@@ -10,6 +10,8 @@ import {
 import { PdfPreview } from "./_components/PdfPreview";
 import { ExtractionTable } from "./_components/ExtractionTable";
 import { ReviewLinkButton } from "./_components/ReviewLinkButton";
+import { ReplaceScanDialog } from "./_components/ReplaceScanDialog";
+import { ReanalyzeButton } from "./_components/ReanalyzeButton";
 
 export const metadata = { title: "Dokument — Angela" };
 
@@ -49,11 +51,18 @@ export default async function DocumentDetailPage({
         {" / "}
         <span>Dokument</span>
       </nav>
-      <header className="mb-6">
-        <h1 className="text-2xl font-semibold leading-tight">Dokument</h1>
-        <p className="mt-1 text-base text-muted-foreground">
-          {doc.filename} · Hochgeladen am {formatDe(new Date(doc.uploadedAt))}
-        </p>
+      <header className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold leading-tight">Dokument</h1>
+          <p className="mt-1 text-base text-muted-foreground">
+            {doc.filename} · Hochgeladen am{" "}
+            {formatDe(new Date(doc.uploadedAt))} · Version {doc.version}
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <ReplaceScanDialog documentId={doc.id} />
+          <ReanalyzeButton documentId={doc.id} />
+        </div>
       </header>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_minmax(400px,480px)] lg:gap-8">
