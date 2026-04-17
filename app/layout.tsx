@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body className="antialiased">
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
         <Toaster richColors position="top-right" />
       </body>
     </html>

@@ -34,6 +34,12 @@ export default async function AppLayout({
             >
               Hochladen
             </Link>
+            <Link
+              href="/history"
+              className="font-medium text-muted-foreground hover:text-foreground"
+            >
+              Historie
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">
