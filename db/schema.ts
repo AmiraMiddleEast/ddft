@@ -411,3 +411,84 @@ export const documentReviewRelations = relations(
     }),
   }),
 );
+
+// ======== Phase 4: Laufliste Generation & Cases (D-01, D-02) ========
+
+export const CASE_STATUS = ["open", "ready_for_pdf", "pdf_generated"] as const;
+export type CaseStatus = (typeof CASE_STATUS)[number];
+
+export const caseTable = sqliteTable(
+  "case",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    personName: text("person_name").notNull(),
+    personBirthdate: text("person_birthdate"),
+    notes: text("notes"),
+    status: text("status", { enum: CASE_STATUS })
+      .notNull()
+      .default("open"),
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (t) => [
+    index("case_user_idx").on(t.userId),
+    index("case_user_updated_idx").on(t.userId, t.updatedAt),
+    check(
+      "case_status_ck",
+      sql`${t.status} IN ('open','ready_for_pdf','pdf_generated')`,
+    ),
+  ],
+);
+
+export const caseDocument = sqliteTable(
+  "case_document",
+  {
+    id: text("id").primaryKey(),
+    caseId: text("case_id")
+      .notNull()
+      .references(() => caseTable.id, { onDelete: "cascade" }),
+    documentId: text("document_id")
+      .notNull()
+      .references(() => document.id, { onDelete: "cascade" }),
+    position: integer("position").notNull(),
+    addedAt: integer("added_at", { mode: "timestamp_ms" })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .notNull(),
+  },
+  (t) => [
+    uniqueIndex("case_document_doc_uniq").on(t.documentId),
+    uniqueIndex("case_document_case_doc_uniq").on(t.caseId, t.documentId),
+    index("case_document_case_pos_idx").on(t.caseId, t.position),
+  ],
+);
+
+export const laufliste = sqliteTable(
+  "laufliste",
+  {
+    id: text("id").primaryKey(),
+    caseId: text("case_id")
+      .notNull()
+      .references(() => caseTable.id, { onDelete: "cascade" }),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    pdfStoragePath: text("pdf_storage_path").notNull(),
+    generatedAt: integer("generated_at", { mode: "timestamp_ms" })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .notNull(),
+    documentCount: integer("document_count").notNull(),
+    fileSize: integer("file_size").notNull(),
+  },
+  (t) => [
+    index("laufliste_case_idx").on(t.caseId),
+    index("laufliste_case_generated_idx").on(t.caseId, t.generatedAt),
+  ],
+);
