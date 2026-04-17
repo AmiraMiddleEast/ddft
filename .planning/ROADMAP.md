@@ -70,7 +70,7 @@ Plans:
 **Plans**: 6 plans
 Plans:
 - [x] 03-01-PLAN.md — Schema additions + [BLOCKING] migration push + install fastest-levenshtein + vendor shadcn select (Wave 1)
-- [ ] 03-02-PLAN.md — Behörden seed script: parse 16 states via Claude, cache data/behoerden-parsed.json, insert authorities (Wave 2)
+- [x] 03-02-PLAN.md — Behörden seed script: parse 16 states via Claude, cache data/behoerden-parsed.json, insert authorities (Wave 2)
 - [ ] 03-03-PLAN.md — Resolver library (slug, city-map, fuzzy resolveAuthority) + unit tests (Wave 2)
 - [ ] 03-04-PLAN.md — approveAndResolve Server Action + Zod validations + chooseAmbiguousAuthority (Wave 3)
 - [ ] 03-05-PLAN.md — Review page UI: ReviewForm + FieldRow + AuthorityResultPanel + enabled review link (Wave 4)
@@ -111,6 +111,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Foundation & Authentication | 0/5 | Not started | - |
 | 2. Document Upload & AI Extraction | 0/7 | Not started | - |
-| 3. Review & Authority Lookup | 0/0 | Not started | - |
+| 3. Review & Authority Lookup | 2/6 | In Progress|  |
 | 4. Laufliste Generation & Cases | 0/0 | Not started | - |
 | 5. History, Re-upload & Admin | 0/0 | Not started | - |

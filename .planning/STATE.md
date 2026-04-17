@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-04-17T09:25:57.984Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-04-17T09:38:49.743Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 18
-  completed_plans: 13
-  percent: 72
+  completed_plans: 14
+  percent: 78
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 3 (review-authority-lookup) — EXECUTING
-Plan: 2 of 6
+Plan: 3 of 6
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -66,6 +66,7 @@ Progress: [..........] 0%
 | Phase 02-document-upload-ai-extraction P06 | 18min | 3 tasks | 8 files |
 | Phase 02-document-upload-ai-extraction P07 | 10min | 1 task + 1 checkpoint tasks | 2 files files |
 | Phase 03 P01 | 5min | 2 tasks | 7 files |
+| Phase 03-review-authority-lookup P02 | 7min | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -110,6 +111,11 @@ Recent decisions affecting current work:
 - [Phase 02-document-upload-ai-extraction]: Plan 02-07: Phase 2 human-verify exit gate auto-approved in autonomous mode — 4 browser UAT items (dropzone UX, batch progress, iframe preview, extraction accuracy) remain as deferred operator sign-off
 - [Phase 03]: Hoisted REVIEW_STATUS + LOOKUP_STATUS constants above Phase 2 section in db/schema.ts so document ALTER can reference them
 - [Phase 03]: Reset dev DB (gitignored) when drizzle-kit push mid-transaction failure left orphan __new_document and dropped document — cleaner than surgical SQL repair
+- [Phase 03-review-authority-lookup]: Seed accepts opts.parseState for test injection — avoids vi.mock brittleness across module reset boundaries
+- [Phase 03-review-authority-lookup]: Seed idempotency via wipe+re-insert in single transaction — FK-safe and avoids UNIQUE constraint churn on global doc_type dedup
+- [Phase 03-review-authority-lookup]: data/behoerden-parsed.json generated synthetically (placeholder ANTHROPIC_API_KEY); regenerate with --force + real key
+- [Phase 03-review-authority-lookup]: Added --skip-parse CLI flag for CI / placeholder-key environments — errors if cache missing
+- [Phase 03-review-authority-lookup]: CLI entry uses fileURLToPath (not string comparison) because iCloud project path contains spaces/tilde
 
 ### Pending Todos
 
@@ -121,6 +127,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T09:25:57.981Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-04-17T09:38:39.345Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
