@@ -40,6 +40,12 @@ export default async function AppLayout({
             >
               Historie
             </Link>
+            <Link
+              href="/admin/behoerden"
+              className="font-medium text-muted-foreground hover:text-foreground"
+            >
+              Behörden
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">
