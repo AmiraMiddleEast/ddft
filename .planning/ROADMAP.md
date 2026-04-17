@@ -67,7 +67,14 @@ Plans:
   3. User can approve extraction results, triggering the system to look up the correct Vorbeglaubigung authority from the Behoerden database
   4. After approval, system displays the resolved authority with full contact details (name, address, phone, email, office hours, website)
   5. System correctly handles Regierungsbezirk sub-routing and displays special routing rules and exceptions where applicable
-**Plans**: TBD
+**Plans**: 6 plans
+Plans:
+- [x] 03-01-PLAN.md — Schema additions + [BLOCKING] migration push + install fastest-levenshtein + vendor shadcn select (Wave 1)
+- [ ] 03-02-PLAN.md — Behörden seed script: parse 16 states via Claude, cache data/behoerden-parsed.json, insert authorities (Wave 2)
+- [ ] 03-03-PLAN.md — Resolver library (slug, city-map, fuzzy resolveAuthority) + unit tests (Wave 2)
+- [ ] 03-04-PLAN.md — approveAndResolve Server Action + Zod validations + chooseAmbiguousAuthority (Wave 3)
+- [ ] 03-05-PLAN.md — Review page UI: ReviewForm + FieldRow + AuthorityResultPanel + enabled review link (Wave 4)
+- [ ] 03-06-PLAN.md — Integration tests + human-verify checkpoint (Wave 5)
 **UI hint**: yes
 
 ### Phase 4: Laufliste Generation & Cases

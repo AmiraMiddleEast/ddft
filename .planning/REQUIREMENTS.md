@@ -28,15 +28,15 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **REVW-01**: User sees side-by-side view of original PDF and extracted data
 - [ ] **REVW-02**: User can edit all extracted fields inline
-- [ ] **REVW-03**: User can select Bundesland and Dokumententyp from constrained dropdown lists
-- [ ] **REVW-04**: User can approve extraction results to trigger authority lookup
+- [x] **REVW-03**: User can select Bundesland and Dokumententyp from constrained dropdown lists
+- [x] **REVW-04**: User can approve extraction results to trigger authority lookup
 
 ### Authority Lookup
 
-- [ ] **LKUP-01**: System maps dokumenten_typ + bundesland to the correct Vorbeglaubigung authority from Behoerden database
-- [ ] **LKUP-02**: System handles Regierungsbezirk sub-routing for states with administrative districts (Bayern, Baden-Wuerttemberg, Hessen, NRW)
-- [ ] **LKUP-03**: System displays special routing rules and exceptions (e.g., Fuehrungszeugnis special handling, Reisepass needs no legalization)
-- [ ] **LKUP-04**: System shows full authority contact details (name, address, phone, email, office hours, website)
+- [x] **LKUP-01**: System maps dokumenten_typ + bundesland to the correct Vorbeglaubigung authority from Behoerden database
+- [x] **LKUP-02**: System handles Regierungsbezirk sub-routing for states with administrative districts (Bayern, Baden-Wuerttemberg, Hessen, NRW)
+- [x] **LKUP-03**: System displays special routing rules and exceptions (e.g., Fuehrungszeugnis special handling, Reisepass needs no legalization)
+- [x] **LKUP-04**: System shows full authority contact details (name, address, phone, email, office hours, website)
 
 ### Laufliste / PDF Generation
 
@@ -108,12 +108,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EXTR-02 | Phase 2 | Complete |
 | REVW-01 | Phase 3 | Pending |
 | REVW-02 | Phase 3 | Pending |
-| REVW-03 | Phase 3 | Pending |
-| REVW-04 | Phase 3 | Pending |
-| LKUP-01 | Phase 3 | Pending |
-| LKUP-02 | Phase 3 | Pending |
-| LKUP-03 | Phase 3 | Pending |
-| LKUP-04 | Phase 3 | Pending |
+| REVW-03 | Phase 3 | Complete |
+| REVW-04 | Phase 3 | Complete |
+| LKUP-01 | Phase 3 | Complete |
+| LKUP-02 | Phase 3 | Complete |
+| LKUP-03 | Phase 3 | Complete |
+| LKUP-04 | Phase 3 | Complete |
 | LAFL-01 | Phase 4 | Pending |
 | LAFL-02 | Phase 4 | Pending |
 | LAFL-03 | Phase 4 | Pending |

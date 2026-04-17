@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 02-07-PLAN.md
-last_updated: "2026-04-17T07:36:22.987Z"
+status: executing
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-04-17T09:25:57.984Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 12
-  completed_plans: 12
-  percent: 100
+  total_plans: 18
+  completed_plans: 13
+  percent: 72
 ---
 
 # Project State
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-16)
 
 **Core value:** Upload documents, get a correct and complete Laufliste PDF with the right authorities for each document -- fast and without manual research.
-**Current focus:** Phase 2 — document-upload-ai-extraction
+**Current focus:** Phase 3 — review-authority-lookup
 
 ## Current Position
 
-Phase: 3
-Plan: Not started
-Status: Phase complete — ready for verification
+Phase: 3 (review-authority-lookup) — EXECUTING
+Plan: 2 of 6
+Status: Ready to execute
 Last activity: 2026-04-17
 
 Progress: [..........] 0%
@@ -65,6 +65,7 @@ Progress: [..........] 0%
 | Phase 02-document-upload-ai-extraction P05 | 4min | 2 tasks | 9 files |
 | Phase 02-document-upload-ai-extraction P06 | 18min | 3 tasks | 8 files |
 | Phase 02-document-upload-ai-extraction P07 | 10min | 1 task + 1 checkpoint tasks | 2 files files |
+| Phase 03 P01 | 5min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -107,6 +108,8 @@ Recent decisions affecting current work:
 - [Phase 02-document-upload-ai-extraction]: Link-as-button via buttonVariants() on <Link> (project Button primitive is base-ui, not Radix Slot, so asChild unsupported)
 - [Phase 02-document-upload-ai-extraction]: Plan 02-07: Seed script committed as .ts invoked via tsx (not .mjs) — Node ESM could not resolve named exports from Drizzle .ts modules; matches scripts/seed-user.ts convention
 - [Phase 02-document-upload-ai-extraction]: Plan 02-07: Phase 2 human-verify exit gate auto-approved in autonomous mode — 4 browser UAT items (dropzone UX, batch progress, iframe preview, extraction accuracy) remain as deferred operator sign-off
+- [Phase 03]: Hoisted REVIEW_STATUS + LOOKUP_STATUS constants above Phase 2 section in db/schema.ts so document ALTER can reference them
+- [Phase 03]: Reset dev DB (gitignored) when drizzle-kit push mid-transaction failure left orphan __new_document and dropped document — cleaner than surgical SQL repair
 
 ### Pending Todos
 
@@ -118,6 +121,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T07:18:35.731Z
-Stopped at: Completed 02-07-PLAN.md
+Last session: 2026-04-17T09:25:57.981Z
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None
