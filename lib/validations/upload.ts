@@ -8,4 +8,6 @@ export const FileInput = z
   .instanceof(File, { message: "invalid_pdf" })
   .refine((f) => f.size > 0, { message: "invalid_pdf" })
   .refine((f) => f.size <= MAX_FILE_BYTES, { message: "file_too_large" })
+  // NOTE: f.type is browser-supplied and untrusted — any file can claim this MIME type.
+  // The authoritative check is validatePdf() in the Server Action (magic-bytes + pdf-lib parse).
   .refine((f) => f.type === "application/pdf", { message: "invalid_pdf" });
