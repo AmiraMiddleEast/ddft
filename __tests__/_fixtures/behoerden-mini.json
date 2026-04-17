@@ -1,0 +1,150 @@
+{
+  "states": [
+    {
+      "id": "bayern",
+      "name": "Bayern",
+      "hat_regierungsbezirke": true,
+      "besonderheiten": null
+    },
+    {
+      "id": "berlin",
+      "name": "Berlin",
+      "hat_regierungsbezirke": false,
+      "besonderheiten": null
+    },
+    {
+      "id": "hamburg",
+      "name": "Hamburg",
+      "hat_regierungsbezirke": false,
+      "besonderheiten": null
+    }
+  ],
+  "regierungsbezirke": [
+    {
+      "id": "bayern-oberbayern",
+      "state_id": "bayern",
+      "name": "Oberbayern",
+      "slug": "oberbayern"
+    },
+    {
+      "id": "bayern-schwaben",
+      "state_id": "bayern",
+      "name": "Schwaben",
+      "slug": "schwaben"
+    }
+  ],
+  "document_types": [
+    { "id": "geburtsurkunde", "display_name": "Geburtsurkunde" },
+    { "id": "heiratsurkunde", "display_name": "Heiratsurkunde" },
+    { "id": "approbationsurkunde", "display_name": "Approbationsurkunde" },
+    { "id": "fuehrungszeugnis", "display_name": "Fuehrungszeugnis" },
+    { "id": "reisepass", "display_name": "Reisepass" }
+  ],
+  "authorities": [
+    {
+      "id": "a1",
+      "state_id": "bayern",
+      "regierungsbezirk_id": "bayern-oberbayern",
+      "document_type_id": "approbationsurkunde",
+      "name": "Regierung von Oberbayern",
+      "address": "Maximilianstrasse 39, 80538 Muenchen",
+      "phone": "089 2176-0",
+      "email": null,
+      "website": "https://www.regierung.oberbayern.bayern.de",
+      "office_hours": "Mo-Do 8-16, Fr 8-12",
+      "notes": null,
+      "special_rules": null,
+      "needs_review": false
+    },
+    {
+      "id": "a2",
+      "state_id": "bayern",
+      "regierungsbezirk_id": "bayern-schwaben",
+      "document_type_id": "approbationsurkunde",
+      "name": "Regierung von Schwaben",
+      "address": "Fronhof 10, 86152 Augsburg",
+      "phone": "0821 327-01",
+      "email": null,
+      "website": null,
+      "office_hours": null,
+      "notes": null,
+      "special_rules": null,
+      "needs_review": true
+    },
+    {
+      "id": "a3",
+      "state_id": "bayern",
+      "regierungsbezirk_id": null,
+      "document_type_id": "geburtsurkunde",
+      "name": "Standesamt Bayern",
+      "address": "-",
+      "phone": null,
+      "email": null,
+      "website": null,
+      "office_hours": null,
+      "notes": "Vorbeglaubigung durch Landratsamt",
+      "special_rules": null,
+      "needs_review": false
+    },
+    {
+      "id": "a4",
+      "state_id": "berlin",
+      "regierungsbezirk_id": null,
+      "document_type_id": "geburtsurkunde",
+      "name": "Senatsverwaltung fuer Inneres Berlin",
+      "address": "Klosterstrasse 47, 10179 Berlin",
+      "phone": "030 9027-0",
+      "email": null,
+      "website": "https://www.berlin.de/",
+      "office_hours": null,
+      "notes": null,
+      "special_rules": null,
+      "needs_review": false
+    },
+    {
+      "id": "a5",
+      "state_id": "berlin",
+      "regierungsbezirk_id": null,
+      "document_type_id": "fuehrungszeugnis",
+      "name": "Bundesamt fuer Justiz",
+      "address": "Adenauerallee 99-103, 53113 Bonn",
+      "phone": null,
+      "email": null,
+      "website": null,
+      "office_hours": null,
+      "notes": null,
+      "special_rules": "Fuehrungszeugnis: keine Vorbeglaubigung - direkt zur Apostille beim BfAA.",
+      "needs_review": false
+    },
+    {
+      "id": "a6",
+      "state_id": "hamburg",
+      "regierungsbezirk_id": null,
+      "document_type_id": "reisepass",
+      "name": "-",
+      "address": "-",
+      "phone": null,
+      "email": null,
+      "website": null,
+      "office_hours": null,
+      "notes": null,
+      "special_rules": "Reisepass: keine Legalisation erforderlich.",
+      "needs_review": false
+    },
+    {
+      "id": "a7",
+      "state_id": "hamburg",
+      "regierungsbezirk_id": null,
+      "document_type_id": "heiratsurkunde",
+      "name": "Standesamt Hamburg",
+      "address": "Rathaus, Hamburg",
+      "phone": null,
+      "email": null,
+      "website": null,
+      "office_hours": null,
+      "notes": null,
+      "special_rules": null,
+      "needs_review": false
+    }
+  ]
+}
