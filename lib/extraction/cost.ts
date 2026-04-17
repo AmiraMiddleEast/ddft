@@ -11,6 +11,10 @@ export function computeCostEur(
   if (!p) return 0; // unknown model — do NOT fabricate a price
   const usd =
     (inputTokens * p.inputUsd + outputTokens * p.outputUsd) / 1_000_000;
-  const rate = Number(process.env.USD_TO_EUR ?? "0.92");
+  const rawRate = process.env.USD_TO_EUR ?? "0.92";
+  const rate = Number(rawRate);
+  if (!Number.isFinite(rate) || rate <= 0) {
+    throw new Error(`USD_TO_EUR env var is invalid: "${rawRate}"`);
+  }
   return Number((usd * rate).toFixed(6));
 }
