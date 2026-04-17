@@ -39,7 +39,10 @@ export async function GET(
     headers: {
       "Content-Type": "application/pdf",
       "Content-Length": String(bytes.byteLength),
-      "Content-Disposition": `inline; filename="${encodeURIComponent(doc.filename)}"`,
+      // RFC 6266 / RFC 5987: plain ASCII fallback in filename= (for older clients)
+      // plus the percent-encoded UTF-8 value in filename*= (for all modern clients).
+      // This ensures German umlauts (ä, ö, ü, ß) are preserved correctly.
+      "Content-Disposition": `inline; filename="document.pdf"; filename*=UTF-8''${encodeURIComponent(doc.filename)}`,
       "Cache-Control": "private, no-store",
     },
   });
