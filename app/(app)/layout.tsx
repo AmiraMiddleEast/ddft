@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -16,7 +17,25 @@ export default async function AppLayout({
   return (
     <div className="min-h-screen bg-background">
       <header className="h-16 border-b border-border bg-muted flex items-center justify-between px-6">
-        <span className="text-sm font-semibold">Angela</span>
+        <div className="flex items-center gap-6">
+          <Link href="/" className="text-sm font-semibold">
+            Angela
+          </Link>
+          <nav className="flex items-center gap-4 text-sm">
+            <Link
+              href="/cases"
+              className="font-medium text-muted-foreground hover:text-foreground"
+            >
+              Fälle
+            </Link>
+            <Link
+              href="/upload"
+              className="font-medium text-muted-foreground hover:text-foreground"
+            >
+              Hochladen
+            </Link>
+          </nav>
+        </div>
         <div className="flex items-center gap-4">
           <span className="text-sm font-semibold">{session.user.email}</span>
           <LogoutButton />

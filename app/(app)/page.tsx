@@ -44,9 +44,17 @@ export default async function HomePage() {
     <main className="mx-auto w-full max-w-[960px] px-6 pt-8">
       <section className="mb-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <h1 className="text-2xl font-semibold leading-tight">Übersicht</h1>
-        <Link href="/upload" className={buttonVariants()}>
-          Dokumente hochladen
-        </Link>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <Link
+            href="/cases"
+            className={buttonVariants({ variant: "outline" })}
+          >
+            Fälle
+          </Link>
+          <Link href="/upload" className={buttonVariants()}>
+            Dokumente hochladen
+          </Link>
+        </div>
       </section>
 
       <section>
