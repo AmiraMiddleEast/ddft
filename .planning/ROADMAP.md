@@ -93,7 +93,7 @@ Plans:
 - [x] 04-03-PLAN.md — Laufliste PDF generator: static BVA/BfJ + UAE Embassy + React-PDF document tree + renderLaufliste + storage helper + slug util (Wave 3)
 - [x] 04-04-PLAN.md — buildLauflisteInput composer + generateLauflisteAction + laufliste queries (Wave 4)
 - [x] 04-05-PLAN.md — Cases UI: /cases, /cases/new, /cases/[id] + AddDocumentsSheet + Remove/Regenerate dialogs (Wave 5)
-- [ ] 04-06-PLAN.md — Download Route Handler + Historie + integration test + human-verify checkpoint (Wave 6)
+- [x] 04-06-PLAN.md — Download Route Handler + Historie + integration test + human-verify checkpoint (Wave 6)
 **UI hint**: yes
 
 ### Phase 5: History, Re-upload & Admin
