@@ -6,7 +6,10 @@ export default defineConfig({
     environment: "happy-dom",
     globals: true,
     setupFiles: ["./__tests__/setup.ts"],
-    include: ["__tests__/**/*.test.{ts,tsx}"],
+    include: [
+      "__tests__/**/*.test.{ts,tsx}",
+      "lib/**/*.test.{ts,tsx}",
+    ],
   },
   resolve: {
     alias: {
