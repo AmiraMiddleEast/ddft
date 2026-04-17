@@ -6,6 +6,7 @@ import path from "node:path";
 import { auth } from "@/lib/auth";
 import { db } from "@/db/client";
 import { getLauflisteForDownload } from "@/lib/laufliste/queries";
+import { LAUFLISTEN_DIR } from "@/lib/laufliste/storage";
 
 /**
  * Phase 4 Plan 06 Task 1 — Laufliste PDF download Route Handler.
@@ -52,6 +53,16 @@ export async function GET(
   const abs = path.isAbsolute(row.pdfStoragePath)
     ? row.pdfStoragePath
     : path.resolve(process.cwd(), row.pdfStoragePath);
+
+  // Defense-in-depth (R-04-01): even though pdf_storage_path is written by
+  // writeLauflisteToDisk with a server-generated UUID caseId, double-check
+  // the resolved path is contained within LAUFLISTEN_DIR before reading.
+  // Protects against future code paths (admin import, backup restore,
+  // migration bug) that could pollute the column with a traversal value.
+  const containmentRoot = LAUFLISTEN_DIR + path.sep;
+  if (abs !== LAUFLISTEN_DIR && !abs.startsWith(containmentRoot)) {
+    return new NextResponse("File missing", { status: 410 });
+  }
 
   let bytes: Buffer;
   try {

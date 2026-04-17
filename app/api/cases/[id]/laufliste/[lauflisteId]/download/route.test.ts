@@ -27,9 +27,9 @@ import {
 } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { mkdtempSync, rmSync, writeFileSync, mkdirSync } from "node:fs";
 import { createTestDb } from "../../../../../../../__tests__/_fixtures/test-db";
+import { LAUFLISTEN_DIR } from "@/lib/laufliste/storage";
 
 vi.mock("server-only", () => ({}));
 vi.mock("next/headers", () => ({ headers: async () => new Headers() }));
@@ -75,7 +75,11 @@ beforeAll(async () => {
   process.env.BETTER_AUTH_SECRET = "x".repeat(32);
   process.env.BETTER_AUTH_URL = "http://localhost:3000";
 
-  tmpDir = mkdtempSync(path.join(tmpdir(), "angela-download-"));
+  // Write test fixture files INSIDE LAUFLISTEN_DIR so the route's
+  // containment check (R-04-01) accepts them. We mkdtemp below it to keep
+  // the fixtures isolated and cleanable.
+  mkdirSync(LAUFLISTEN_DIR, { recursive: true });
+  tmpDir = mkdtempSync(path.join(LAUFLISTEN_DIR, "test-download-"));
 
   vi.resetModules();
 
