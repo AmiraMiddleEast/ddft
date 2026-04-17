@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import {
   getDocumentForUser,
@@ -10,6 +9,7 @@ import {
 } from "@/lib/documents/queries";
 import { PdfPreview } from "./_components/PdfPreview";
 import { ExtractionTable } from "./_components/ExtractionTable";
+import { ReviewLinkButton } from "./_components/ReviewLinkButton";
 
 export const metadata = { title: "Dokument — Angela" };
 
@@ -96,9 +96,10 @@ export default async function DocumentDetailPage({
                   ) : null}
                   <ExtractionTable rows={rows} pending={pending} />
                   <div className="flex justify-end">
-                    <Button disabled title="Verfügbar in der nächsten Version.">
-                      Zur Überprüfung
-                    </Button>
+                    <ReviewLinkButton
+                      documentId={doc.id}
+                      status={doc.extractionStatus}
+                    />
                   </div>
                 </>
               )}
