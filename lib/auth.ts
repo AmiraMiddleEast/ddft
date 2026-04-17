@@ -9,6 +9,13 @@ if (!process.env.BETTER_AUTH_SECRET) {
   );
 }
 
+if (process.env.ALLOW_SIGNUP === "1" && process.env.NODE_ENV === "production") {
+  throw new Error(
+    "ALLOW_SIGNUP=1 must never be set in production. " +
+      "Remove it from your environment configuration."
+  );
+}
+
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "sqlite" }),
 
