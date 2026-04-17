@@ -38,7 +38,7 @@ export default async function DocumentDetailPage({
 
   const pending =
     doc.extractionStatus === "pending" || doc.extractionStatus === "extracting";
-  const rows = pending ? [] : await getExtractionsForDocument(id);
+  const rows = pending ? [] : await getExtractionsForDocument(id, session.user.id);
 
   return (
     <main className="mx-auto w-full max-w-[1200px] px-6 pt-8">

@@ -30,6 +30,7 @@ export type ExtractionRow = {
 
 export async function getExtractionsForDocument(
   documentId: string,
+  userId: string, // required — prevents accidental use without ownership verification
 ): Promise<ExtractionRow[]> {
   return db
     .select({
@@ -39,5 +40,6 @@ export async function getExtractionsForDocument(
       reasoning: extraction.reasoning,
     })
     .from(extraction)
-    .where(eq(extraction.documentId, documentId));
+    .innerJoin(document, eq(extraction.documentId, document.id))
+    .where(and(eq(extraction.documentId, documentId), eq(document.userId, userId)));
 }
