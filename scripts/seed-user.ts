@@ -45,12 +45,11 @@ async function main() {
     const lower = msg.toLowerCase();
     if (lower.includes("disabled") || lower.includes("sign up")) {
       console.error(
-        "ERROR: Signup is disabled in lib/auth.ts (emailAndPassword.disableSignUp: true)."
+        "ERROR: Signup is disabled. Set ALLOW_SIGNUP=1 in your environment before running this script."
       );
       console.error(
-        "A1 workaround: temporarily set disableSignUp: false in lib/auth.ts,"
+        "Example: ALLOW_SIGNUP=1 SEED_EMAIL=... SEED_PASSWORD=... npx tsx scripts/seed-user.ts"
       );
-      console.error("re-run this script, then restore disableSignUp: true.");
       console.error("Original error:", msg);
       process.exit(2);
     }
