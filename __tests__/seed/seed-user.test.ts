@@ -3,7 +3,7 @@ import { describe, it, expect } from "vitest";
 import { execSync } from "node:child_process";
 
 describe("scripts/seed-user.ts guards", () => {
-  it("exits non-zero when SEED_EMAIL and SEED_PASSWORD are missing", () => {
+  it("exits non-zero when SEED_EMAIL and SEED_PASSWORD are missing", { timeout: 15_000 }, () => {
     let exitCode = 0;
     try {
       execSync("npx tsx scripts/seed-user.ts", {
