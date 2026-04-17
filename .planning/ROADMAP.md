@@ -54,7 +54,7 @@ Plans:
 - [x] 02-04-PLAN.md — Extraction Server Action: Claude SDK + prompt + Zod + cost log + transactional writes (Wave 3)
 - [x] 02-05-PLAN.md — /upload page: react-dropzone + useActionState + p-limit(3) client orchestration (Wave 4)
 - [x] 02-06-PLAN.md — /documents/[id] + /api/documents/[id]/pdf Route Handler + home page update (Wave 5)
-- [ ] 02-07-PLAN.md — Integration tests + human-verify checkpoint (Wave 6)
+- [x] 02-07-PLAN.md — Integration tests + human-verify checkpoint (Wave 6)
 **UI hint**: yes
 
 ### Phase 3: Review & Authority Lookup
