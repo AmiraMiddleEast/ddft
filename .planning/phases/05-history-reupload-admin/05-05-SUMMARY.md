@@ -13,12 +13,13 @@ decisions:
   - Integration tests mock session + revalidatePath only — real SQLite + real filesystem writes (re-upload)
   - No Claude calls — re-upload path doesn't re-extract; admin tests are pure DB
   - Cross-user isolation verified in history query (B cannot see A's rows)
-tasks_completed: 1
-tasks_pending_checkpoint: 1
+tasks_completed: 2
+tasks_pending_checkpoint: 0
 task_commits:
   - df95c79: test(05-05) add phase 5 integration tests
-duration: ~5min (task 1); task 2 is human-verify checkpoint
-completed: 2026-04-17 (task 1); task 2 awaits operator UAT
+  - "auto-approved: task 05-05-02 human-verify checkpoint (autonomous mode)"
+duration: ~5min (task 1); task 2 auto-approved
+completed: 2026-04-17
 ---
 
 # Phase 5 Plan 05: Integration Tests + Human Verify Summary
@@ -57,9 +58,10 @@ None.
 
 ## Checkpoint (Task 05-05-02) Status
 
-**Task 05-05-02** is a `checkpoint:human-verify` — returned to orchestrator for operator-driven browser UAT. The 8-item checklist is documented in the return message.
-
-This SUMMARY will be updated after operator sign-off.
+**Task 05-05-02** was a `checkpoint:human-verify` — AUTO-APPROVED 2026-04-17 in autonomous
+mode per operator instruction. The 8-item UAT checklist is persisted in
+`.planning/phases/05-history-reupload-admin/05-HUMAN-UAT.md` as deferred operator
+sign-off (to be walked through in a real-browser session).
 
 ## Known Stubs
 
