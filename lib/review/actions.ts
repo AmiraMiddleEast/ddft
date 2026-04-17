@@ -94,47 +94,52 @@ export async function approveAndResolve(input: {
 
   // 5. Transactional persist — SYNC callback (see file header).
   // There is intentionally NO await before db.transaction().
-  db.transaction((tx) => {
-    const existing = tx
-      .select()
-      .from(documentReview)
-      .where(eq(documentReview.documentId, parsed.data.documentId))
-      .all();
+  try {
+    db.transaction((tx) => {
+      const existing = tx
+        .select()
+        .from(documentReview)
+        .where(eq(documentReview.documentId, parsed.data.documentId))
+        .all();
 
-    if (existing.length > 0) {
-      tx.update(documentReview)
-        .set({
-          approvedByUserId: session.user.id,
-          approvedAt: new Date(),
-          correctedFields: parsed.data.corrected,
-          resolvedAuthorityId,
-          lookupStatus,
-        })
-        .where(eq(documentReview.id, existing[0].id))
-        .run();
-    } else {
-      tx.insert(documentReview)
-        .values({
-          id: crypto.randomUUID(),
-          documentId: parsed.data.documentId,
-          approvedByUserId: session.user.id,
-          correctedFields: parsed.data.corrected,
-          resolvedAuthorityId,
-          lookupStatus,
-        })
-        .run();
-    }
+      if (existing.length > 0) {
+        tx.update(documentReview)
+          .set({
+            approvedByUserId: session.user.id,
+            approvedAt: new Date(),
+            correctedFields: parsed.data.corrected,
+            resolvedAuthorityId,
+            lookupStatus,
+          })
+          .where(eq(documentReview.id, existing[0].id))
+          .run();
+      } else {
+        tx.insert(documentReview)
+          .values({
+            id: crypto.randomUUID(),
+            documentId: parsed.data.documentId,
+            approvedByUserId: session.user.id,
+            correctedFields: parsed.data.corrected,
+            resolvedAuthorityId,
+            lookupStatus,
+          })
+          .run();
+      }
 
-    tx.update(document)
-      .set({ reviewStatus: "approved", reviewedAt: new Date() })
-      .where(
-        and(
-          eq(document.id, parsed.data.documentId),
-          eq(document.userId, session.user.id),
-        ),
-      )
-      .run();
-  });
+      tx.update(document)
+        .set({ reviewStatus: "approved", reviewedAt: new Date() })
+        .where(
+          and(
+            eq(document.id, parsed.data.documentId),
+            eq(document.userId, session.user.id),
+          ),
+        )
+        .run();
+    });
+  } catch (err) {
+    console.error("[approveAndResolve] transaction failed:", err);
+    return { ok: false, error: "db_error" };
+  }
 
   return { ok: true, data: result };
 }
@@ -196,17 +201,22 @@ export async function chooseAmbiguousAuthority(input: {
   if (!chosen) return { ok: false, error: "invalid_choice" };
 
   // Sync transaction — no async inside.
-  db.transaction((tx) => {
-    tx.update(documentReview)
-      .set({
-        resolvedAuthorityId: chosen.id,
-        lookupStatus: "matched",
-        approvedAt: new Date(),
-        approvedByUserId: session.user.id,
-      })
-      .where(eq(documentReview.id, review.id))
-      .run();
-  });
+  try {
+    db.transaction((tx) => {
+      tx.update(documentReview)
+        .set({
+          resolvedAuthorityId: chosen.id,
+          lookupStatus: "matched",
+          approvedAt: new Date(),
+          approvedByUserId: session.user.id,
+        })
+        .where(eq(documentReview.id, review.id))
+        .run();
+    });
+  } catch (err) {
+    console.error("[chooseAmbiguousAuthority] transaction failed:", err);
+    return { ok: false, error: "db_error" };
+  }
 
   return { ok: true, data: { authority: chosen } };
 }
