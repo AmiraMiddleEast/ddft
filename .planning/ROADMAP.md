@@ -12,11 +12,11 @@ The Angela App delivers a complete pipeline from document upload to Laufliste PD
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Authentication** - Project scaffolding, database setup, and password-based login
-- [ ] **Phase 2: Document Upload & AI Extraction** - Upload PDFs and extract structured data via Claude Vision
-- [ ] **Phase 3: Review & Authority Lookup** - Review/edit extraction results and resolve correct Vorbeglaubigung authorities
-- [ ] **Phase 4: Laufliste Generation & Cases** - Generate PDF Laufliste output and organize documents into cases
-- [ ] **Phase 5: History, Re-upload & Admin** - Browse past Lauflisten, re-upload documents, and maintain Behoerden database
+- [x] **Phase 1: Foundation & Authentication** - Project scaffolding, database setup, and password-based login (completed 2026-04-17)
+- [x] **Phase 2: Document Upload & AI Extraction** - Upload PDFs and extract structured data via Claude Vision (completed 2026-04-17)
+- [x] **Phase 3: Review & Authority Lookup** - Review/edit extraction results and resolve correct Vorbeglaubigung authorities (completed 2026-04-17)
+- [x] **Phase 4: Laufliste Generation & Cases** - Generate PDF Laufliste output and organize documents into cases (completed 2026-04-17)
+- [x] **Phase 5: History, Re-upload & Admin** - Browse past Lauflisten, re-upload documents, and maintain Behoerden database (completed 2026-04-17)
 
 ## Phase Details
 
@@ -28,7 +28,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. User can log in with username and password and see the main application screen
   2. User can close the browser, reopen it, and still be logged in
   3. User can log out and be prevented from accessing the app without logging in again
-**Plans:** 5 plans
+**Plans:** 5/5 plans complete
 Plans:
 - [x] 01-01-PLAN.md — Scaffold Next.js 16.2 + Tailwind v4 + shadcn (new-york) + Vitest (Wave 1)
 - [x] 01-02-PLAN.md — Install better-sqlite3 + Drizzle ORM, write db/client.ts + drizzle.config.ts (Wave 2)
@@ -86,7 +86,7 @@ Plans:
   2. System generates a PDF Laufliste showing the full chain per document (Vorbeglaubigung -> Endbeglaubigung -> Legalisation) with correct authority details
   3. Generated PDF matches the existing Laufliste format with professional layout and correct German characters (umlauts)
   4. User can download the generated PDF to their local machine
-**Plans:** 5/6 plans executed
+**Plans:** 6/6 plans complete
 Plans:
 - [x] 04-01-PLAN.md — Schema additions (case, case_document, laufliste) + [BLOCKING] drizzle-kit push + install @react-pdf/renderer@4.5.1 + vendor shadcn dialog/sheet/checkbox/textarea (Wave 1)
 - [x] 04-02-PLAN.md — Cases queries + Server Actions: create, addDocs, remove, reorder (Wave 2)
@@ -116,8 +116,8 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Authentication | 0/5 | Not started | - |
-| 2. Document Upload & AI Extraction | 0/7 | Not started | - |
-| 3. Review & Authority Lookup | 2/6 | In Progress|  |
-| 4. Laufliste Generation & Cases | 5/6 | In Progress|  |
-| 5. History, Re-upload & Admin | 0/0 | Not started | - |
+| 1. Foundation & Authentication | 5/5 | Complete   | 2026-04-17 |
+| 2. Document Upload & AI Extraction | 7/7 | Complete   | 2026-04-17 |
+| 3. Review & Authority Lookup | 6/6 | Complete   | 2026-04-17 |
+| 4. Laufliste Generation & Cases | 6/6 | Complete   | 2026-04-17 |
+| 5. History, Re-upload & Admin | 5/5 | Complete   | 2026-04-17 |

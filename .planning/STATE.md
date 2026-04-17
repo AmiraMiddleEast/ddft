@@ -4,13 +4,13 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Completed 04-05-PLAN.md
-last_updated: "2026-04-17T12:11:40.099Z"
+last_updated: "2026-04-17T13:56:43.425Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
-  completed_phases: 4
-  total_plans: 24
-  completed_plans: 24
+  completed_phases: 5
+  total_plans: 29
+  completed_plans: 29
   percent: 100
 ---
 
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-16)
 
 **Core value:** Upload documents, get a correct and complete Laufliste PDF with the right authorities for each document -- fast and without manual research.
-**Current focus:** Phase 4 — laufliste-generation-cases
+**Current focus:** Phase 5 — history-reupload-admin
 
 ## Current Position
 
-Phase: 5
+Phase: 05
 Plan: Not started
-Status: Ready to execute
+Status: Executing Phase 5
 Last activity: 2026-04-17
 
 Progress: [..........] 0%
@@ -36,7 +36,7 @@ Progress: [..........] 0%
 
 **Velocity:**
 
-- Total plans completed: 24
+- Total plans completed: 29
 - Average duration: -
 - Total execution time: 0 hours
 
@@ -48,6 +48,7 @@ Progress: [..........] 0%
 | 02 | 7 | - | - |
 | 03 | 6 | - | - |
 | 04 | 6 | - | - |
+| 05 | 5 | - | - |
 
 **Recent Trend:**
 
