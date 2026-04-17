@@ -34,7 +34,7 @@ Plans:
 - [x] 01-02-PLAN.md — Install better-sqlite3 + Drizzle ORM, write db/client.ts + drizzle.config.ts (Wave 2)
 - [x] 01-03-PLAN.md — better-auth config + schema generation + catch-all route + proxy.ts (Wave 3)
 - [x] 01-04-PLAN.md — Login page + protected layout + logout button + German copy (Wave 4)
-- [ ] 01-05-PLAN.md — Seed user script + integration tests + human verification (Wave 5)
+- [x] 01-05-PLAN.md — Seed user script + integration tests + human verification (Wave 5)
 **UI hint**: yes
 
 ### Phase 2: Document Upload & AI Extraction
