@@ -44,6 +44,8 @@ next-env.d.ts
 # Data directory (SQLite + future uploads)
 data/*
 !data/.gitkeep
+# Phase 3 — committed parsed Behörden snapshot (research Pitfall 3: deterministic CI + reviewable diff)
+!data/behoerden-parsed.json
 *.db
 *.db-journal
 *.db-wal

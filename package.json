@@ -16,7 +16,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "seed": "tsx scripts/seed-user.ts"
+    "seed": "tsx scripts/seed-user.ts",
+    "seed:behoerden": "tsx scripts/seed-behoerden.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.88.0",
