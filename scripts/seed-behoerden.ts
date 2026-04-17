@@ -217,7 +217,7 @@ export async function seedBehoerden(opts: SeedOpts = {}): Promise<SeedResult> {
             regierungsbezirkId: rbzId,
             documentTypeId: a.document_type_slug,
             name: a.name,
-            address: a.address,
+            address: a.address ?? "",
             phone: a.phone,
             email: a.email,
             website: a.website,

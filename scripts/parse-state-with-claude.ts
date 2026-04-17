@@ -69,7 +69,7 @@ export const AuthorityOutput = z.object({
   document_type_slug: z.string().regex(/^[a-z0-9-]+$/),
   regierungsbezirk: z.string().nullable(),
   name: z.string().min(1),
-  address: z.string(),
+  address: z.string().nullable(),
   phone: z.string().nullable(),
   email: z.string().nullable(),
   website: z.string().nullable(),
@@ -139,7 +139,7 @@ export async function parseStateWithClaude(
 
   const msg = await client().messages.create({
     model: CLAUDE_MODEL,
-    max_tokens: 4096,
+    max_tokens: 16384,
     messages: [
       {
         role: "user",
