@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-03-PLAN.md
-last_updated: "2026-04-17T11:26:23.144Z"
+stopped_at: Completed 04-04-PLAN.md
+last_updated: "2026-04-17T11:39:21.133Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 3
   total_plans: 24
-  completed_plans: 21
-  percent: 88
+  completed_plans: 22
+  percent: 92
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 4 (laufliste-generation-cases) — EXECUTING
-Plan: 4 of 6
+Plan: 5 of 6
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -75,6 +75,7 @@ Progress: [..........] 0%
 | Phase 04 P01 | 4min | 3 tasks | 11 files |
 | Phase 04 P02 | 6min | 2 tasks | 5 files |
 | Phase 04-laufliste-generation-cases P03 | 7 | 3 tasks | 11 files |
+| Phase 04 P04 | 45m | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -138,6 +139,8 @@ Recent decisions affecting current work:
 - [Phase 04]: Plan 04-02: Parking-sentinel (position=-1) pattern used for BOTH reorder swap and post-remove renumber — keeps logic future-proof if a compound UNIQUE(case_id, position) is ever added
 - [Phase 04-laufliste-generation-cases]: Rendered Laufliste PDF uses @react-pdf/renderer renderToBuffer inside Server Actions (not renderToStream) to get byteLength for file_size column.
 - [Phase 04-laufliste-generation-cases]: BVA/BfJ/UAE Embassy contact fields kept as research defaults with @assumed JSDoc; operator must verify against sample PDF before production print.
+- [Phase 04]: Followed plan truths (Führungszeugnis -> exception-apostille) over inline prose that suggested 'authority' kind — matches Plan 03 render contract
+- [Phase 04]: Split queries into lib/laufliste/queries.ts (mirrors lib/cases/{actions,queries}.ts) so Plan 06 download route imports getLauflisteForDownload without pulling Server Action bundle
 
 ### Pending Todos
 
@@ -149,6 +152,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T11:26:23.140Z
-Stopped at: Completed 04-03-PLAN.md
+Last session: 2026-04-17T11:39:21.129Z
+Stopped at: Completed 04-04-PLAN.md
 Resume file: None
