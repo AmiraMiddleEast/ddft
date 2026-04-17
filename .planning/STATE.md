@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-03-PLAN.md (upload Server Action + SHA-256 dedup)
-last_updated: "2026-04-17T04:54:16.661Z"
+stopped_at: Completed 02-04-PLAN.md (Claude extraction Server Action + 15 tests)
+last_updated: "2026-04-17T05:06:24.798Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 12
-  completed_plans: 8
-  percent: 67
+  completed_plans: 9
+  percent: 75
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 ## Current Position
 
 Phase: 2 (document-upload-ai-extraction) — EXECUTING
-Plan: 4 of 7
+Plan: 5 of 7
 Status: Ready to execute
 Last activity: 2026-04-17
 
@@ -60,6 +60,7 @@ Progress: [..........] 0%
 | Phase 02 P01 | 4 | 3 tasks | 7 files |
 | Phase 02 P02 | 4min | 2 tasks | 4 files |
 | Phase 02-document-upload-ai-extraction P03 | 4m | 2 tasks | 11 files |
+| Phase 02 P04 | 10min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -95,6 +96,8 @@ Recent decisions affecting current work:
 - [Phase 02-document-upload-ai-extraction]: Plan 02-03: Server Action returns discriminated-union; never throws for user errors (RESEARCH Anti-Patterns)
 - [Phase 02-document-upload-ai-extraction]: Plan 02-03: sha256Hex + onConflictDoNothing before writeUploadToDisk — no bytes on disk on dedup hit (Pitfalls 5 & 8)
 - [Phase 02-document-upload-ai-extraction]: Plan 02-03: Extended vitest include to lib/**/*.test.ts — enables co-located unit+integration tests
+- [Phase 02]: Plan 02-04: Use better-sqlite3 sync transaction with .run() — async transaction callbacks rejected with 'cannot return a promise'
+- [Phase 02]: Plan 02-04: vi.doMock after vi.resetModules to mock relative imports inside dynamically loaded modules (the established hoisted vi.mock doesn't re-apply after resetModules for transitive static imports)
 
 ### Pending Todos
 
@@ -106,6 +109,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T04:53:59.723Z
-Stopped at: Completed 02-03-PLAN.md (upload Server Action + SHA-256 dedup)
+Last session: 2026-04-17T05:06:24.795Z
+Stopped at: Completed 02-04-PLAN.md (Claude extraction Server Action + 15 tests)
 Resume file: None
