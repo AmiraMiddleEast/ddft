@@ -86,13 +86,13 @@ Plans:
   2. System generates a PDF Laufliste showing the full chain per document (Vorbeglaubigung -> Endbeglaubigung -> Legalisation) with correct authority details
   3. Generated PDF matches the existing Laufliste format with professional layout and correct German characters (umlauts)
   4. User can download the generated PDF to their local machine
-**Plans:** 6 plans
+**Plans:** 5/6 plans executed
 Plans:
 - [x] 04-01-PLAN.md — Schema additions (case, case_document, laufliste) + [BLOCKING] drizzle-kit push + install @react-pdf/renderer@4.5.1 + vendor shadcn dialog/sheet/checkbox/textarea (Wave 1)
 - [x] 04-02-PLAN.md — Cases queries + Server Actions: create, addDocs, remove, reorder (Wave 2)
 - [x] 04-03-PLAN.md — Laufliste PDF generator: static BVA/BfJ + UAE Embassy + React-PDF document tree + renderLaufliste + storage helper + slug util (Wave 3)
 - [x] 04-04-PLAN.md — buildLauflisteInput composer + generateLauflisteAction + laufliste queries (Wave 4)
-- [ ] 04-05-PLAN.md — Cases UI: /cases, /cases/new, /cases/[id] + AddDocumentsSheet + Remove/Regenerate dialogs (Wave 5)
+- [x] 04-05-PLAN.md — Cases UI: /cases, /cases/new, /cases/[id] + AddDocumentsSheet + Remove/Regenerate dialogs (Wave 5)
 - [ ] 04-06-PLAN.md — Download Route Handler + Historie + integration test + human-verify checkpoint (Wave 6)
 **UI hint**: yes
 
@@ -119,5 +119,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 1. Foundation & Authentication | 0/5 | Not started | - |
 | 2. Document Upload & AI Extraction | 0/7 | Not started | - |
 | 3. Review & Authority Lookup | 2/6 | In Progress|  |
-| 4. Laufliste Generation & Cases | 0/6 | Not started | - |
+| 4. Laufliste Generation & Cases | 5/6 | In Progress|  |
 | 5. History, Re-upload & Admin | 0/0 | Not started | - |
