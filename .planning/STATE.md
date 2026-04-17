@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 03-06-PLAN.md (human-verify auto-approved under autonomous mode)
-last_updated: "2026-04-17T10:36:22.228Z"
+status: executing
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-04-17T11:07:47.581Z"
 last_activity: 2026-04-17
 progress:
   total_phases: 5
   completed_phases: 3
-  total_plans: 18
-  completed_plans: 18
-  percent: 100
+  total_plans: 24
+  completed_plans: 19
+  percent: 79
 ---
 
 # Project State
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-16)
 
 **Core value:** Upload documents, get a correct and complete Laufliste PDF with the right authorities for each document -- fast and without manual research.
-**Current focus:** Phase 3 — review-authority-lookup
+**Current focus:** Phase 4 — laufliste-generation-cases
 
 ## Current Position
 
-Phase: 4
-Plan: Not started
-Status: Phase complete — ready for verification
+Phase: 4 (laufliste-generation-cases) — EXECUTING
+Plan: 2 of 6
+Status: Ready to execute
 Last activity: 2026-04-17
 
 Progress: [..........] 0%
@@ -72,6 +72,7 @@ Progress: [..........] 0%
 | Phase 03 P04 | 5min | 2 tasks tasks | 4 files files |
 | Phase 03-review-authority-lookup P05 | 6min | 3 tasks | 9 files |
 | Phase 03 P06 | 4min | 3 tasks | 2 files |
+| Phase 04 P01 | 4min | 3 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -127,6 +128,10 @@ Recent decisions affecting current work:
 - [Phase 03-review-authority-lookup]: Plan 05: DiscardDialog hand-rolled (role=alertdialog + focus + Escape) rather than adding shadcn AlertDialog — CONTEXT D-17 locks new components this phase to select only.
 - [Phase 03-review-authority-lookup]: Plan 05: Dokumenttyp/Bundesland Selects store display_name/name (not slug); resolver slugifies at lookup time — keeps UI human-readable.
 - [Phase 03-review-authority-lookup]: Plan 05: Controlled useState instead of react-hook-form — small form, Zod safeParse on submit is sufficient; focus first invalid field by id.
+- [Phase 04]: Plan 04-01: caseTable exported as caseTable (SQL name 'case' via sqliteTable('case', ...)) — 'case' is a TS keyword
+- [Phase 04]: Plan 04-01: uniqueIndex on case_document.document_id enforces D-02 one-case-per-doc globally at DB layer (belt-and-suspenders vs compound unique)
+- [Phase 04]: Plan 04-01: @react-pdf/renderer added to next.config.ts serverExternalPackages preemptively — avoids Turbopack vs fontkit CJS tree-shaking issues before any import exists
+- [Phase 04]: Plan 04-01: Retroactively committed drizzle/meta/0003_snapshot.json (missing from Phase 3) so drizzle-kit migrate works on clean clones
 
 ### Pending Todos
 
@@ -138,6 +143,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-17T10:17:22.274Z
-Stopped at: Completed 03-06-PLAN.md (human-verify auto-approved under autonomous mode)
+Last session: 2026-04-17T11:07:30.214Z
+Stopped at: Completed 04-01-PLAN.md
 Resume file: None

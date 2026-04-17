@@ -40,15 +40,15 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Laufliste / PDF Generation
 
-- [ ] **LAFL-01**: System generates a PDF Laufliste with the full authentication chain per document (Vorbeglaubigung -> Endbeglaubigung -> Legalisation)
-- [ ] **LAFL-02**: PDF matches the existing Laufliste format with professional layout and correct German characters (umlauts)
-- [ ] **LAFL-03**: User can download the generated PDF
+- [x] **LAFL-01**: System generates a PDF Laufliste with the full authentication chain per document (Vorbeglaubigung -> Endbeglaubigung -> Legalisation)
+- [x] **LAFL-02**: PDF matches the existing Laufliste format with professional layout and correct German characters (umlauts)
+- [x] **LAFL-03**: User can download the generated PDF
 
 ### Case Management
 
-- [ ] **CASE-01**: User can create a case for a person (with name)
-- [ ] **CASE-02**: User can add multiple documents to a case
-- [ ] **CASE-03**: System generates one consolidated Laufliste per case covering all documents
+- [x] **CASE-01**: User can create a case for a person (with name)
+- [x] **CASE-02**: User can add multiple documents to a case
+- [x] **CASE-03**: System generates one consolidated Laufliste per case covering all documents
 
 ### History
 
@@ -114,12 +114,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LKUP-02 | Phase 3 | Complete |
 | LKUP-03 | Phase 3 | Complete |
 | LKUP-04 | Phase 3 | Complete |
-| LAFL-01 | Phase 4 | Pending |
-| LAFL-02 | Phase 4 | Pending |
-| LAFL-03 | Phase 4 | Pending |
-| CASE-01 | Phase 4 | Pending |
-| CASE-02 | Phase 4 | Pending |
-| CASE-03 | Phase 4 | Pending |
+| LAFL-01 | Phase 4 | Complete |
+| LAFL-02 | Phase 4 | Complete |
+| LAFL-03 | Phase 4 | Complete |
+| CASE-01 | Phase 4 | Complete |
+| CASE-02 | Phase 4 | Complete |
+| CASE-03 | Phase 4 | Complete |
 | HIST-01 | Phase 5 | Pending |
 | HIST-02 | Phase 5 | Pending |
 | HIST-03 | Phase 5 | Pending |
