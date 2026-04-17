@@ -86,9 +86,11 @@ export async function extractDocumentAction(
   }
 
   // Persist in a single transaction: 6 extraction rows + 1 log + document status update.
-  // better-sqlite3 transactions are synchronous — use .run() (sync) on each query
-  // and keep the callback non-async (RESEARCH Pitfall: "Transaction function
-  // cannot return a promise").
+  // better-sqlite3 transactions are SYNCHRONOUS — the callback must NOT be async and
+  // must NOT contain await. If the callback returned a Promise it would be silently
+  // ignored, turning the transaction into a no-op for async callers.
+  // There is intentionally no `await` before db.transaction() — this is correct.
+  // See: https://orm.drizzle.team/docs/transactions#sqlite
   try {
     db.transaction((tx) => {
       const now = Date.now();
