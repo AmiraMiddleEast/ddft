@@ -71,6 +71,7 @@ export function ReviewForm({
     Partial<Record<keyof CorrectedFields, string>>
   >({});
   const [pending, startTransition] = React.useTransition();
+  const [choosePending, setChoosePending] = React.useState(false);
   const [result, setResult] = React.useState<ResolverResult | null>(null);
   const [confirmDiscard, setConfirmDiscard] = React.useState(false);
 
@@ -161,22 +162,28 @@ export function ReviewForm({
   }
 
   async function onChooseAmbiguous(authorityId: string) {
-    const res = await chooseAmbiguousAuthority({ documentId, authorityId });
-    if (!res.ok) {
-      toast.error(
-        "Behörde konnte nicht ermittelt werden. Bitte erneut versuchen.",
-      );
-      return;
+    if (choosePending) return;
+    setChoosePending(true);
+    try {
+      const res = await chooseAmbiguousAuthority({ documentId, authorityId });
+      if (!res.ok) {
+        toast.error(
+          "Behörde konnte nicht ermittelt werden. Bitte erneut versuchen.",
+        );
+        return;
+      }
+      const chosen = res.data.authority;
+      setResult({
+        status: "matched",
+        authority: chosen,
+        routing_path: [],
+        special_rules: chosen.specialRules,
+        needs_review: chosen.needsReview,
+      });
+      toast.success("Zuständige Behörde ermittelt.");
+    } finally {
+      setChoosePending(false);
     }
-    const chosen = res.data.authority;
-    setResult({
-      status: "matched",
-      authority: chosen,
-      routing_path: [],
-      special_rules: chosen.specialRules,
-      needs_review: chosen.needsReview,
-    });
-    toast.success("Zuständige Behörde ermittelt.");
   }
 
   function onAdjustInputs() {
@@ -358,6 +365,7 @@ export function ReviewForm({
             result={result}
             onChooseAuthority={onChooseAmbiguous}
             onAdjustInputs={onAdjustInputs}
+            choosePending={choosePending}
           />
         </div>
       ) : null}

@@ -20,6 +20,7 @@ type AuthorityResultPanelProps = {
   result: ResolverResult;
   onChooseAuthority: (authorityId: string) => void;
   onAdjustInputs: () => void;
+  choosePending?: boolean;
 };
 
 const BREADCRUMB_SEP = " › "; // U+203A
@@ -150,10 +151,12 @@ function AmbiguousVariant({
   candidates,
   routing,
   onChooseAuthority,
+  choosePending,
 }: {
   candidates: AuthorityRow[];
   routing: string[];
   onChooseAuthority: (id: string) => void;
+  choosePending?: boolean;
 }) {
   return (
     <Card className="gap-4 p-6">
@@ -189,6 +192,7 @@ function AmbiguousVariant({
                   <TableCell className="text-right">
                     <Button
                       size="sm"
+                      disabled={choosePending}
                       onClick={() => onChooseAuthority(c.id)}
                     >
                       Diese Behörde übernehmen
@@ -236,6 +240,7 @@ export function AuthorityResultPanel({
   result,
   onChooseAuthority,
   onAdjustInputs,
+  choosePending,
 }: AuthorityResultPanelProps) {
   if (result.status === "matched") {
     return (
@@ -254,6 +259,7 @@ export function AuthorityResultPanel({
         candidates={result.candidates}
         routing={result.routing_path}
         onChooseAuthority={onChooseAuthority}
+        choosePending={choosePending}
       />
     );
   }
