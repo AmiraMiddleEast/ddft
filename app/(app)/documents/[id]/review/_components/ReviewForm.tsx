@@ -79,7 +79,10 @@ export function ReviewForm({
     (k: FieldName) => values[k] !== original[k].value,
     [values, original],
   );
-  const anyDirty = FIELD_NAMES.some((k) => isDirty(k));
+  const anyDirty = React.useMemo(
+    () => FIELD_NAMES.some((k) => values[k] !== original[k].value),
+    [values, original],
+  );
 
   // beforeunload warning on unsaved edits.
   React.useEffect(() => {
