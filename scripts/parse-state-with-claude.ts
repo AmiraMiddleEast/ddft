@@ -131,6 +131,12 @@ export async function parseStateWithClaude(
   raw: string,
   stateSlugHint: string,
 ): Promise<StateParseOutputT> {
+  // Sanitize raw input before interpolation — strip any closing XML-like tag
+  // that could break out of the <input>…</input> boundary in the prompt and
+  // inject instructions into the Claude context.
+  const safeRaw = raw.replace(/<\/input>/gi, "[/input]");
+  const promptText = STATE_PARSE_PROMPT.replace("{{DOKUMENTE_RAW}}", safeRaw);
+
   const msg = await client().messages.create({
     model: CLAUDE_MODEL,
     max_tokens: 4096,
@@ -140,7 +146,7 @@ export async function parseStateWithClaude(
         content: [
           {
             type: "text",
-            text: STATE_PARSE_PROMPT.replace("{{DOKUMENTE_RAW}}", raw),
+            text: promptText,
           },
         ],
       },
