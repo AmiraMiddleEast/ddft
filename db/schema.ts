@@ -114,6 +114,14 @@ export const accountRelations = relations(account, ({ one }) => ({
   }),
 }));
 
+// ======== Phase 3 constants (hoisted — referenced by document ALTER below) ========
+
+export const REVIEW_STATUS = ["pending", "approved"] as const;
+export type ReviewStatus = (typeof REVIEW_STATUS)[number];
+
+export const LOOKUP_STATUS = ["matched", "ambiguous", "not_found"] as const;
+export type LookupStatus = (typeof LOOKUP_STATUS)[number];
+
 // ======== Phase 2: Document Upload & AI Extraction (D-16) ========
 
 export const EXTRACTION_STATUS = ["pending", "extracting", "done", "error"] as const;
@@ -152,6 +160,10 @@ export const document = sqliteTable(
       .notNull()
       .default("pending"),
     errorCode: text("error_code"),
+    reviewStatus: text("review_status", { enum: REVIEW_STATUS })
+      .notNull()
+      .default("pending"),
+    reviewedAt: integer("reviewed_at", { mode: "timestamp_ms" }),
   },
   (t) => [
     uniqueIndex("document_user_sha_uniq").on(t.userId, t.sha256),
@@ -160,6 +172,10 @@ export const document = sqliteTable(
     check(
       "document_status_ck",
       sql`${t.extractionStatus} IN ('pending','extracting','done','error')`,
+    ),
+    check(
+      "document_review_status_ck",
+      sql`${t.reviewStatus} IN ('pending','approved')`,
     ),
   ],
 );
@@ -230,3 +246,168 @@ export const extractionLogRelations = relations(extractionLog, ({ one }) => ({
     references: [document.id],
   }),
 }));
+
+// ======== Phase 3: Behörden + Document Review (D-02, D-15) ========
+
+export const behoerdenState = sqliteTable("behoerden_state", {
+  id: text("id").primaryKey(), // slug: "bayern"
+  name: text("name").notNull(), // "Bayern"
+  hatRegierungsbezirke: integer("hat_regierungsbezirke", { mode: "boolean" })
+    .notNull()
+    .default(false),
+  besonderheiten: text("besonderheiten"),
+  createdAt: integer("created_at", { mode: "timestamp_ms" })
+    .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+    .notNull(),
+});
+
+export const behoerdenRegierungsbezirk = sqliteTable(
+  "behoerden_regierungsbezirk",
+  {
+    id: text("id").primaryKey(), // "bayern-oberbayern"
+    stateId: text("state_id")
+      .notNull()
+      .references(() => behoerdenState.id, { onDelete: "cascade" }),
+    name: text("name").notNull(), // "Oberbayern"
+    slug: text("slug").notNull(), // "oberbayern"
+  },
+  (t) => [
+    uniqueIndex("rbz_state_slug_uniq").on(t.stateId, t.slug),
+    index("rbz_state_idx").on(t.stateId),
+  ],
+);
+
+export const behoerdenDocumentType = sqliteTable("behoerden_document_type", {
+  id: text("id").primaryKey(), // "approbationsurkunde"
+  displayName: text("display_name").notNull(), // "Approbationsurkunde"
+});
+
+export const behoerdenAuthority = sqliteTable(
+  "behoerden_authority",
+  {
+    id: text("id").primaryKey(),
+    stateId: text("state_id")
+      .notNull()
+      .references(() => behoerdenState.id, { onDelete: "cascade" }),
+    regierungsbezirkId: text("regierungsbezirk_id").references(
+      () => behoerdenRegierungsbezirk.id,
+      { onDelete: "set null" },
+    ),
+    documentTypeId: text("document_type_id")
+      .notNull()
+      .references(() => behoerdenDocumentType.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    address: text("address").notNull(),
+    phone: text("phone"),
+    email: text("email"),
+    website: text("website"),
+    officeHours: text("office_hours"),
+    notes: text("notes"),
+    specialRules: text("special_rules"),
+    needsReview: integer("needs_review", { mode: "boolean" })
+      .notNull()
+      .default(false),
+  },
+  (t) => [
+    index("authority_lookup_idx").on(
+      t.stateId,
+      t.documentTypeId,
+      t.regierungsbezirkId,
+    ),
+    index("authority_state_idx").on(t.stateId),
+  ],
+);
+
+export const documentReview = sqliteTable(
+  "document_review",
+  {
+    id: text("id").primaryKey(),
+    documentId: text("document_id")
+      .notNull()
+      .references(() => document.id, { onDelete: "cascade" }),
+    approvedByUserId: text("approved_by_user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    approvedAt: integer("approved_at", { mode: "timestamp_ms" })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .notNull(),
+    correctedFields: text("corrected_fields", { mode: "json" })
+      .$type<Record<string, string>>()
+      .notNull(),
+    resolvedAuthorityId: text("resolved_authority_id").references(
+      () => behoerdenAuthority.id,
+      { onDelete: "set null" },
+    ),
+    lookupStatus: text("lookup_status", { enum: LOOKUP_STATUS }).notNull(),
+  },
+  (t) => [
+    index("doc_review_doc_idx").on(t.documentId),
+    check(
+      "doc_review_status_ck",
+      sql`${t.lookupStatus} IN ('matched','ambiguous','not_found')`,
+    ),
+  ],
+);
+
+// Relations
+export const behoerdenStateRelations = relations(
+  behoerdenState,
+  ({ many }) => ({
+    regierungsbezirke: many(behoerdenRegierungsbezirk),
+    authorities: many(behoerdenAuthority),
+  }),
+);
+
+export const behoerdenRegierungsbezirkRelations = relations(
+  behoerdenRegierungsbezirk,
+  ({ one, many }) => ({
+    state: one(behoerdenState, {
+      fields: [behoerdenRegierungsbezirk.stateId],
+      references: [behoerdenState.id],
+    }),
+    authorities: many(behoerdenAuthority),
+  }),
+);
+
+export const behoerdenDocumentTypeRelations = relations(
+  behoerdenDocumentType,
+  ({ many }) => ({
+    authorities: many(behoerdenAuthority),
+  }),
+);
+
+export const behoerdenAuthorityRelations = relations(
+  behoerdenAuthority,
+  ({ one }) => ({
+    state: one(behoerdenState, {
+      fields: [behoerdenAuthority.stateId],
+      references: [behoerdenState.id],
+    }),
+    regierungsbezirk: one(behoerdenRegierungsbezirk, {
+      fields: [behoerdenAuthority.regierungsbezirkId],
+      references: [behoerdenRegierungsbezirk.id],
+    }),
+    documentType: one(behoerdenDocumentType, {
+      fields: [behoerdenAuthority.documentTypeId],
+      references: [behoerdenDocumentType.id],
+    }),
+  }),
+);
+
+export const documentReviewRelations = relations(
+  documentReview,
+  ({ one }) => ({
+    document: one(document, {
+      fields: [documentReview.documentId],
+      references: [document.id],
+    }),
+    approvedBy: one(user, {
+      fields: [documentReview.approvedByUserId],
+      references: [user.id],
+    }),
+    resolvedAuthority: one(behoerdenAuthority, {
+      fields: [documentReview.resolvedAuthorityId],
+      references: [behoerdenAuthority.id],
+    }),
+  }),
+);
