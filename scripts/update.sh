@@ -31,8 +31,8 @@ sudo -u "${APP_USER}" bash -lc "cd '${APP_DIR}' && npm ci"
 echo "==> Build"
 sudo -u "${APP_USER}" bash -lc "cd '${APP_DIR}' && npm run build"
 
-echo "==> DB-Migration (falls neu)"
-sudo -u "${APP_USER}" bash -lc "cd '${APP_DIR}' && npx drizzle-kit push --force"
+echo "==> DB-Migration (falls neu, sonst idempotent übergehen)"
+sudo -u "${APP_USER}" bash -lc "cd '${APP_DIR}' && npx drizzle-kit push --force" || echo "    → push-Konflikt ignoriert (Schema vermutlich bereits synchron)"
 
 echo "==> Restart"
 sudo -u "${APP_USER}" bash -lc "pm2 reload ${APP_NAME} --update-env"

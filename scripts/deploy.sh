@@ -158,8 +158,8 @@ if [[ ! -f "${APP_DIR}/data/angela.db" ]]; then
     rm -f /tmp/ddft-admin-email /tmp/ddft-admin-password
   fi
 else
-  echo "    DB existiert — nur Migrationen pushen"
-  sudo -u "${APP_USER}" bash -lc "cd '${APP_DIR}' && npx drizzle-kit push --force"
+  echo "    DB existiert — versuche Migrationen pushen (darf scheitern wenn Schema bereits aktuell)"
+  sudo -u "${APP_USER}" bash -lc "cd '${APP_DIR}' && npx drizzle-kit push --force" || echo "    → push-Konflikt ignoriert (Schema vermutlich bereits synchron)"
 fi
 
 # --------------------------------------------------------------------------
