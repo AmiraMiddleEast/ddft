@@ -90,26 +90,21 @@ export function UploadClient() {
         setTimeout(() => setRejectMsg(null), 5000);
       }
       if (accepted.length === 0) return;
-      // Use functional setRows to read the latest state rather than the stale
-      // rows.length closure value — prevents double-drop race exceeding MAX_BATCH_FILES.
+      // Batch-limit check: use stale closure value (rows.length). For a single-user
+      // internal tool with sub-second drop latency this is fine; earlier functional
+      // setRows pattern was broken because setRows is async → the `admitted` flag
+      // stayed false when the synchronous check ran, silently skipping the pipeline.
+      if (rows.length + accepted.length > MAX_BATCH_FILES) {
+        setRejectMsg(ERROR_COPY.batch_limit);
+        setTimeout(() => setRejectMsg(null), 5000);
+        return;
+      }
       const newRows: BatchRowData[] = accepted.map((f) => ({
         key: crypto.randomUUID(),
         filename: f.name,
         status: "queued" as RowStatus,
       }));
-      let admitted = false;
-      setRows((current) => {
-        if (current.length + accepted.length > MAX_BATCH_FILES) {
-          return current; // reject — caller will show the error message
-        }
-        admitted = true;
-        return [...current, ...newRows];
-      });
-      if (!admitted) {
-        setRejectMsg(ERROR_COPY.batch_limit);
-        setTimeout(() => setRejectMsg(null), 5000);
-        return;
-      }
+      setRows((xs) => [...xs, ...newRows]);
       // Reset batch signal so the completion toast will fire again
       // when this new batch finishes.
       lastBatchSignal.current = "";
@@ -118,7 +113,7 @@ export function UploadClient() {
         void runPipeline(newRows[i].key, accepted[i]);
       }
     },
-    [runPipeline],
+    [rows.length, runPipeline],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

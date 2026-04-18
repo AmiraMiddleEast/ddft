@@ -13,7 +13,7 @@ export default function UploadPage() {
         </h1>
         <p className="mt-2 text-base leading-normal text-muted-foreground">
           PDF-Dateien per Drag-and-Drop oder über den Button auswählen. Maximal
-          10 Dateien, je 10 MB.
+          25 Dateien, je 10 MB.
         </p>
       </header>
       <UploadClient />
