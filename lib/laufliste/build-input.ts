@@ -1,11 +1,12 @@
 import "server-only";
-import { and, asc, eq } from "drizzle-orm";
+import { and, asc, eq, inArray } from "drizzle-orm";
 
 import { db as defaultDb, type Db } from "@/db/client";
 import {
   caseTable,
   caseDocument,
   documentReview,
+  extraction,
 } from "@/db/schema";
 import {
   resolveAuthority,
@@ -109,13 +110,37 @@ export async function buildLauflisteInput(
   const resolver = opts.resolver ?? resolveAuthority;
   const documents: LauflisteDocumentEntry[] = [];
 
+  // Phase 6: pre-load extraction rows for all documents in this case as a
+  // fallback when document_review is missing (reviews are no longer required
+  // to add docs to a case).
+  const docIds = rows.map((r) => r.documentId);
+  const extractionRows =
+    docIds.length === 0
+      ? []
+      : await db
+          .select({
+            documentId: extraction.documentId,
+            fieldName: extraction.fieldName,
+            fieldValue: extraction.fieldValue,
+          })
+          .from(extraction)
+          .where(inArray(extraction.documentId, docIds));
+  const extractionByDoc = new Map<string, Record<string, string>>();
+  for (const e of extractionRows) {
+    const bucket = extractionByDoc.get(e.documentId) ?? {};
+    if (e.fieldValue != null) bucket[e.fieldName] = e.fieldValue;
+    extractionByDoc.set(e.documentId, bucket);
+  }
+
   for (const row of rows) {
-    // corrected_fields is NOT NULL in the Plan 02 schema (reviews are
-    // required before a document can be added to a case), but the left-join
-    // widens the type. Defend against a missing review row with a safe
-    // empty record — the downstream renderer emits "— nicht erkannt"
-    // sentinels for blank values.
-    const cf = (row.correctedFields ?? {}) as Record<string, string>;
+    // Prefer reviewed (corrected) fields; fall back to auto-extraction when
+    // the document never went through the manual review flow (Phase 6 removed
+    // the review gate from the case-add pipeline).
+    const reviewCf = (row.correctedFields ?? null) as
+      | Record<string, string>
+      | null;
+    const extractionCf = extractionByDoc.get(row.documentId) ?? {};
+    const cf: Record<string, string> = reviewCf ?? extractionCf;
     const dokumentenTyp = cf.dokumenten_typ ?? "";
 
     const isReisepass = REISEPASS_RE.test(dokumentenTyp);
