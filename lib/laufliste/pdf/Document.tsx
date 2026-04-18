@@ -477,6 +477,7 @@ export function LauflisteDocument({ input }: { input: LauflisteInput }) {
       <CoverPage input={input} />
       <OverviewPage input={input} />
       {input.cogs ? <CogsSectionPage cogs={input.cogs} /> : null}
+      {/* Sektion-B-Intro on its own page */}
       <Page size="A4" style={styles.page}>
         <Text style={styles.sectionTitle}>
           Sektion B — Dokumenten-Legalisation
@@ -485,12 +486,18 @@ export function LauflisteDocument({ input }: { input: LauflisteInput }) {
         <Text style={styles.sectionIntro}>
           Für jede Urkunde folgt eine dreistufige Legalisationskette:
           Vorbeglaubigung → Endbeglaubigung → Legalisation durch VAE-Botschaft.
+          Jede Urkunde beginnt auf einer neuen Seite.
         </Text>
-        {input.documents.map((doc, i) => (
-          <DocumentSection key={doc.position} doc={doc} index={i} />
-        ))}
         <Footer />
       </Page>
+      {/* Each document on its own page to avoid React-PDF pagination bugs
+          with many <View break> children inside a single Page. */}
+      {input.documents.map((doc, i) => (
+        <Page key={doc.position} size="A4" style={styles.page}>
+          <DocumentSection doc={doc} index={0} />
+          <Footer />
+        </Page>
+      ))}
       <ClosingPage />
     </Document>
   );
