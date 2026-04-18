@@ -120,7 +120,8 @@ export function AddDocumentsSheet({
         <SheetHeader className="gap-2 p-6 pb-4">
           <SheetTitle>Dokumente hinzufügen</SheetTitle>
           <SheetDescription>
-            Nur geprüfte Dokumente, die keinem anderen Fall zugeordnet sind.
+            Dokumente mit abgeschlossener Analyse, die keinem anderen Fall
+            zugeordnet sind.
           </SheetDescription>
         </SheetHeader>
 
@@ -128,8 +129,7 @@ export function AddDocumentsSheet({
           {assignableDocs.length === 0 ? (
             <div className="flex flex-col items-center gap-4 py-12 text-center px-4">
               <p className="text-base text-muted-foreground">
-                Keine Dokumente verfügbar. Bitte zuerst ein Dokument hochladen
-                und prüfen.
+                Keine Dokumente verfügbar. Bitte zuerst ein Dokument hochladen.
               </p>
               <Link href="/upload" className={buttonVariants()}>
                 Dokument hochladen

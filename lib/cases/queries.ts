@@ -138,7 +138,8 @@ export async function listAssignableDocuments(
       and(
         eq(document.userId, userId),
         eq(document.extractionStatus, "done"),
-        eq(document.reviewStatus, "approved"),
+        // Phase 6: manual review gate removed — auto-resolve happens after
+        // extraction. Documents are assignable once extraction is done.
         notExists(
           db
             .select({ x: caseDocument.id })

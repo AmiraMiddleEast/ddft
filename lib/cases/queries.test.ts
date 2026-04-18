@@ -217,10 +217,11 @@ describe("listAssignableDocuments", () => {
     expect(ids).not.toContain("doc-assigned");
   });
 
-  it("filters out unapproved and unextracted documents + other users' docs", async () => {
-    // Approved + extracted (included)
+  it("filters out unextracted documents + other users' docs (Phase 6: review gate removed)", async () => {
+    // Extracted + reviewed (included)
     await seedDocument("doc-ok", USER_A);
-    // Unapproved (excluded)
+    // Extracted but not manually reviewed — also INCLUDED per Phase 6
+    // (auto-resolve replaces the manual review gate for CoGS routing).
     await seedDocument("doc-unreviewed", USER_A, { reviewStatus: "pending" });
     // Not extracted (excluded)
     await seedDocument("doc-extracting", USER_A, {
@@ -231,7 +232,7 @@ describe("listAssignableDocuments", () => {
     await seedDocument("doc-other", USER_B);
 
     const rows = await listAssignableDocuments(USER_A, db);
-    const ids = rows.map((r: { id: string }) => r.id);
-    expect(ids).toEqual(["doc-ok"]);
+    const ids = rows.map((r: { id: string }) => r.id).sort();
+    expect(ids).toEqual(["doc-ok", "doc-unreviewed"]);
   });
 });
