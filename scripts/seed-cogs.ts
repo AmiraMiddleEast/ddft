@@ -183,7 +183,9 @@ function normalizeRow(r: Row): {
 
 async function main(): Promise<void> {
   const cwd = process.cwd();
-  const csvPath = path.join(cwd, "data/good_standing_database.csv");
+  // CSV lives in reference/ (tracked in git) rather than data/ (gitignored)
+  // so the seed is reproducible on fresh clones / deploys.
+  const csvPath = path.join(cwd, "reference/good_standing_database.csv");
   const jsonPath = path.join(cwd, ".planning/cogs-research-results.json");
 
   console.log("[seed-cogs] loading baseline CSV…");
