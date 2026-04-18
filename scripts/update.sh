@@ -16,6 +16,7 @@ set -euo pipefail
 APP_NAME="ddft"
 APP_USER="ddft"
 APP_DIR="/var/www/${APP_NAME}"
+APP_PORT="3100"
 
 if [[ $EUID -ne 0 ]]; then
   echo "Bitte als root oder via sudo ausführen." >&2
@@ -35,7 +36,7 @@ echo "==> DB-Migration (falls neu, sonst idempotent übergehen)"
 sudo -u "${APP_USER}" bash -lc "cd '${APP_DIR}' && npx drizzle-kit push --force" || echo "    → push-Konflikt ignoriert (Schema vermutlich bereits synchron)"
 
 echo "==> Restart"
-sudo -u "${APP_USER}" bash -lc "pm2 reload ${APP_NAME} --update-env"
+sudo -u "${APP_USER}" bash -lc "PORT=${APP_PORT} pm2 reload ${APP_NAME} --update-env"
 
 echo
 echo "✓ Update fertig"

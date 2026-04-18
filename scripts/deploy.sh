@@ -166,7 +166,9 @@ fi
 # 6) PM2 — Prozess starten + bei Boot auto-start
 # --------------------------------------------------------------------------
 echo "==> 6/8 PM2"
-sudo -u "${APP_USER}" bash -lc "cd '${APP_DIR}' && pm2 start npm --name '${APP_NAME}' -- start --update-env || pm2 reload ${APP_NAME} --update-env"
+# Next.js reads PORT from the process env, NOT from .env.local — pass it
+# explicitly so the app binds on ${APP_PORT} instead of the default 3000.
+sudo -u "${APP_USER}" bash -lc "cd '${APP_DIR}' && PORT=${APP_PORT} pm2 start 'npm start' --name '${APP_NAME}' --update-env || PORT=${APP_PORT} pm2 reload '${APP_NAME}' --update-env"
 sudo -u "${APP_USER}" bash -lc "pm2 save"
 
 # Systemd-Integration für den App-User (führt `pm2 resurrect` bei Boot aus)
