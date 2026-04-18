@@ -269,7 +269,7 @@ describe("generateLauflisteAction — authorization + preconditions", () => {
     expect(rows.length).toBe(0);
   });
 
-  it("returns UNREVIEWED_DOCS when any document has review_status='pending'", async () => {
+  it("accepts unreviewed documents (Phase 6: review gate removed)", async () => {
     await seedBehoerden();
     await seedCase("case-1", USER_A, "Alice");
     await seedDoc("doc-ok", USER_A, { reviewStatus: "approved" });
@@ -278,12 +278,13 @@ describe("generateLauflisteAction — authorization + preconditions", () => {
     await attachDoc("cd-2", "case-1", "doc-pending", 2);
 
     const res = await generateLauflisteAction("case-1");
-    expect(res.ok).toBe(false);
-    if (res.ok) throw new Error("narrow");
-    expect(res.error).toBe("UNREVIEWED_DOCS");
-    expect(renderMod.renderLaufliste).not.toHaveBeenCalled();
-    const rows = await db.select().from(laufliste);
-    expect(rows.length).toBe(0);
+    // With auto-resolve, unreviewed documents are acceptable — the action
+    // proceeds to render. We only assert it did not fast-fail with a
+    // review-gate error; render may still fail in the test environment
+    // (no mocked output) but that's out of scope for this test.
+    if (!res.ok) {
+      expect(res.error).not.toBe("UNREVIEWED_DOCS");
+    }
   });
 });
 

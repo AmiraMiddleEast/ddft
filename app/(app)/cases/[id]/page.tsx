@@ -94,8 +94,10 @@ export default async function CaseDetailPage({
   ]);
 
   const isEmpty = docs.length === 0;
-  const hasUnreviewed = docs.some((d) => d.reviewStatus !== "approved");
-  const canGenerate = !isEmpty && !hasUnreviewed;
+  // Phase 6: manual review gate removed. CoGS routing and auto-resolve happen
+  // automatically — no per-document review required to generate the Laufzettel.
+  const hasUnreviewed = false;
+  const canGenerate = !isEmpty;
   const latestLaufliste = lauflisten[0] ?? null;
   const historie = lauflisten.slice(1);
 

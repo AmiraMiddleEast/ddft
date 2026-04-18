@@ -68,11 +68,9 @@ export async function generateLauflisteAction(
     return { ok: false, error: "EMPTY_CASE" };
   }
 
-  // 3. D-17 — fast-fail before rendering if any doc is not approved.
-  const unapprovedCount = await countUnapprovedDocsInCase(caseId, db);
-  if (unapprovedCount > 0) {
-    return { ok: false, error: "UNREVIEWED_DOCS" };
-  }
+  // Phase 6: manual review gate removed. CoGS routing + Vorbeglaubigung
+  // auto-resolve handle routing. No per-document approval is required before
+  // generating the Laufzettel.
 
   // 4. Render (may throw for font / pagination failures).
   let bytes: Buffer;
