@@ -43,6 +43,13 @@
       "when": 1776428461050,
       "tag": "0005_clammy_wolf_cub",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1776495877567,
+      "tag": "0006_needy_thunderbird",
+      "breakpoints": true
     }
   ]
 }

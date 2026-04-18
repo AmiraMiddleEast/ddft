@@ -72,7 +72,7 @@ describe("CasesListPage — UI-SPEC Copywriting", () => {
         id: "case-1",
         userId: "user-1",
         personName: "Dr. Sandra Hertel",
-        personBirthdate: null,
+        personBirthdate: null, beruf: null, wohnsitzBundesland: null, arbeitsortBundesland: null, nrwSubregion: null,
         notes: null,
         status: "open",
         createdAt: new Date("2026-04-10T10:00:00Z"),

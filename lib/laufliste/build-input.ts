@@ -17,12 +17,15 @@ import {
 
 import type {
   AuthorityBlock,
+  CogsSection,
   LauflisteDocumentEntry,
   LauflisteInput,
   VorbeglaubigungBlock,
 } from "./types";
 import { endbeglaubigungFor } from "./endbeglaubigung";
 import { UAE_EMBASSY_BERLIN } from "./embassy";
+import { bundeslandName } from "@/lib/bundesland";
+import { resolveCogs } from "@/lib/cogs/resolve";
 
 /**
  * Phase 4 Plan 04 Task 1 — pure composer that turns a (caseId, userId) pair
@@ -158,12 +161,61 @@ export async function buildLauflisteInput(
     });
   }
 
+  // Phase 6 — resolve CoGS section when the case has Beruf + at least one BL input.
+  let cogs: CogsSection | null = null;
+  if (caseRow.beruf && (caseRow.wohnsitzBundesland || caseRow.arbeitsortBundesland)) {
+    try {
+      const cogsResult = await resolveCogs({
+        beruf: caseRow.beruf as "arzt" | "zahnarzt",
+        arbeitsortBundesland: caseRow.arbeitsortBundesland ?? null,
+        wohnsitzBundesland: caseRow.wohnsitzBundesland ?? "",
+        nrwSubregion:
+          (caseRow.nrwSubregion as "nordrhein" | "westfalen-lippe" | null) ??
+          null,
+      });
+      if (cogsResult.ok) {
+        const k = cogsResult.cogsKammer;
+        cogs = {
+          beruf: caseRow.beruf as "arzt" | "zahnarzt",
+          berufLabel:
+            caseRow.beruf === "arzt" ? "Ärztin / Arzt" : "Zahnärztin / Zahnarzt",
+          maßgeblichesBundesland: {
+            key: cogsResult.routing.bundeslandKey,
+            name: bundeslandName(
+              (cogsResult.routing.bundeslandKey || "").split("_")[0],
+            ),
+          },
+          routingSource: cogsResult.routing.used,
+          nrwSubregion: cogsResult.routing.appliedNrwSubregion,
+          kammerName: k.kammerName,
+          zustaendigeStelle: k.zustaendigeStelle,
+          zustaendigeStelleHinweis: k.zustaendigeStelleHinweis,
+          fuehrungszeugnisOEmpfaenger: k.fuehrungszeugnisOEmpfaenger,
+          antragsverfahren: k.antragsverfahren,
+          erforderlicheDokumente: (k.erforderlicheDokumente ?? "")
+            .split("|")
+            .map((s) => s.trim())
+            .filter((s) => s.length > 0),
+          directUrlGoodStanding: k.directUrlGoodStanding,
+          kontaktEmail: k.kontaktEmail,
+          kontaktTelefon: k.kontaktTelefon,
+          kontaktAdresse: k.kontaktAdresse,
+          besonderheiten: k.besonderheiten,
+          datenVollstaendig: k.datenVollstaendig,
+        };
+      }
+    } catch (err) {
+      console.error("[buildLauflisteInput] CoGS resolve failed:", err);
+    }
+  }
+
   return {
     person: {
       name: caseRow.personName,
       birthdate: caseRow.personBirthdate ?? null,
     },
     generatedAt: new Date(),
+    cogs,
     documents,
   };
 }

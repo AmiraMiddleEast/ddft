@@ -13,19 +13,68 @@ import { z } from "zod";
  * guards against client-side length abuse.
  */
 
-export const CreateCaseSchema = z.object({
-  personName: z
-    .string()
-    .trim()
-    .min(1, "Bitte den Namen der Person angeben.")
-    .max(200, "Name zu lang (max. 200 Zeichen)."),
-  personBirthdate: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Bitte ein gültiges Datum eingeben.")
-    .optional()
-    .or(z.literal("")),
-  notes: z.string().max(2000, "Notizen zu lang (max. 2000 Zeichen).").optional(),
-});
+const BL_KEYS = [
+  "BW",
+  "BY",
+  "BE",
+  "BB",
+  "HB",
+  "HH",
+  "HE",
+  "MV",
+  "NI",
+  "NW",
+  "RP",
+  "SL",
+  "SN",
+  "ST",
+  "SH",
+  "TH",
+] as const;
+
+export const CreateCaseSchema = z
+  .object({
+    personName: z
+      .string()
+      .trim()
+      .min(1, "Bitte den Namen der Person angeben.")
+      .max(200, "Name zu lang (max. 200 Zeichen)."),
+    personBirthdate: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Bitte ein gültiges Datum eingeben.")
+      .optional()
+      .or(z.literal("")),
+    notes: z
+      .string()
+      .max(2000, "Notizen zu lang (max. 2000 Zeichen).")
+      .optional(),
+    beruf: z.enum(["arzt", "zahnarzt"], {
+      message: "Bitte Beruf auswählen (Arzt oder Zahnarzt).",
+    }),
+    wohnsitzBundesland: z.enum(BL_KEYS, {
+      message: "Bitte Wohnsitz-Bundesland auswählen.",
+    }),
+    arbeitsortBundesland: z
+      .enum([...BL_KEYS, "AUSLAND"], {
+        message: "Bitte Arbeitsort auswählen (Bundesland oder 'im Ausland').",
+      }),
+    nrwSubregion: z
+      .enum(["nordrhein", "westfalen-lippe"])
+      .optional()
+      .or(z.literal("")),
+  })
+  .superRefine((data, ctx) => {
+    const hasNrw =
+      data.wohnsitzBundesland === "NW" || data.arbeitsortBundesland === "NW";
+    if (hasNrw && !data.nrwSubregion) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["nrwSubregion"],
+        message:
+          "Bei NRW bitte Nordrhein oder Westfalen-Lippe auswählen.",
+      });
+    }
+  });
 
 export type CreateCaseInput = z.infer<typeof CreateCaseSchema>;
 

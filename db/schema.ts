@@ -140,6 +140,22 @@ export const FIELD_NAMES = [
 ] as const;
 export type FieldName = (typeof FIELD_NAMES)[number];
 
+// ======== Phase 6 constants (hoisted — referenced by document + case below) ========
+
+export const BERUF = ["arzt", "zahnarzt"] as const;
+export type Beruf = (typeof BERUF)[number];
+
+export const NRW_SUBREGION = ["nordrhein", "westfalen-lippe"] as const;
+export type NrwSubregion = (typeof NRW_SUBREGION)[number];
+
+export const VORBEGLAUBIGUNG_STATUS = [
+  "pending",
+  "matched",
+  "ambiguous",
+  "not_found",
+] as const;
+export type VorbeglaubigungStatus = (typeof VORBEGLAUBIGUNG_STATUS)[number];
+
 export const document = sqliteTable(
   "document",
   {
@@ -165,6 +181,11 @@ export const document = sqliteTable(
       .default("pending"),
     reviewedAt: integer("reviewed_at", { mode: "timestamp_ms" }),
     version: integer("version").notNull().default(1),
+    // Phase 6: Auto-resolve results (Vorbeglaubigung after extraction)
+    vorbeglaubigungStatus: text("vorbeglaubigung_status", {
+      enum: VORBEGLAUBIGUNG_STATUS,
+    }),
+    resolvedAuthorityId: text("resolved_authority_id"),
   },
   (t) => [
     uniqueIndex("document_user_sha_uniq").on(t.userId, t.sha256),
@@ -428,6 +449,11 @@ export const caseTable = sqliteTable(
     personName: text("person_name").notNull(),
     personBirthdate: text("person_birthdate"),
     notes: text("notes"),
+    // Phase 6: CoGS routing inputs per case (nullable for legacy rows)
+    beruf: text("beruf", { enum: BERUF }),
+    wohnsitzBundesland: text("wohnsitz_bundesland"),
+    arbeitsortBundesland: text("arbeitsort_bundesland"),
+    nrwSubregion: text("nrw_subregion", { enum: NRW_SUBREGION }),
     status: text("status", { enum: CASE_STATUS })
       .notNull()
       .default("open"),
@@ -526,3 +552,44 @@ export const documentVersionRelations = relations(
     }),
   }),
 );
+
+// ======== Phase 6: Certificate of Good Standing (CoGS) ========
+
+export const cogsKammer = sqliteTable(
+  "cogs_kammer",
+  {
+    // id format: "{bundesland_key_lower_with_underscores_to_dashes}-{beruf}"
+    // e.g. "by-arzt", "nw-nr-zahnarzt", "th-arzt"
+    id: text("id").primaryKey(),
+    bundeslandKey: text("bundesland_key").notNull(),
+    bundeslandName: text("bundesland_name").notNull(),
+    beruf: text("beruf", { enum: BERUF }).notNull(),
+    kammerName: text("kammer_name"),
+    kammerWebsite: text("kammer_website"),
+    zustaendigeStelle: text("zustaendige_stelle").notNull(),
+    zustaendigeStelleHinweis: text("zustaendige_stelle_hinweis"),
+    directUrlGoodStanding: text("direct_url_good_standing"),
+    antragsverfahren: text("antragsverfahren"),
+    erforderlicheDokumente: text("erforderliche_dokumente"),
+    fuehrungszeugnisOErforderlich: text("fuehrungszeugnis_o_erforderlich"),
+    fuehrungszeugnisOEmpfaenger: text("fuehrungszeugnis_o_empfaenger").notNull(),
+    kontaktEmail: text("kontakt_email"),
+    kontaktTelefon: text("kontakt_telefon"),
+    kontaktAdresse: text("kontakt_adresse"),
+    besonderheiten: text("besonderheiten"),
+    quellen: text("quellen"),
+    datenVollstaendig: integer("daten_vollstaendig", { mode: "boolean" })
+      .notNull()
+      .default(false),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+    updatedBy: text("updated_by"),
+  },
+  (t) => [
+    uniqueIndex("cogs_kammer_bl_beruf_uniq").on(t.bundeslandKey, t.beruf),
+    index("cogs_kammer_beruf_idx").on(t.beruf),
+  ],
+);
+

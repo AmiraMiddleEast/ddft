@@ -216,7 +216,7 @@ describe("Phase 4 — integration", () => {
     async () => {
       // 1. createCaseAction
       const create = await createCaseAction({
-        personName: "Dr. Müller Özgür Weiß",
+        personName: "Dr. Müller Özgür Weiß", beruf: "zahnarzt", wohnsitzBundesland: "BE", arbeitsortBundesland: "BE",
       });
       expect(create.ok).toBe(true);
       if (!create.ok) throw new Error("narrow");
@@ -311,7 +311,7 @@ describe("Phase 4 — integration", () => {
     async () => {
       // Seed an owned Laufliste for user-A.
       const create = await createCaseAction({
-        personName: "Alice",
+        personName: "Alice", beruf: "arzt", wohnsitzBundesland: "BE", arbeitsortBundesland: "BE",
       });
       if (!create.ok) throw new Error("narrow");
       const caseId = create.data.caseId;
@@ -355,7 +355,7 @@ describe("Phase 4 — integration", () => {
   it(
     "regenerate creates a new laufliste row + file (D-14 immutability)",
     async () => {
-      const create = await createCaseAction({ personName: "Erika" });
+      const create = await createCaseAction({ personName: "Erika", beruf: "arzt", wohnsitzBundesland: "BE", arbeitsortBundesland: "BE" });
       if (!create.ok) throw new Error("narrow");
       const caseId = create.data.caseId;
 

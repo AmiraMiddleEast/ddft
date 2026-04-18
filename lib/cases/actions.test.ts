@@ -147,7 +147,7 @@ beforeEach(async () => {
 
 describe("createCaseAction", () => {
   it("creates a case with valid input and returns caseId", async () => {
-    const res = await createCaseAction({ personName: "Dr. Alice Schmidt" });
+    const res = await createCaseAction({ personName: "Dr. Alice Schmidt", beruf: "arzt", wohnsitzBundesland: "BE", arbeitsortBundesland: "BE" });
     expect(res.ok).toBe(true);
     if (!res.ok) throw new Error("narrow");
     expect(res.data.caseId).toBeTruthy();
@@ -168,7 +168,7 @@ describe("createCaseAction", () => {
 
   it("unauthorized session returns UNAUTHORIZED and does NOT write", async () => {
     authMod.auth.api.getSession.mockResolvedValueOnce(null);
-    const res = await createCaseAction({ personName: "Bob" });
+    const res = await createCaseAction({ personName: "Bob", beruf: "arzt", wohnsitzBundesland: "BE", arbeitsortBundesland: "BE" });
     expect(res).toEqual({ ok: false, error: "UNAUTHORIZED" });
     const rows = await db.select().from(caseTable);
     expect(rows.length).toBe(0);

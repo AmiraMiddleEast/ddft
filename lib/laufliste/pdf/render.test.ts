@@ -15,6 +15,7 @@ function makeInput(): LauflisteInput {
       birthdate: "01.03.1985",
     },
     generatedAt: new Date("2026-04-17T10:00:00Z"),
+    cogs: null,
     documents: [
       {
         position: 1,

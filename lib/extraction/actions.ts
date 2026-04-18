@@ -141,5 +141,53 @@ export async function extractDocumentAction(
     return { ok: false, documentId, error: "unknown" };
   }
 
+  // Phase 6 T6: auto-resolve Vorbeglaubigung from extracted fields. Non-fatal —
+  // a resolver failure does NOT fail extraction; it only records status as
+  // "not_found" on the document so the UI can surface a review prompt later.
+  try {
+    const { resolveAuthority } = await import("@/lib/behoerden/resolve");
+    const dokTyp = result.parsed.dokumenten_typ?.value ?? "";
+    const bl = result.parsed.bundesland?.value ?? "";
+    const ort = result.parsed.ausstellungsort?.value ?? "";
+    if (dokTyp && bl && ort) {
+      const resolved = await resolveAuthority(
+        { dokumenten_typ: dokTyp, bundesland: bl, ausstellungsort: ort },
+        db,
+      );
+      const status =
+        resolved.status === "matched"
+          ? "matched"
+          : resolved.status === "ambiguous"
+            ? "ambiguous"
+            : "not_found";
+      const authorityId =
+        resolved.status === "matched" ? resolved.authority.id : null;
+      await db
+        .update(document)
+        .set({
+          vorbeglaubigungStatus: status,
+          resolvedAuthorityId: authorityId,
+        })
+        .where(
+          and(
+            eq(document.id, documentId),
+            eq(document.userId, session.user.id),
+          ),
+        );
+    } else {
+      await db
+        .update(document)
+        .set({ vorbeglaubigungStatus: "not_found" })
+        .where(
+          and(
+            eq(document.id, documentId),
+            eq(document.userId, session.user.id),
+          ),
+        );
+    }
+  } catch (err) {
+    console.error("[auto-resolve] non-fatal:", err);
+  }
+
   return { ok: true, documentId };
 }

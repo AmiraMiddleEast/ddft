@@ -1,11 +1,14 @@
 /**
- * Phase 4 Plan 03 — LauflisteInput contract.
+ * Phase 4 + Phase 6 — LauflisteInput contract.
  *
- * Pure-data shape produced by Plan 04's `buildLauflisteInput()` and consumed
- * by `<LauflisteDocument input={...} />` in `./pdf/Document.tsx`.
+ * Pure-data shape produced by `buildLauflisteInput()` and consumed by
+ * `<LauflisteDocument input={...} />` in `./pdf/Document.tsx`.
  *
  * No DB types here — this is the serialisable boundary between the DB/resolver
- * stage and the React-PDF render stage (RESEARCH Pattern 1 — pure render-input).
+ * stage and the React-PDF render stage.
+ *
+ * Phase 6 additions: optional `cogs` block with DDFT-branded 4-step Certificate
+ * of Good Standing section.
  */
 
 export type AuthorityBlock = {
@@ -53,6 +56,36 @@ export type LauflisteDocumentEntry = {
   legalisation: AuthorityBlock | null;
 };
 
+/**
+ * Phase 6 — Certificate of Good Standing section for the Laufzettel.
+ * Pulled from `cogs_kammer` via the CoGS resolver, enriched with routing
+ * metadata for the "maßgebliches Bundesland"-label.
+ */
+export type CogsSection = {
+  beruf: "arzt" | "zahnarzt";
+  /** Human-readable beruf label: "Ärztin/Arzt" or "Zahnärztin/Zahnarzt". */
+  berufLabel: string;
+  /** The decided Bundesland used for routing, with human-readable name. */
+  maßgeblichesBundesland: { key: string; name: string };
+  /** "arbeitsort" | "wohnsitz" — which input drove the routing. */
+  routingSource: "arbeitsort" | "wohnsitz";
+  nrwSubregion: "nordrhein" | "westfalen-lippe" | null;
+  /** The resolved Kammer/Stelle */
+  kammerName: string | null;
+  zustaendigeStelle: string;
+  zustaendigeStelleHinweis: string | null;
+  fuehrungszeugnisOEmpfaenger: string;
+  antragsverfahren: string | null;
+  erforderlicheDokumente: string[];
+  directUrlGoodStanding: string | null;
+  kontaktEmail: string | null;
+  kontaktTelefon: string | null;
+  kontaktAdresse: string | null;
+  besonderheiten: string | null;
+  /** True when research found official procedure — otherwise UI must prompt phone call. */
+  datenVollstaendig: boolean;
+};
+
 export type LauflisteInput = {
   person: {
     name: string;
@@ -60,5 +93,7 @@ export type LauflisteInput = {
     birthdate: string | null;
   };
   generatedAt: Date;
+  /** Optional — when absent, Section A is skipped (legacy cases without beruf). */
+  cogs: CogsSection | null;
   documents: LauflisteDocumentEntry[];
 };

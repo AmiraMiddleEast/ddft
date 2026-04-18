@@ -71,6 +71,10 @@ export async function createCaseAction(input: {
   personName: string;
   personBirthdate?: string;
   notes?: string;
+  beruf?: "arzt" | "zahnarzt";
+  wohnsitzBundesland?: string;
+  arbeitsortBundesland?: string;
+  nrwSubregion?: "nordrhein" | "westfalen-lippe" | "";
 }): Promise<
   ActionResult<{ caseId: string }, "UNAUTHORIZED" | "VALIDATION" | "DB_ERROR">
 > {
@@ -83,6 +87,15 @@ export async function createCaseAction(input: {
   }
 
   const id = crypto.randomUUID();
+  // Map "AUSLAND" sentinel → null (no German Arbeitsort)
+  const arbeitsort =
+    parsed.data.arbeitsortBundesland === "AUSLAND"
+      ? null
+      : parsed.data.arbeitsortBundesland;
+  const nrwSub =
+    parsed.data.nrwSubregion && parsed.data.nrwSubregion.length > 0
+      ? parsed.data.nrwSubregion
+      : null;
   try {
     await db.insert(caseTable).values({
       id,
@@ -90,6 +103,10 @@ export async function createCaseAction(input: {
       personName: parsed.data.personName,
       personBirthdate: parsed.data.personBirthdate || null,
       notes: parsed.data.notes || null,
+      beruf: parsed.data.beruf,
+      wohnsitzBundesland: parsed.data.wohnsitzBundesland,
+      arbeitsortBundesland: arbeitsort,
+      nrwSubregion: nrwSub,
       status: "open",
     });
   } catch (err) {

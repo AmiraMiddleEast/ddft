@@ -46,6 +46,12 @@ export default async function AppLayout({
             >
               Behörden
             </Link>
+            <Link
+              href="/admin/cogs"
+              className="font-medium text-muted-foreground hover:text-foreground"
+            >
+              CoGS
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">

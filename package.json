@@ -17,7 +17,8 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "seed": "node --env-file=.env.local --import tsx scripts/seed-user.ts",
-    "seed:behoerden": "node --env-file=.env.local --import tsx scripts/seed-behoerden.ts"
+    "seed:behoerden": "node --env-file=.env.local --import tsx scripts/seed-behoerden.ts",
+    "seed:cogs": "node --env-file=.env.local --import tsx scripts/seed-cogs.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.88.0",
