@@ -213,13 +213,12 @@ export const styles = StyleSheet.create({
 
   // -- Pills / banners -----------------------------------------------------
   pruefenPill: {
+    // Inline pill inside a <Text> parent — React-PDF only supports a subset
+    // of style props on nested Text (padding/margin are not reliable and
+    // cause render errors). Keep it to background + color + font.
     backgroundColor: DDFT_COLORS.warnBg,
     color: DDFT_COLORS.warn,
-    paddingHorizontal: 4,
-    paddingVertical: 1,
     fontFamily: "Helvetica-Bold",
-    marginRight: 4,
-    fontSize: 9,
   },
   warnBanner: {
     backgroundColor: DDFT_COLORS.warnBg,
