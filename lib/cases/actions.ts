@@ -171,12 +171,14 @@ export async function addDocumentsToCaseAction(input: {
     .limit(1);
   if (!caseRow) return { ok: false, error: "NOT_FOUND" };
 
-  // Document ownership + approval gate — MUST cover ALL requested ids.
+  // Document ownership gate — MUST cover ALL requested ids. Phase 6: the
+  // manual review + documentReview-row gate has been removed. Documents are
+  // assignable as soon as they belong to the user. CoGS routing happens at
+  // the case level (Beruf + Wohnsitz/Arbeitsort), not per-document.
   const docRows = await db
     .select({
       id: document.id,
       userId: document.userId,
-      reviewStatus: document.reviewStatus,
     })
     .from(document)
     .where(inArray(document.id, parsed.data.documentIds));
@@ -185,21 +187,7 @@ export async function addDocumentsToCaseAction(input: {
     return { ok: false, error: "FORBIDDEN" };
   }
   for (const d of docRows) {
-    if (d.userId !== session.user.id || d.reviewStatus !== "approved") {
-      return { ok: false, error: "FORBIDDEN" };
-    }
-    // Belt: must have a documentReview row too (data integrity with Phase 3).
-  }
-  const approvedIds = new Set(
-    (
-      await db
-        .select({ documentId: documentReview.documentId })
-        .from(documentReview)
-        .where(inArray(documentReview.documentId, parsed.data.documentIds))
-    ).map((r) => r.documentId),
-  );
-  for (const id of parsed.data.documentIds) {
-    if (!approvedIds.has(id)) {
+    if (d.userId !== session.user.id) {
       return { ok: false, error: "FORBIDDEN" };
     }
   }

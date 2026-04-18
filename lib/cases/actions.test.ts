@@ -244,7 +244,7 @@ describe("addDocumentsToCaseAction", () => {
     expect(rows.length).toBe(0);
   });
 
-  it("rejects unapproved document with FORBIDDEN", async () => {
+  it("accepts unreviewed document (Phase 6: review gate removed)", async () => {
     await db.insert(caseTable).values({
       id: "case-1",
       userId: USER_A,
@@ -257,11 +257,9 @@ describe("addDocumentsToCaseAction", () => {
       caseId: "case-1",
       documentIds: ["doc-pending"],
     });
-    expect(res.ok).toBe(false);
-    if (res.ok) throw new Error("narrow");
-    expect(res.error).toBe("FORBIDDEN");
+    expect(res.ok).toBe(true);
     const rows = await db.select().from(caseDocument);
-    expect(rows.length).toBe(0);
+    expect(rows.length).toBe(1);
   });
 
   it("rejects unowned document with FORBIDDEN (no cross-user theft)", async () => {
