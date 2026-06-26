@@ -13,6 +13,7 @@ import {
 } from "@/db/schema";
 import { extractFields } from "./claude";
 import { computeCostEur } from "./cost";
+import { classifyAnthropicError } from "./error-code";
 import type { UploadErrorCode } from "@/lib/uploads/errors";
 
 export type ExtractionActionResult =
@@ -76,9 +77,9 @@ export async function extractDocumentAction(
     result = await runExtractionWithOneRetry(doc.storagePath);
   } catch (e: unknown) {
     console.error("[extraction] failed for document", documentId, e);
-    const err = e as { status?: number };
-    const code: UploadErrorCode =
-      err?.status === 429 ? "rate_limited" : "unknown";
+    // Quick 260626-wou: classify into a specific code (auth/credit/…) reusing
+    // the shared classifier. errorCode is free-text TEXT — no enum migration.
+    const code: UploadErrorCode = classifyAnthropicError(e);
     await db
       .update(document)
       .set({ extractionStatus: "error", errorCode: code })

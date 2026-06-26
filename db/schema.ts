@@ -593,3 +593,16 @@ export const cogsKammer = sqliteTable(
   ],
 );
 
+// ======== Quick 260626-wou: App settings (key-value) ========
+// Runtime-configurable settings (Anthropic API key, Claude model) so the
+// operator can change them from the UI without a code deploy or restart.
+// Keys used at runtime: "anthropic_api_key", "claude_model".
+export const appSetting = sqliteTable("app_setting", {
+  key: text("key").primaryKey(),
+  value: text("value"),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+    .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .notNull(),
+});
+
