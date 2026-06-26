@@ -38,7 +38,7 @@ Built as an internal tool for a legalization service provider.
 | Technology | Version | Purpose | Why Recommended |
 |------------|---------|---------|-----------------|
 | @anthropic-ai/sdk | 0.88.0 | Claude API client | Official TypeScript SDK for Claude. Supports document content blocks for PDF analysis with base64 encoding. Type-safe responses. Required by the project constraint (Claude Vision for document analysis). |
-| Claude Sonnet 4 (claude-sonnet-4-20250514) | - | Document analysis model | Best cost/quality tradeoff for structured data extraction from German documents. Fast enough for interactive use. Use Sonnet, not Opus -- this is a structured extraction task, not a reasoning task. |
+| Claude Sonnet 4.6 (claude-sonnet-4-6) | - | Document analysis model | Best cost/quality tradeoff for structured data extraction from German documents. Fast enough for interactive use. Use Sonnet, not Opus -- this is a structured extraction task, not a reasoning task. |
 ### Authentication
 | Technology | Version | Purpose | Why Recommended |
 |------------|---------|---------|-----------------|

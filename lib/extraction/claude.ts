@@ -13,7 +13,7 @@ export type ExtractFieldsResult = {
   model: string;
 };
 
-const MODEL = "claude-sonnet-4-20250514" as const;
+const MODEL = "claude-sonnet-4-6" as const;
 
 let _client: Anthropic | null = null;
 function client(): Anthropic {

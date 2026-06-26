@@ -1,5 +1,6 @@
 export const PRICING_PER_MTOK = {
   "claude-sonnet-4-20250514": { inputUsd: 3, outputUsd: 15 },
+  "claude-sonnet-4-6": { inputUsd: 3, outputUsd: 15 },
 } as const;
 
 export function computeCostEur(
