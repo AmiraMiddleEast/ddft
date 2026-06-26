@@ -7,7 +7,7 @@ import { listDocumentTypesAdmin } from "@/lib/admin/queries";
 
 import { DocumentTypesClient } from "./DocumentTypesClient";
 
-export const metadata = { title: "Dokumentenarten — Angela" };
+export const metadata = { title: "Dokumentenarten — DDFT" };
 
 export default async function DocumentTypesAdminPage() {
   const session = await auth.api.getSession({ headers: await headers() });

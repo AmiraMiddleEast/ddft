@@ -75,6 +75,7 @@ export async function extractDocumentAction(
   try {
     result = await runExtractionWithOneRetry(doc.storagePath);
   } catch (e: unknown) {
+    console.error("[extraction] failed for document", documentId, e);
     const err = e as { status?: number };
     const code: UploadErrorCode =
       err?.status === 429 ? "rate_limited" : "unknown";

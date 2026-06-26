@@ -1,7 +1,7 @@
 import { UploadClient } from "./_components/UploadClient";
 
 export const metadata = {
-  title: "Dokumente hochladen — Angela",
+  title: "Dokumente hochladen — DDFT",
 };
 
 export default function UploadPage() {

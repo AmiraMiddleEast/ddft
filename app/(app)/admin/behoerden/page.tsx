@@ -7,7 +7,7 @@ import { getAdminStats } from "@/lib/admin/queries";
 import { Card, CardContent } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 
-export const metadata = { title: "Behörden — Angela" };
+export const metadata = { title: "Behörden — DDFT" };
 
 export default async function AdminBehoerdenPage() {
   const session = await auth.api.getSession({ headers: await headers() });

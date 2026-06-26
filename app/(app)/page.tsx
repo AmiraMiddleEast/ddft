@@ -15,7 +15,7 @@ import {
 import { auth } from "@/lib/auth";
 import { listRecentDocumentsForUser } from "@/lib/documents/queries";
 
-export const metadata = { title: "Übersicht — Angela" };
+export const metadata = { title: "Übersicht — DDFT" };
 
 function formatDe(ts: Date) {
   return new Intl.DateTimeFormat("de-DE", {

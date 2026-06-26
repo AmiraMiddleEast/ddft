@@ -18,7 +18,7 @@ import {
 
 import { HistoryFilters } from "./HistoryFilters";
 
-export const metadata = { title: "Historie — Angela" };
+export const metadata = { title: "Historie — DDFT" };
 
 const PAGE_SIZE = 20;
 

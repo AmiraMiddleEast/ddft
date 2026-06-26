@@ -68,10 +68,10 @@ export async function generateMetadata({
 }) {
   const { id } = await params;
   const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) return { title: "Fall — Angela" };
+  if (!session) return { title: "Fall — DDFT" };
   const caseRow = await getCaseForUser(id, session.user.id, db);
-  if (!caseRow) return { title: "Fall — Angela" };
-  return { title: `${caseRow.personName} — Angela` };
+  if (!caseRow) return { title: "Fall — DDFT" };
+  return { title: `${caseRow.personName} — DDFT` };
 }
 
 export default async function CaseDetailPage({

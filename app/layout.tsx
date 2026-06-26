@@ -4,7 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "Angela",
+  title: "Dubai Docs Fast Track",
   description: "Dokumentenlegalisation — interne Anwendung",
 };
 

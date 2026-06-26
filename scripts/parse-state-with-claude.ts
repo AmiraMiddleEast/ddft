@@ -113,7 +113,7 @@ export function normalizeDocTypeSlug(input: string): string {
 // Claude client (lazy — do not instantiate at import time; the seed script
 // should be importable without ANTHROPIC_API_KEY set if --skip-parse is used).
 // ---------------------------------------------------------------------------
-const CLAUDE_MODEL = "claude-sonnet-4-20250514" as const;
+const CLAUDE_MODEL = "claude-sonnet-4-6" as const;
 
 let _client: Anthropic | null = null;
 function client(): Anthropic {

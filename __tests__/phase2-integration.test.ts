@@ -101,7 +101,7 @@ const OK_RESPONSE = {
     },
   },
   usage: { input_tokens: 5000, output_tokens: 400 },
-  model: "claude-sonnet-4-20250514",
+  model: "claude-sonnet-4-6",
 };
 
 async function fd(file: File): Promise<FormData> {
@@ -223,7 +223,7 @@ describe("Phase 2 — integration", () => {
     expect(logs.length).toBe(1);
     expect(logs[0].inputTokens).toBe(5000);
     expect(logs[0].outputTokens).toBe(400);
-    expect(logs[0].claudeModel).toBe("claude-sonnet-4-20250514");
+    expect(logs[0].claudeModel).toBe("claude-sonnet-4-6");
     expect(logs[0].costEur).toBeGreaterThan(0);
   });
 

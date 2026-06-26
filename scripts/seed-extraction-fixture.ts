@@ -130,7 +130,7 @@ async function main() {
   // 5) Insert one extraction_log row with computed cost.
   const INPUT_TOKENS = 5000;
   const OUTPUT_TOKENS = 400;
-  const MODEL = "claude-sonnet-4-20250514";
+  const MODEL = "claude-sonnet-4-6";
   await db
     .insert(extractionLog)
     .values({

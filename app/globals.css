@@ -12,10 +12,10 @@
   --color-muted-foreground: oklch(0.45 0 0);     /* #525252 */
   --color-border: oklch(0.922 0 0);              /* #E5E5E5 */
   --color-input: oklch(0.922 0 0);
-  --color-primary: oklch(0.205 0.02 256);        /* #0F172A slate-900 accent */
+  --color-primary: oklch(0.45 0.17 258);         /* #08449B DDFT navy */
   --color-primary-foreground: oklch(1 0 0);
   --color-destructive: oklch(0.577 0.245 27);    /* #DC2626 red-600 */
-  --color-ring: oklch(0.205 0.02 256);
+  --color-ring: oklch(0.72 0.13 220);            /* #07B7EF DDFT cyan */
 
   --radius: 0.5rem;
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -79,7 +79,7 @@ body {
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0.02 256);
+  --primary: oklch(0.45 0.17 258);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -90,7 +90,7 @@ body {
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.205 0.02 256);
+  --ring: oklch(0.72 0.13 220);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);

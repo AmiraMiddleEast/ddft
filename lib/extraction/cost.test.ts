@@ -18,6 +18,11 @@ describe("computeCostEur", () => {
     expect(c).toBeCloseTo(0.0345, 6);
   });
 
+  it("computes Sonnet 4.6 cost in EUR (same pricing as Sonnet 4)", () => {
+    const c = computeCostEur("claude-sonnet-4-6", 10_000, 500);
+    expect(c).toBeCloseTo(0.0345, 6);
+  });
+
   it("returns 0 for an unknown model (no fabricated price)", () => {
     expect(computeCostEur("not-a-real-model", 10_000, 500)).toBe(0);
   });
