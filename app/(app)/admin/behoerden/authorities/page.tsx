@@ -22,7 +22,7 @@ import {
 
 import { AuthoritiesFilters } from "./AuthoritiesFilters";
 
-export const metadata = { title: "Behörden bearbeiten — Angela" };
+export const metadata = { title: "Behörden bearbeiten — DDFT" };
 
 const PAGE_SIZE = 20;
 

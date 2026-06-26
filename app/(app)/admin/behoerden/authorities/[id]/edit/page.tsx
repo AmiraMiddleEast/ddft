@@ -7,7 +7,7 @@ import { getAuthorityByIdAdmin } from "@/lib/admin/queries";
 
 import { EditAuthorityForm } from "./EditAuthorityForm";
 
-export const metadata = { title: "Behörde bearbeiten — Angela" };
+export const metadata = { title: "Behörde bearbeiten — DDFT" };
 
 export default async function EditAuthorityPage({
   params,

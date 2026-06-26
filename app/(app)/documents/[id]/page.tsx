@@ -13,7 +13,7 @@ import { ReviewLinkButton } from "./_components/ReviewLinkButton";
 import { ReplaceScanDialog } from "./_components/ReplaceScanDialog";
 import { ReanalyzeButton } from "./_components/ReanalyzeButton";
 
-export const metadata = { title: "Dokument — Angela" };
+export const metadata = { title: "Dokument — DDFT" };
 
 function formatDe(ts: Date) {
   // dd.MM.yyyy HH:mm — use Intl to match UI-SPEC German formatting.

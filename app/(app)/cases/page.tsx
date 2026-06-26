@@ -19,7 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export const metadata = { title: "Fälle — Angela" };
+export const metadata = { title: "Fälle — DDFT" };
 
 function formatDe(ts: Date) {
   return new Intl.DateTimeFormat("de-DE", {

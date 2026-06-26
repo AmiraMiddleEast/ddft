@@ -14,7 +14,7 @@ import { FIELD_NAMES, type Confidence, type FieldName } from "@/db/schema";
 import { PdfPreview } from "../_components/PdfPreview";
 import { ReviewForm } from "./_components/ReviewForm";
 
-export const metadata = { title: "Überprüfung — Angela" };
+export const metadata = { title: "Überprüfung — DDFT" };
 
 type Props = { params: Promise<{ id: string }> };
 

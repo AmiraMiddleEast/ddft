@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { CreateCaseForm } from "./CreateCaseForm";
 
-export const metadata = { title: "Neuen Fall anlegen — Angela" };
+export const metadata = { title: "Neuen Fall anlegen — DDFT" };
 
 export default async function CreateCasePage() {
   const session = await auth.api.getSession({ headers: await headers() });

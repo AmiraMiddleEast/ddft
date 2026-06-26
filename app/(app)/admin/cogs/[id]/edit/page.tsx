@@ -6,7 +6,7 @@ import { cogsKammer } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { EditCogsKammerForm } from "./EditCogsKammerForm";
 
-export const metadata = { title: "CoGS-Eintrag bearbeiten — Angela" };
+export const metadata = { title: "CoGS-Eintrag bearbeiten — DDFT" };
 
 export default async function EditCogsKammerPage({
   params,
