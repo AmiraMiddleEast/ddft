@@ -27,6 +27,11 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  // Match all routes except: API routes, Next internals, static files, favicon
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  // Match all routes except: API routes, Next internals, favicon, and static
+  // asset files (png/svg/etc). Excluding image files is required so the DDFT logo
+  // at /ddft-logo.png is served directly instead of being redirected to /login
+  // (e.g. on the unauthenticated login page).
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:png|svg|jpg|jpeg|gif|webp|ico)$).*)",
+  ],
 };
