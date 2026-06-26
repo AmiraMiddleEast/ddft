@@ -90,7 +90,7 @@ const OK_RESPONSE = {
     },
   },
   usage: { input_tokens: 4000, output_tokens: 300 },
-  model: "claude-sonnet-4-20250514",
+  model: "claude-sonnet-4-6",
 };
 
 beforeAll(async () => {
@@ -178,7 +178,7 @@ describe("extractDocumentAction", () => {
     expect(rows.length).toBe(6);
     const log = await db.select().from(extractionLog);
     expect(log.length).toBe(1);
-    expect(log[0].claudeModel).toBe("claude-sonnet-4-20250514");
+    expect(log[0].claudeModel).toBe("claude-sonnet-4-6");
     expect(log[0].inputTokens).toBe(4000);
     expect(log[0].outputTokens).toBe(300);
     // cost: (4000*3 + 300*15)/1e6 * 0.92 = 0.01518
