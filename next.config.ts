@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
   // Its transitive deps (fontkit, @react-pdf/textkit) are CJS and rely on dynamic require,
   // which Turbopack cannot tree-shake safely. Must run as a real Node import in Server Actions.
   serverExternalPackages: ["@react-pdf/renderer"],
+  // Logo is a small static PNG in /public — skip the Next image optimizer entirely.
+  // Avoids the optimizer 400 on the self-hosted VPS (no sharp dependency) and lets
+  // the browser load /ddft-logo.png directly (served via the proxy exclusion below).
+  images: {
+    unoptimized: true,
+  },
   experimental: {
     serverActions: {
       // Per RESEARCH §Next 16 Server Action body size limit.
