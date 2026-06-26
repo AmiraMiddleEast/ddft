@@ -242,6 +242,28 @@ describe("extractDocumentAction", () => {
     expect(rows.length).toBe(6);
   });
 
+  it("maps a 400 'credit balance too low' error to credit and sets status=error", async () => {
+    const creditErr = Object.assign(
+      new Error(
+        "Your credit balance is too low to access the Anthropic API.",
+      ),
+      { status: 400 },
+    );
+    extractFieldsMock.mockRejectedValueOnce(creditErr);
+    const res = await extractDocumentAction(DOC_ID);
+    expect(res).toEqual({
+      ok: false,
+      documentId: DOC_ID,
+      error: "credit",
+    });
+    const [doc] = await db
+      .select()
+      .from(document)
+      .where(drizzleEq(document.id, DOC_ID));
+    expect(doc.extractionStatus).toBe("error");
+    expect(doc.errorCode).toBe("credit");
+  });
+
   it("maps non-429 SDK errors to unknown and sets status=error", async () => {
     extractFieldsMock.mockRejectedValueOnce(new Error("boom"));
     const res = await extractDocumentAction(DOC_ID);

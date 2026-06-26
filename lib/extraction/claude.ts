@@ -6,23 +6,13 @@ import {
   parseExtractionResponse,
   type ExtractionResponseT,
 } from "./schema";
+import { resolveAnthropicKey, resolveClaudeModel } from "@/lib/settings/store";
 
 export type ExtractFieldsResult = {
   parsed: ExtractionResponseT;
   usage: { input_tokens: number; output_tokens: number };
   model: string;
 };
-
-const MODEL = "claude-sonnet-4-6" as const;
-
-let _client: Anthropic | null = null;
-function client(): Anthropic {
-  if (_client) return _client;
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not set");
-  _client = new Anthropic({ apiKey });
-  return _client;
-}
 
 export async function extractFields(
   storagePath: string,
@@ -33,8 +23,16 @@ export async function extractFields(
   const pdfBuffer = await readFile(abs);
   const base64 = pdfBuffer.toString("base64");
 
-  const msg = await client().messages.create({
-    model: MODEL,
+  // Quick 260626-wou: resolve key + model at CALL TIME (no module-level cache)
+  // so a UI key/model change applies on the next extraction with NO restart.
+  // Creating the client per call is intentional and fine for a single-user tool.
+  const apiKey = await resolveAnthropicKey();
+  if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not set");
+  const model = await resolveClaudeModel();
+  const anthropic = new Anthropic({ apiKey });
+
+  const msg = await anthropic.messages.create({
+    model,
     max_tokens: 2048,
     messages: [
       {

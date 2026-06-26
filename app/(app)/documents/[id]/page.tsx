@@ -12,6 +12,7 @@ import { ExtractionTable } from "./_components/ExtractionTable";
 import { ReviewLinkButton } from "./_components/ReviewLinkButton";
 import { ReplaceScanDialog } from "./_components/ReplaceScanDialog";
 import { ReanalyzeButton } from "./_components/ReanalyzeButton";
+import { extractionErrorMessageDe } from "@/lib/extraction/error-code";
 
 export const metadata = { title: "Dokument — DDFT" };
 
@@ -92,9 +93,16 @@ export default async function DocumentDetailPage({
                     Analyse fehlgeschlagen
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Die Analyse konnte nicht abgeschlossen werden. Bitte erneut
-                    versuchen.
+                    {extractionErrorMessageDe(doc.errorCode)}
                   </p>
+                  {doc.errorCode === "credit" || doc.errorCode === "auth" ? (
+                    <Link
+                      href="/admin/settings"
+                      className="text-sm underline"
+                    >
+                      API-Schlüssel/Guthaben unter Einstellungen prüfen
+                    </Link>
+                  ) : null}
                 </div>
               ) : (
                 <>

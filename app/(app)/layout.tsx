@@ -61,6 +61,12 @@ export default async function AppLayout({
             >
               CoGS
             </Link>
+            <Link
+              href="/admin/settings"
+              className="font-medium text-muted-foreground hover:text-foreground"
+            >
+              Einstellungen
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">

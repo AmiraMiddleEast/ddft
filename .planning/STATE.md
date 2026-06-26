@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 Phase: 05
 Plan: Not started
 Status: Executing Phase 5
-Last activity: 2026-06-26 - Completed quick task 260626-lc7: Fix retired Claude model (claude-sonnet-4-6) + Fehler-Logging
+Last activity: 2026-06-26 - Completed quick task 260626-wou: Einstellungs-Seite (API-Key + Modell) + spezifische Fehlermeldungen
 
 Progress: [..........] 0%
 
@@ -159,6 +159,7 @@ None yet.
 |---|-------------|------|--------|-----------|
 | 260626-joq | Voller Rebrand Angela zu DDFT / Dubai Docs Fast Track (Name, Logo, Farben) | 2026-06-26 | 94e79ed | [260626-joq-voller-rebrand-angela-zu-ddft-dubai-docs](./quick/260626-joq-voller-rebrand-angela-zu-ddft-dubai-docs/) |
 | 260626-lc7 | Fix retired Claude model (claude-sonnet-4-20250514 → claude-sonnet-4-6) + Fehler-Logging | 2026-06-26 | a06ea26 | [260626-lc7-fix-retired-claude-model-claude-sonnet-4](./quick/260626-lc7-fix-retired-claude-model-claude-sonnet-4/) |
+| 260626-wou | Einstellungs-Seite (Anthropic API-Key + Modell konfigurierbar, mit Test) + spezifische Extraktions-Fehlermeldungen | 2026-06-26 | 9018f96 | [260626-wou-einstellungs-seite-anthropic-api-key-mod](./quick/260626-wou-einstellungs-seite-anthropic-api-key-mod/) |
 
 ## Session Continuity
 
