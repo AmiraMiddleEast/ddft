@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -18,8 +19,16 @@ export default async function AppLayout({
     <div className="min-h-screen bg-background">
       <header className="h-16 border-b border-border bg-muted flex items-center justify-between px-6">
         <div className="flex items-center gap-6">
-          <Link href="/" className="text-sm font-semibold">
-            Angela
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/ddft-logo.png"
+              alt="Dubai Docs Fast Track"
+              height={28}
+              width={120}
+              style={{ height: 28, width: "auto" }}
+              priority
+            />
+            <span className="text-sm font-semibold">Dubai Docs Fast Track</span>
           </Link>
           <nav className="flex items-center gap-4 text-sm">
             <Link
