@@ -234,7 +234,7 @@ describe("buildLauflisteInput", () => {
     );
   });
 
-  it("Führungszeugnis routes to exception-apostille with BfJ Endbeglaubigung and null legalisation", async () => {
+  it("Führungszeugnis routes to full chain: no Landes-Vorbeglaubigung, BfAA Endbeglaubigung, embassy legalisation", async () => {
     // No behörden seed needed — short-circuit via dokumenten_typ pattern.
     await seedCase("case-1", USER_A, "Anna Example");
     await seedDoc("doc-fz", USER_A, {
@@ -251,9 +251,13 @@ describe("buildLauflisteInput", () => {
     if (!input) throw new Error("expected input");
 
     const doc0 = input.documents[0];
-    expect(doc0.vorbeglaubigung.kind).toBe("exception-apostille");
-    expect(doc0.endbeglaubigung?.name).toContain("Bundesamt für Justiz");
-    expect(doc0.legalisation).toBeNull();
+    // UAE is not an Apostille state → full chain (no more BfJ-Apostille short-cut).
+    expect(doc0.vorbeglaubigung.kind).toBe("exception-fuehrungszeugnis");
+    expect(doc0.endbeglaubigung?.name).toContain(
+      "Bundesamt für Auswärtige Angelegenheiten",
+    );
+    // Nordrhein-Westfalen → Berlin embassy.
+    expect(doc0.legalisation?.name).toContain("Vereinigten Arabischen Emirate");
   });
 
   it("Reisepass routes to exception-reisepass with null endbeglaubigung and legalisation", async () => {

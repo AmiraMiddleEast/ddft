@@ -2,10 +2,7 @@
 import { describe, it, expect } from "vitest";
 import { renderLaufliste } from "./render";
 import type { LauflisteInput } from "../types";
-import {
-  BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
-  BUNDESAMT_FUER_JUSTIZ_BONN,
-} from "../endbeglaubigung";
+import { BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN } from "../endbeglaubigung";
 import { UAE_EMBASSY_BERLIN } from "../embassy";
 
 function makeInput(): LauflisteInput {
@@ -49,9 +46,9 @@ function makeInput(): LauflisteInput {
         ausstellungsort: "Bonn",
         ausstellungsdatum: "10.03.2026",
         vollerName: "Dr. Müller Özgür Weiß",
-        vorbeglaubigung: { kind: "exception-apostille" },
-        endbeglaubigung: BUNDESAMT_FUER_JUSTIZ_BONN,
-        legalisation: null,
+        vorbeglaubigung: { kind: "exception-fuehrungszeugnis" },
+        endbeglaubigung: BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
+        legalisation: UAE_EMBASSY_BERLIN,
       },
       {
         position: 3,

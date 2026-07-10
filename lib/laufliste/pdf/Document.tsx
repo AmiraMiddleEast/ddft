@@ -150,7 +150,7 @@ function OverviewPage({ input }: { input: LauflisteInput }) {
           {[
             "Führungszeugnis Belegart O beim Bürgeramt beantragen",
             "Antrag Certificate of Good Standing bei zuständiger Stelle",
-            "Apostille/Legalisation (BVA Köln + VAE-Botschaft Berlin)",
+            "Endbeglaubigung (BfAA) + Legalisation (VAE-Botschaft/Konsulat)",
             "Übersetzung durch vereidigten Übersetzer",
           ].map((label, i) => (
             <View key={i} style={styles.overviewRow}>
@@ -180,8 +180,8 @@ function OverviewPage({ input }: { input: LauflisteInput }) {
               {d.dokumentart}
               {d.vorbeglaubigung.kind === "exception-reisepass" ? (
                 <Text style={styles.muted}> · keine Legalisation</Text>
-              ) : d.vorbeglaubigung.kind === "exception-apostille" ? (
-                <Text style={styles.muted}> · Apostille (BfJ)</Text>
+              ) : d.vorbeglaubigung.kind === "exception-fuehrungszeugnis" ? (
+                <Text style={styles.muted}> · Führungszeugnis (BfJ)</Text>
               ) : null}
             </Text>
           </View>

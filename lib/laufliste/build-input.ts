@@ -23,7 +23,10 @@ import type {
   LauflisteInput,
   VorbeglaubigungBlock,
 } from "./types";
-import { endbeglaubigungFor } from "./endbeglaubigung";
+import {
+  endbeglaubigungFor,
+  BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
+} from "./endbeglaubigung";
 import { embassyFor } from "./embassy";
 import { bundeslandName } from "@/lib/bundesland";
 import { resolveCogs } from "@/lib/cogs/resolve";
@@ -42,9 +45,9 @@ import { resolveCogs } from "@/lib/cogs/resolve";
  *      cached from Phase 3 review). A previously resolved_authority_id on
  *      document_review is intentionally ignored.
  *   4. Route exceptions:
- *        Führungszeugnis  → vorbeglaubigung: exception-apostille,
- *                            endbeglaubigung: BfJ (via endbeglaubigungFor),
- *                            legalisation: null
+ *        Führungszeugnis  → vorbeglaubigung: exception-fuehrungszeugnis,
+ *                            endbeglaubigung: BfAA,
+ *                            legalisation: UAE mission (Berlin/München)
  *        Reisepass        → vorbeglaubigung: exception-reisepass,
  *                            endbeglaubigung: null,
  *                            legalisation: null
@@ -155,11 +158,13 @@ export async function buildLauflisteInput(
       endbeglaubigung = null;
       legalisation = null;
     } else if (isFuehrungszeugnis) {
-      // Apostille short-chain: no Vorbeglaubigung authority block, BfJ as
-      // the Endbeglaubigung step, no UAE legalisation (D-08).
-      vorbeglaubigung = { kind: "exception-apostille" };
-      endbeglaubigung = endbeglaubigungFor(dokumentenTyp); // BfJ
-      legalisation = null;
+      // Führungszeugnis: issued by the Bundesamt für Justiz (Bundeszentralregister)
+      // for use abroad — no Landes-Vorbeglaubigung. The UAE is NOT an Apostille
+      // state, so the full chain still applies: BfAA Endbeglaubigung → UAE
+      // mission legalisation (Berlin, or München for Bayern/Baden-Württemberg).
+      vorbeglaubigung = { kind: "exception-fuehrungszeugnis" };
+      endbeglaubigung = BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN;
+      legalisation = embassyFor(cf.bundesland ?? "");
     } else {
       // Normal 3-step chain: resolver → BfAA → UAE mission (Berlin, or München
       // for Bayern/Baden-Württemberg).
