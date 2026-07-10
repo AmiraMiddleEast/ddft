@@ -16,15 +16,27 @@ export function AuthoritiesFilters({
   states: Array<{ id: string; name: string }>;
   docTypes: Array<{ id: string; displayName: string }>;
 }) {
-  const [q, setQ] = useQueryState("q", { defaultValue: "" });
-  const [stateId, setStateId] = useQueryState("stateId", { defaultValue: "" });
+  // shallow: false — the authorities list is rendered by the Server Component
+  // (page.tsx reads searchParams). Without shallow:false, nuqs only updates the
+  // URL client-side and the server list never re-fetches, so filters appear to
+  // do nothing.
+  const [q, setQ] = useQueryState("q", { defaultValue: "", shallow: false });
+  const [stateId, setStateId] = useQueryState("stateId", {
+    defaultValue: "",
+    shallow: false,
+  });
   const [docTypeId, setDocTypeId] = useQueryState("docTypeId", {
     defaultValue: "",
+    shallow: false,
   });
   const [needsReview, setNeedsReview] = useQueryState("needsReview", {
     defaultValue: "",
+    shallow: false,
   });
-  const [, setPage] = useQueryState("page", { defaultValue: "" });
+  const [, setPage] = useQueryState("page", {
+    defaultValue: "",
+    shallow: false,
+  });
 
   const [qDraft, setQDraft] = useState(q);
   useEffect(() => setQDraft(q), [q]);
