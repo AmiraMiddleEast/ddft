@@ -26,7 +26,10 @@ export type AuthorityBlock = {
  * Step 1 of the chain. Three discriminated variants:
  *  - `authority`: normal Vorbeglaubigung with an authority block; `needsReview`
  *    drives the amber `[PRÜFEN]` pill per UI-SPEC.
- *  - `exception-apostille`: Führungszeugnis — short chain (Apostille via BfJ).
+ *  - `exception-fuehrungszeugnis`: Führungszeugnis — issued by the Bundesamt für
+ *    Justiz (Bundeszentralregister) for use abroad; no Landes-Vorbeglaubigung,
+ *    but the full UAE chain still applies (BfAA Endbeglaubigung → Botschaft),
+ *    because the UAE is not an Apostille state.
  *  - `exception-reisepass`: Reisepass — no legalization chain at all.
  */
 export type VorbeglaubigungBlock =
@@ -36,7 +39,7 @@ export type VorbeglaubigungBlock =
       needsReview: boolean;
       specialRules: string | null;
     }
-  | { kind: "exception-apostille" }
+  | { kind: "exception-fuehrungszeugnis" }
   | { kind: "exception-reisepass" };
 
 export type LauflisteDocumentEntry = {

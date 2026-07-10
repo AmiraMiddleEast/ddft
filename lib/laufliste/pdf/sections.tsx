@@ -182,10 +182,10 @@ export function VorbeglaubigungSection({
         </View>
       ) : null}
 
-      {v.kind === "exception-apostille" ? (
+      {v.kind === "exception-fuehrungszeugnis" ? (
         <Text style={styles.body}>
-          Sonderregelung: Apostille — siehe folgenden Schritt (Bundesamt für
-          Justiz).
+          Wird vom Bundesamt für Justiz (Bundeszentralregister) zur Vorlage im
+          Ausland ausgestellt — keine Landes-Vorbeglaubigung erforderlich.
         </Text>
       ) : null}
 
@@ -197,22 +197,16 @@ export function VorbeglaubigungSection({
 }
 
 // ---------------------------------------------------------------------------
-// EndbeglaubigungSection — Step 2.
-// For Führungszeugnis (exception-apostille), this renders the BfJ block but
-// the section title is rephrased to "Endbeglaubigung (Apostille)".
+// EndbeglaubigungSection — Step 2 (Bundesamt für Auswärtige Angelegenheiten).
 // ---------------------------------------------------------------------------
 function EndbeglaubigungSection({
   authority,
-  apostille,
 }: {
   authority: AuthorityBlock;
-  apostille: boolean;
 }) {
   return (
     <View style={styles.stepBlock}>
-      <Text style={styles.h2}>
-        {apostille ? "Endbeglaubigung (Apostille)" : "Endbeglaubigung"}
-      </Text>
+      <Text style={styles.h2}>Endbeglaubigung</Text>
       <View style={styles.sectionUnderline} />
       <AuthorityBlockView authority={authority} />
     </View>
@@ -242,7 +236,6 @@ export function DocumentSection({
   doc: LauflisteDocumentEntry;
   index: number;
 }) {
-  const isApostille = doc.vorbeglaubigung.kind === "exception-apostille";
   const isReisepass = doc.vorbeglaubigung.kind === "exception-reisepass";
 
   return (
@@ -265,21 +258,11 @@ export function DocumentSection({
           <Text style={styles.body}>Keine Legalisation erforderlich.</Text>
         </View>
       ) : doc.endbeglaubigung ? (
-        <EndbeglaubigungSection
-          authority={doc.endbeglaubigung}
-          apostille={isApostille}
-        />
+        <EndbeglaubigungSection authority={doc.endbeglaubigung} />
       ) : null}
 
-      {/* Step 3 — Legalisation (or short-circuit line for Apostille) */}
-      {isReisepass ? null : isApostille ? (
-        <View style={styles.stepBlock}>
-          <Text style={styles.body}>
-            Sonderregelung: Apostille — keine Legalisation durch VAE-Botschaft
-            erforderlich.
-          </Text>
-        </View>
-      ) : doc.legalisation ? (
+      {/* Step 3 — Legalisation (UAE mission) */}
+      {isReisepass ? null : doc.legalisation ? (
         <LegalisationSection authority={doc.legalisation} />
       ) : null}
 
