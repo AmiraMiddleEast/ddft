@@ -24,7 +24,7 @@ import type {
   VorbeglaubigungBlock,
 } from "./types";
 import { endbeglaubigungFor } from "./endbeglaubigung";
-import { UAE_EMBASSY_BERLIN } from "./embassy";
+import { embassyFor } from "./embassy";
 import { bundeslandName } from "@/lib/bundesland";
 import { resolveCogs } from "@/lib/cogs/resolve";
 
@@ -49,8 +49,8 @@ import { resolveCogs } from "@/lib/cogs/resolve";
  *                            endbeglaubigung: null,
  *                            legalisation: null
  *        Everything else  → vorbeglaubigung: authority from resolver,
- *                            endbeglaubigung: BVA (via endbeglaubigungFor),
- *                            legalisation: UAE_EMBASSY_BERLIN
+ *                            endbeglaubigung: BfAA (via endbeglaubigungFor),
+ *                            legalisation: UAE mission (Berlin/München via embassyFor)
  *   5. Format `ausstellungsdatum` (ISO yyyy-MM-dd) as `dd.MM.yyyy` for the
  *      renderer. Null / malformed → null pass-through.
  *
@@ -161,7 +161,8 @@ export async function buildLauflisteInput(
       endbeglaubigung = endbeglaubigungFor(dokumentenTyp); // BfJ
       legalisation = null;
     } else {
-      // Normal 3-step chain: resolver → BVA → UAE Embassy.
+      // Normal 3-step chain: resolver → BfAA → UAE mission (Berlin, or München
+      // for Bayern/Baden-Württemberg).
       const resolverInput: ResolverInput = {
         dokumenten_typ: dokumentenTyp,
         bundesland: cf.bundesland ?? "",
@@ -169,8 +170,8 @@ export async function buildLauflisteInput(
       };
       const result = await resolver(resolverInput, db as ResolverDb);
       vorbeglaubigung = resolverResultToVorbeglaubigung(result);
-      endbeglaubigung = endbeglaubigungFor(dokumentenTyp); // BVA
-      legalisation = UAE_EMBASSY_BERLIN;
+      endbeglaubigung = endbeglaubigungFor(dokumentenTyp); // BfAA
+      legalisation = embassyFor(cf.bundesland ?? "");
     }
 
     documents.push({
