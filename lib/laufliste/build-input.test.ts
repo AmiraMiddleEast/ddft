@@ -224,8 +224,10 @@ describe("buildLauflisteInput", () => {
       "Beglaubigung durch Präsidenten erforderlich.",
     );
 
-    // Endbeglaubigung: BVA (not Führungszeugnis).
-    expect(doc0.endbeglaubigung?.name).toContain("Bundesverwaltungsamt");
+    // Endbeglaubigung: BfAA (not Führungszeugnis).
+    expect(doc0.endbeglaubigung?.name).toContain(
+      "Bundesamt für Auswärtige Angelegenheiten",
+    );
     // Legalisation: UAE Embassy.
     expect(doc0.legalisation?.name).toContain(
       "Vereinigten Arabischen Emirate",

@@ -3,7 +3,7 @@ import { describe, it, expect } from "vitest";
 import { renderLaufliste } from "./render";
 import type { LauflisteInput } from "../types";
 import {
-  BUNDESVERWALTUNGSAMT_KOELN,
+  BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
   BUNDESAMT_FUER_JUSTIZ_BONN,
 } from "../endbeglaubigung";
 import { UAE_EMBASSY_BERLIN } from "../embassy";
@@ -39,7 +39,7 @@ function makeInput(): LauflisteInput {
           specialRules:
             "Beglaubigung durch Präsidenten des Landgerichts erforderlich.",
         },
-        endbeglaubigung: BUNDESVERWALTUNGSAMT_KOELN,
+        endbeglaubigung: BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
         legalisation: UAE_EMBASSY_BERLIN,
       },
       {

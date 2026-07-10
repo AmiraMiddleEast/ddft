@@ -7,7 +7,7 @@ import { writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { renderLaufliste } from "@/lib/laufliste/pdf/render";
 import {
-  BUNDESVERWALTUNGSAMT_KOELN,
+  BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
 } from "@/lib/laufliste/endbeglaubigung";
 import { UAE_EMBASSY_BERLIN } from "@/lib/laufliste/embassy";
 import type { LauflisteInput } from "@/lib/laufliste/types";
@@ -70,7 +70,7 @@ const input: LauflisteInput = {
         needsReview: false,
         specialRules: null,
       },
-      endbeglaubigung: BUNDESVERWALTUNGSAMT_KOELN,
+      endbeglaubigung: BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
       legalisation: UAE_EMBASSY_BERLIN,
     },
     {
@@ -94,7 +94,7 @@ const input: LauflisteInput = {
         needsReview: false,
         specialRules: null,
       },
-      endbeglaubigung: BUNDESVERWALTUNGSAMT_KOELN,
+      endbeglaubigung: BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
       legalisation: UAE_EMBASSY_BERLIN,
     },
     {
@@ -118,7 +118,7 @@ const input: LauflisteInput = {
         needsReview: false,
         specialRules: null,
       },
-      endbeglaubigung: BUNDESVERWALTUNGSAMT_KOELN,
+      endbeglaubigung: BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
       legalisation: UAE_EMBASSY_BERLIN,
     },
     {

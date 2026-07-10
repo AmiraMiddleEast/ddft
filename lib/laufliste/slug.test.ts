@@ -3,7 +3,7 @@ import { describe, it, expect } from "vitest";
 import { slugifyPersonName } from "./slug";
 import {
   endbeglaubigungFor,
-  BUNDESVERWALTUNGSAMT_KOELN,
+  BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
   BUNDESAMT_FUER_JUSTIZ_BONN,
 } from "./endbeglaubigung";
 
@@ -45,15 +45,15 @@ describe("endbeglaubigungFor", () => {
     );
   });
 
-  it("returns BVA Köln for Geburtsurkunde", () => {
+  it("returns BfAA for Geburtsurkunde", () => {
     expect(endbeglaubigungFor("Geburtsurkunde")).toBe(
-      BUNDESVERWALTUNGSAMT_KOELN,
+      BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
     );
   });
 
-  it("returns BVA Köln for Heiratsurkunde", () => {
+  it("returns BfAA for Heiratsurkunde", () => {
     expect(endbeglaubigungFor("Heiratsurkunde")).toBe(
-      BUNDESVERWALTUNGSAMT_KOELN,
+      BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN,
     );
   });
 });

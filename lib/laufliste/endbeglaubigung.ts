@@ -1,35 +1,35 @@
 /**
- * Phase 4 Plan 03 — Endbeglaubigung static policy (CONTEXT D-06).
+ * Endbeglaubigung static policy (CONTEXT D-06).
  *
- * - Most German documents route through Bundesverwaltungsamt (BVA) Köln.
- * - Führungszeugnisse route through Bundesamt für Justiz (BfJ) Bonn as an
- *   Apostille (CONTEXT D-08 exception).
- *
- * @assumed Phone / e-mail / Öffnungszeiten values below are placeholder
- * defaults from research. Source of truth is the sample PDF at repo root
- * (`Dokumenten Laufliste Dr. Sandra Hertel-2.pdf`). The operator must verify
- * these fields against the sample PDF before production use — a
- * `[PRÜFEN: verify before production]` annotation in UI/PDF would be ideal if
- * downstream plans re-introduce needsReview semantics here. See SUMMARY.
+ * - Most German documents route through the Bundesamt für Auswärtige
+ *   Angelegenheiten (BfAA), Brandenburg an der Havel. Since 01.01.2023 the BfAA
+ *   is the sole federal authority for Endbeglaubigungen/Apostillen — it took
+ *   over from the Bundesverwaltungsamt (BVA) Köln, which is no longer
+ *   responsible (Recherche 2026-07: bfaa.diplo.de + Auswärtiges Amt).
+ * - Führungszeugnisse currently route through Bundesamt für Justiz (BfJ) Bonn
+ *   as an Apostille short-chain (D-08). NOTE: the UAE is NOT an Apostille state,
+ *   so this short-chain is under review — Führungszeugnisse for the UAE most
+ *   likely need the full chain (BfJ → BfAA-Endbeglaubigung → Botschaft). Left
+ *   unchanged here pending an operator decision; tracked as a Laufliste follow-up.
  */
 
 import type { AuthorityBlock } from "./types";
 
 /**
- * Bundesverwaltungsamt Köln — Endbeglaubigung for most civil-status documents
- * (Geburts-, Heirats-, Sterbeurkunden, Meldebescheinigungen, Diplome, etc.).
- *
- * @assumed Contact fields verified against research defaults only; cross-check
- * with the sample Laufliste PDF at repo root before printing for a customer.
+ * Bundesamt für Auswärtige Angelegenheiten (BfAA) — Endbeglaubigung for most
+ * documents before the UAE-Embassy legalisation. Online portal:
+ * bega.bfaa.diplo.de. Fee: 22 € per Endbeglaubigung (since 01.07.2025).
+ * Sole federal authority since 01.01.2023 (replaced Bundesverwaltungsamt Köln).
  */
-export const BUNDESVERWALTUNGSAMT_KOELN: AuthorityBlock = {
-  name: "Bundesverwaltungsamt — Endbeglaubigung",
-  address: ["Barbarastraße 1", "50735 Köln"],
-  phone: "+49 22899 358-0",
-  email: "poststelle@bva.bund.de",
-  website: "https://www.bva.bund.de",
-  officeHours: "Mo–Fr 08:00–16:00",
-  notes: null,
+export const BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN: AuthorityBlock = {
+  name: "Bundesamt für Auswärtige Angelegenheiten (BfAA) — Endbeglaubigung",
+  address: ["Kirchhofstraße 1–2", "14776 Brandenburg an der Havel"],
+  phone: "+49 30 18 4730 16500",
+  email: null,
+  website: "https://bega.bfaa.diplo.de/",
+  officeHours: "Servicezeiten Telefon Mo–Fr 09:00–15:00",
+  notes:
+    "Online-Antrag über bega.bfaa.diplo.de; Gebühr 22 € je Endbeglaubigung. Zuständig seit 01.01.2023 (zuvor Bundesverwaltungsamt Köln).",
 };
 
 /**
@@ -37,8 +37,7 @@ export const BUNDESVERWALTUNGSAMT_KOELN: AuthorityBlock = {
  * Replaces the normal Endbeglaubigung step and short-circuits the chain
  * (no UAE-Embassy legalisation needed for Apostille documents).
  *
- * @assumed Contact fields verified against research defaults only; cross-check
- * with the sample Laufliste PDF at repo root before printing for a customer.
+ * @assumed Contact fields are research defaults; cross-check before printing.
  */
 export const BUNDESAMT_FUER_JUSTIZ_BONN: AuthorityBlock = {
   name: "Bundesamt für Justiz — Apostille",
@@ -53,11 +52,12 @@ export const BUNDESAMT_FUER_JUSTIZ_BONN: AuthorityBlock = {
 /**
  * Static lookup: which Endbeglaubigung block applies for a given Dokumentart?
  * Case-insensitive substring match on "Führungszeugnis" (handles the common
- * variant "Führungszeugnis nach §30 BZRG").
+ * variant "Führungszeugnis nach §30 BZRG"). All other documents route through
+ * the BfAA.
  */
 export function endbeglaubigungFor(dokumentTyp: string): AuthorityBlock {
   if (/führungszeugnis/i.test(dokumentTyp)) {
     return BUNDESAMT_FUER_JUSTIZ_BONN;
   }
-  return BUNDESVERWALTUNGSAMT_KOELN;
+  return BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN;
 }
