@@ -48,6 +48,8 @@ data/*
 !data/behoerden-parsed.json
 # 2026-07 — committed additive research authorities supplement (seeded on top of the parsed snapshot)
 !data/behoerden-supplement.json
+# 2026-07 — committed CoGS fill-only overlay (fills empty Kammer fields on seed)
+!data/cogs-supplement.json
 *.db
 *.db-journal
 *.db-wal
