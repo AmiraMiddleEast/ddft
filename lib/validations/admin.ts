@@ -46,6 +46,24 @@ export const AuthorityPatchSchema = z.object({
 
 export type AuthorityPatch = z.infer<typeof AuthorityPatchSchema>;
 
+/**
+ * Schema for creating a brand-new authority. Extends the patch (contact fields)
+ * with the identity fields: which Bundesland + Dokumentenart it belongs to, and
+ * an optional Regierungsbezirk. Empty string on the optional RB → NULL.
+ */
+export const AuthorityCreateSchema = AuthorityPatchSchema.extend({
+  stateId: z.string().trim().min(1, "Bitte ein Bundesland wählen."),
+  documentTypeId: z.string().trim().min(1, "Bitte eine Dokumentenart wählen."),
+  regierungsbezirkId: z
+    .string()
+    .trim()
+    .optional()
+    .nullable()
+    .or(z.literal("")),
+});
+
+export type AuthorityCreateInput = z.infer<typeof AuthorityCreateSchema>;
+
 export const DocumentTypeSchema = z.object({
   displayName: z
     .string()

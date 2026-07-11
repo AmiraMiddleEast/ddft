@@ -198,6 +198,17 @@ export async function listStatesAdmin(db: Db = defaultDb) {
     .orderBy(asc(behoerdenState.name));
 }
 
+export async function listRegierungsbezirkeAdmin(db: Db = defaultDb) {
+  return db
+    .select({
+      id: behoerdenRegierungsbezirk.id,
+      stateId: behoerdenRegierungsbezirk.stateId,
+      name: behoerdenRegierungsbezirk.name,
+    })
+    .from(behoerdenRegierungsbezirk)
+    .orderBy(asc(behoerdenRegierungsbezirk.name));
+}
+
 export async function listRecentlyEditedAuthorities(
   limit = 5,
   db: Db = defaultDb,
