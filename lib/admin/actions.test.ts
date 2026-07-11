@@ -24,6 +24,7 @@ let behoerdenState: any;
 let behoerdenDocumentType: any;
 let behoerdenAuthority: any;
 let updateAuthorityAction: any;
+let createAuthorityAction: any;
 let createDocumentTypeAction: any;
 let updateDocumentTypeAction: any;
 let auth: any;
@@ -49,6 +50,7 @@ beforeAll(async () => {
   } = await import("@/db/schema"));
   ({
     updateAuthorityAction,
+    createAuthorityAction,
     createDocumentTypeAction,
     updateDocumentTypeAction,
   } = await import("./actions"));
@@ -100,6 +102,62 @@ beforeEach(async () => {
   auth.api.getSession.mockResolvedValue({
     user: { id: "admin-u", email: "admin@x.de" },
     session: { id: "s1" },
+  });
+});
+
+describe("createAuthorityAction", () => {
+  it("creates a new authority for an existing state + doc type", async () => {
+    const res = await createAuthorityAction({
+      stateId: "bayern",
+      documentTypeId: "geburtsurkunde",
+      regierungsbezirkId: "",
+      name: "Regierung von Oberbayern",
+      address: "Maximilianstr. 39\n80538 München",
+      phone: "089 2176-0",
+      email: "poststelle@reg-ob.bayern.de",
+      website: "https://www.regierung.oberbayern.bayern.de",
+      officeHours: null,
+      notes: null,
+      specialRules: null,
+      needsReview: true,
+    });
+    expect(res.ok).toBe(true);
+
+    const rows = await db
+      .select()
+      .from(behoerdenAuthority)
+      .where(drizzleEq(behoerdenAuthority.stateId, "bayern"));
+    // The seeded auth-1 plus the new one.
+    expect(rows.length).toBe(2);
+    const created = rows.find(
+      (r: any) => r.name === "Regierung von Oberbayern",
+    );
+    expect(created).toBeTruthy();
+    expect(created.documentTypeId).toBe("geburtsurkunde");
+    expect(created.regierungsbezirkId).toBeNull();
+    expect(created.needsReview).toBe(true);
+  });
+
+  it("rejects an unknown state", async () => {
+    const res = await createAuthorityAction({
+      stateId: "atlantis",
+      documentTypeId: "geburtsurkunde",
+      name: "Amt",
+      address: "Straße 1",
+    });
+    expect(res.ok).toBe(false);
+    if (!res.ok) expect(res.error).toBe("UNKNOWN_STATE");
+  });
+
+  it("rejects missing required fields (VALIDATION)", async () => {
+    const res = await createAuthorityAction({
+      stateId: "bayern",
+      documentTypeId: "geburtsurkunde",
+      name: "",
+      address: "",
+    });
+    expect(res.ok).toBe(false);
+    if (!res.ok) expect(res.error).toBe("VALIDATION");
   });
 });
 

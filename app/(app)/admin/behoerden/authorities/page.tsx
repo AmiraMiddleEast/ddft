@@ -76,13 +76,21 @@ export default async function AuthoritiesAdminPage({
         <span aria-current="page">Behörden bearbeiten</span>
       </nav>
 
-      <section className="mb-6">
-        <h1 className="text-2xl font-semibold leading-tight">
-          Behörden bearbeiten
-        </h1>
-        <p className="mt-1 text-base text-muted-foreground">
-          Suchen, filtern und einzelne Kontaktdaten aktualisieren.
-        </p>
+      <section className="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold leading-tight">
+            Behörden bearbeiten
+          </h1>
+          <p className="mt-1 text-base text-muted-foreground">
+            Suchen, filtern, ergänzen und einzelne Kontaktdaten aktualisieren.
+          </p>
+        </div>
+        <Link
+          href="/admin/behoerden/authorities/new"
+          className={buttonVariants({ variant: "default" })}
+        >
+          Neue Behörde
+        </Link>
       </section>
 
       <Card className="mb-6">
