@@ -21,6 +21,7 @@ import {
   chooseAmbiguousAuthority,
 } from "@/lib/review/actions";
 import type { ResolverResult } from "@/lib/behoerden/resolve";
+import { matchDocType } from "@/lib/behoerden/match-doc-type";
 import type { Confidence, FieldName } from "@/db/schema";
 
 import { AuthorityResultPanel } from "./AuthorityResultPanel";
@@ -47,9 +48,19 @@ type Props = {
   states: { id: string; name: string }[];
 };
 
-function initialValues(original: Original): CorrectedFields {
+function initialValues(
+  original: Original,
+  documentTypes: { id: string; displayName: string }[],
+): CorrectedFields {
+  // Claude fills `dokumenten_typ` with a verbose description (e.g. "Urkunde
+  // (Anerkennung der Weiterbildung zur Fachzahnärztin)") that never equals a
+  // dropdown option verbatim, so the Select would render empty. Map it to the
+  // canonical type up front; leave empty (forcing a manual pick, per the
+  // schema's min(1)) when no confident match exists instead of pre-filling
+  // unresolvable free text.
+  const matchedType = matchDocType(original.dokumenten_typ.value, documentTypes);
   return {
-    dokumenten_typ: original.dokumenten_typ.value,
+    dokumenten_typ: matchedType?.displayName ?? "",
     ausstellende_behoerde: original.ausstellende_behoerde.value,
     ausstellungsort: original.ausstellungsort.value,
     bundesland: original.bundesland.value,
@@ -64,9 +75,15 @@ export function ReviewForm({
   documentTypes,
   states,
 }: Props) {
-  const [values, setValues] = React.useState<CorrectedFields>(() =>
-    initialValues(original),
+  // The loaded form state (Claude's analysis, with dokumenten_typ normalized to
+  // a dropdown option). "Dirty" and "Verwerfen" compare against this baseline,
+  // NOT the raw extraction — otherwise the normalized dokumenten_typ would show
+  // as edited on load and trigger a spurious unsaved-changes warning.
+  const baseline = React.useMemo(
+    () => initialValues(original, documentTypes),
+    [original, documentTypes],
   );
+  const [values, setValues] = React.useState<CorrectedFields>(baseline);
   const [errors, setErrors] = React.useState<
     Partial<Record<keyof CorrectedFields, string>>
   >({});
@@ -76,12 +93,12 @@ export function ReviewForm({
   const [confirmDiscard, setConfirmDiscard] = React.useState(false);
 
   const isDirty = React.useCallback(
-    (k: FieldName) => values[k] !== original[k].value,
-    [values, original],
+    (k: FieldName) => values[k] !== baseline[k],
+    [values, baseline],
   );
   const anyDirty = React.useMemo(
-    () => FIELD_NAMES.some((k) => values[k] !== original[k].value),
-    [values, original],
+    () => FIELD_NAMES.some((k) => values[k] !== baseline[k]),
+    [values, baseline],
   );
 
   // beforeunload warning on unsaved edits.
@@ -159,7 +176,7 @@ export function ReviewForm({
 
   function onDiscard() {
     setConfirmDiscard(false);
-    setValues(initialValues(original));
+    setValues(baseline);
     setErrors({});
     setResult(null);
   }
