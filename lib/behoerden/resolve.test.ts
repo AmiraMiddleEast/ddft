@@ -314,4 +314,41 @@ describe("resolveAuthority", () => {
     if (r.status !== "not_found") throw new Error("narrow");
     expect(r.reason).toBe("no_authority_for_combination");
   });
+
+  it("Test 12 (display-name match + general fallback): compound display name → Facharztanerkennung → Hamburg Beglaubigungsstelle, needs_review", async () => {
+    // The review dropdown submits the DISPLAY NAME, not the slug id. The
+    // resolver must match "Facharztanerkennung / Weiterbildungsurkunde" to the
+    // "facharztanerkennung" doc type, then fall back to Hamburg's general
+    // Beglaubigungsstelle because no specific Facharzt authority exists there.
+    const r = await resolveAuthority(
+      {
+        dokumenten_typ: "Facharztanerkennung / Weiterbildungsurkunde",
+        bundesland: "Hamburg",
+        ausstellungsort: "Hamburg",
+      },
+      db,
+    );
+    expect(r.status).toBe("matched");
+    if (r.status !== "matched") throw new Error("narrow");
+    expect(r.authority.id).toBe("a8");
+    expect(r.needs_review).toBe(true);
+    expect(r.routing_path).toContain("Allgemeine Beglaubigungsstelle");
+  });
+
+  it("Test 13 (fallback excluded for Führungszeugnis): general exists but judicial-class docs must not fall back", async () => {
+    // Hamburg has a general Beglaubigungsstelle (a8) but no Führungszeugnis
+    // authority. Führungszeugnis routes to the BfJ, so it must NOT fall back to
+    // the general stelle — it stays no_authority_for_combination.
+    const r = await resolveAuthority(
+      {
+        dokumenten_typ: "Fuehrungszeugnis",
+        bundesland: "Hamburg",
+        ausstellungsort: "Hamburg",
+      },
+      db,
+    );
+    expect(r.status).toBe("not_found");
+    if (r.status !== "not_found") throw new Error("narrow");
+    expect(r.reason).toBe("no_authority_for_combination");
+  });
 });

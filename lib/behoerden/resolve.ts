@@ -74,7 +74,17 @@ export async function resolveAuthority(
   const candidateSlug = slugify(input.dokumenten_typ);
   const allDocTypes = await db.select().from(behoerdenDocumentType);
   const scored = allDocTypes
-    .map((d) => ({ d, dist: distance(candidateSlug, d.id) }))
+    .map((d) => ({
+      d,
+      // Match against BOTH the slug id and the slugified display name. The
+      // review dropdown submits the display name (e.g. "Facharztanerkennung /
+      // Weiterbildungsurkunde"), which does not slugify to the short id
+      // ("facharztanerkennung") — matching only the id would fail here.
+      dist: Math.min(
+        distance(candidateSlug, d.id),
+        distance(candidateSlug, slugify(d.displayName)),
+      ),
+    }))
     .sort((a, b) => a.dist - b.dist);
   const best = scored[0];
   // Require slug length >= 5 before allowing any fuzzy matching. Short slugs
@@ -166,6 +176,25 @@ export async function resolveAuthority(
         ),
       );
     if (anyMatch.length === 0) {
+      // Systematic fallback: no specific authority for this (state, doc type).
+      // For non-judicial documents, route to the state's general
+      // Beglaubigungsstelle ("alle öffentlichen Urkunden des Landes"). Judicial
+      // and notarial documents route to the Landgericht, and Führungszeugnis to
+      // the BfJ — those are excluded so we never mis-route them.
+      const general = await maybeGeneralBeglaubigung(db, stateRow.id, docType);
+      if (general) {
+        return {
+          status: "matched",
+          authority: general,
+          routing_path: [
+            stateRow.name,
+            "Allgemeine Beglaubigungsstelle",
+            docType.displayName,
+          ],
+          special_rules: general.specialRules,
+          needs_review: true, // fallback — operator confirms this doc type is handled here
+        };
+      }
       return { status: "not_found", reason: "no_authority_for_combination" };
     }
     return {
@@ -195,4 +224,38 @@ export async function resolveAuthority(
     candidates: authorities,
     routing_path: [stateRow.name, docType.displayName],
   };
+}
+
+// Document types that must NOT fall back to the general Beglaubigungsstelle:
+// judicial + notarial route to the Landgericht, Führungszeugnis to the BfJ.
+const GENERAL_FALLBACK_EXCLUDE = new Set([
+  "gerichtliche-entscheidungen",
+  "notarielle-urkunden",
+  "fuehrungszeugnis",
+  "allgemeine-beglaubigung",
+]);
+
+/**
+ * For a non-judicial document type with no specific authority, return the
+ * state's general Beglaubigungsstelle (document_type_id "allgemeine-beglaubigung")
+ * or null. This is the systematic fallback so administrative/professional
+ * documents (e.g. Facharzt-Weiterbildungsurkunden) resolve to the Bundesland's
+ * central Beglaubigungsstelle instead of "Keine Behörde gefunden".
+ */
+async function maybeGeneralBeglaubigung(
+  db: ResolverDb,
+  stateId: string,
+  docType: typeof behoerdenDocumentType.$inferSelect,
+): Promise<AuthorityRow | null> {
+  if (GENERAL_FALLBACK_EXCLUDE.has(docType.id)) return null;
+  const rows = await db
+    .select()
+    .from(behoerdenAuthority)
+    .where(
+      and(
+        eq(behoerdenAuthority.stateId, stateId),
+        eq(behoerdenAuthority.documentTypeId, "allgemeine-beglaubigung"),
+      ),
+    );
+  return rows[0] ?? null;
 }

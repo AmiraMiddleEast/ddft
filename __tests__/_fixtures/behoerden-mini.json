@@ -38,7 +38,15 @@
     { "id": "heiratsurkunde", "display_name": "Heiratsurkunde" },
     { "id": "approbationsurkunde", "display_name": "Approbationsurkunde" },
     { "id": "fuehrungszeugnis", "display_name": "Fuehrungszeugnis" },
-    { "id": "reisepass", "display_name": "Reisepass" }
+    { "id": "reisepass", "display_name": "Reisepass" },
+    {
+      "id": "facharztanerkennung",
+      "display_name": "Facharztanerkennung / Weiterbildungsurkunde"
+    },
+    {
+      "id": "allgemeine-beglaubigung",
+      "display_name": "Allgemeine Beglaubigungsstelle des Bundeslands"
+    }
   ],
   "authorities": [
     {
@@ -145,6 +153,21 @@
       "notes": null,
       "special_rules": null,
       "needs_review": false
+    },
+    {
+      "id": "a8",
+      "state_id": "hamburg",
+      "regierungsbezirk_id": null,
+      "document_type_id": "allgemeine-beglaubigung",
+      "name": "Behoerde fuer Inneres und Sport Hamburg - Beglaubigungsstelle",
+      "address": "Johanniswall 4, 20095 Hamburg",
+      "phone": null,
+      "email": null,
+      "website": null,
+      "office_hours": null,
+      "notes": null,
+      "special_rules": null,
+      "needs_review": true
     }
   ]
 }
