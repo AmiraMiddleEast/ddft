@@ -12,4 +12,6 @@ APP_DIR=/var/www/ddft
 APP_USER=ddft
 echo "==> Re-seeding Behörden (parsed snapshot + research supplement) ..."
 sudo -u "$APP_USER" bash -lc "cd '$APP_DIR' && npm run seed:behoerden -- --skip-parse"
+echo "==> Re-seeding CoGS-Kammern (CSV + research + fill-only overlay) ..."
+sudo -u "$APP_USER" bash -lc "cd '$APP_DIR' && npm run seed:cogs"
 echo "==> Done."
