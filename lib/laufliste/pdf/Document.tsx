@@ -17,6 +17,9 @@ import path from "node:path";
 import { DDFT_COLORS, styles } from "./styles";
 import { DocumentSection } from "./sections";
 import type { LauflisteInput, CogsSection, AuthorityBlock } from "../types";
+import { BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN } from "../endbeglaubigung";
+import { embassyFor } from "../embassy";
+import { BFARM_SUPPORTING_DOCUMENT } from "../bfarm";
 
 function formatGeneratedAt(d: Date): string {
   const dd = String(d.getUTCDate()).padStart(2, "0");
@@ -254,24 +257,10 @@ function CogsStep({
 }
 
 function CogsSectionPage({ cogs }: { cogs: CogsSection }) {
-  const bvaAddress: AuthorityBlock = {
-    name: "Bundesverwaltungsamt (BVA) — Referat für Legalisation",
-    address: ["Barbarastraße 1", "50735 Köln"],
-    phone: "+49 22899 358-0",
-    email: "poststelle@bva.bund.de",
-    website: "www.bva.bund.de",
-    officeHours: null,
-    notes: null,
-  };
-  const uaeEmbassy: AuthorityBlock = {
-    name: "Botschaft der Vereinigten Arabischen Emirate",
-    address: ["Hiroshimastraße 18–20", "10785 Berlin"],
-    phone: "030 516 516",
-    email: "berlinemb.amo@mofaic.gov.ae",
-    website: "www.uae-embassy.de",
-    officeHours: "Montag–Freitag: 10:00–15:00 Uhr",
-    notes: null,
-  };
+  // Use the shared, up-to-date blocks: BfAA (not the retired BVA Köln) for the
+  // Endbeglaubigung, and the Bundesland-aware embassy (München for BY/BW).
+  const endbeglaubigung = BUNDESAMT_FUER_AUSWAERTIGE_ANGELEGENHEITEN;
+  const uaeEmbassy = embassyFor(cogs.maßgeblichesBundesland.name);
 
   return (
     <Page size="A4" style={styles.page}>
@@ -410,7 +399,7 @@ function CogsSectionPage({ cogs }: { cogs: CogsSection }) {
         <Text style={{ ...styles.body, ...styles.emphasis, marginTop: 6 }}>
           a) Endbeglaubigung
         </Text>
-        {renderAuthorityBlock(bvaAddress)}
+        {renderAuthorityBlock(endbeglaubigung)}
         <Text style={{ ...styles.body, ...styles.emphasis, marginTop: 8 }}>
           b) Legalisation durch VAE-Botschaft
         </Text>
@@ -427,6 +416,20 @@ function CogsSectionPage({ cogs }: { cogs: CogsSection }) {
           </Text>
         </Text>
       </CogsStep>
+
+      {/* Supplementary — BfArM supporting document for the Approbation */}
+      <View style={{ marginTop: 10 }}>
+        <Text style={{ ...styles.h3, marginBottom: 4 }}>
+          Ergänzend für die Approbation: Supporting Document (BfArM)
+        </Text>
+        <Text style={styles.body}>
+          Für die Anerkennung der Approbation in den VAE wird häufig eine
+          Bescheinigung nach Art. 34 RL 2005/36/EG benötigt (alte
+          Approbationsbeschlüsse werden dort oft nicht anerkannt). Diese stellt
+          das BfArM aus.
+        </Text>
+        {renderAuthorityBlock(BFARM_SUPPORTING_DOCUMENT)}
+      </View>
       <Footer />
     </Page>
   );
