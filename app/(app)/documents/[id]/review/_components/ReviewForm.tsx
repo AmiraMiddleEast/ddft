@@ -37,7 +37,7 @@ const FIELD_NAMES: readonly FieldName[] = [
   "voller_name",
 ] as const;
 
-const BUNDESLAND_SENTINEL = "Unbekannt / Sonstiges";
+const BUNDESLAND_SENTINEL = "Unknown / Other";
 
 type Original = Record<FieldName, { value: string; confidence: Confidence }>;
 
@@ -76,7 +76,7 @@ export function ReviewForm({
   states,
 }: Props) {
   // The loaded form state (Claude's analysis, with dokumenten_typ normalized to
-  // a dropdown option). "Dirty" and "Verwerfen" compare against this baseline,
+  // a dropdown option). "Dirty" and "Discard" compare against this baseline,
   // NOT the raw extraction — otherwise the normalized dokumenten_typ would show
   // as edited on load and trigger a spurious unsaved-changes warning.
   const baseline = React.useMemo(
@@ -106,7 +106,7 @@ export function ReviewForm({
     const handler = (e: BeforeUnloadEvent) => {
       if (anyDirty) {
         e.preventDefault();
-        e.returnValue = "Änderungen gehen verloren. Seite verlassen?";
+        e.returnValue = "Changes will be lost. Leave the page?";
       }
     };
     window.addEventListener("beforeunload", handler);
@@ -153,13 +153,13 @@ export function ReviewForm({
         });
         if (!res.ok) {
           toast.error(
-            "Behörde konnte nicht ermittelt werden. Bitte erneut versuchen.",
+            "Could not determine the authority. Please try again.",
           );
           return;
         }
         setResult(res.data);
         if (res.data.status === "matched") {
-          toast.success("Zuständige Behörde ermittelt.");
+          toast.success("Responsible authority found.");
         }
         window.setTimeout(() => {
           document
@@ -168,7 +168,7 @@ export function ReviewForm({
         }, 50);
       } catch {
         toast.error(
-          "Behörde konnte nicht ermittelt werden. Bitte erneut versuchen.",
+          "Could not determine the authority. Please try again.",
         );
       }
     });
@@ -188,7 +188,7 @@ export function ReviewForm({
       const res = await chooseAmbiguousAuthority({ documentId, authorityId });
       if (!res.ok) {
         toast.error(
-          "Behörde konnte nicht ermittelt werden. Bitte erneut versuchen.",
+          "Could not determine the authority. Please try again.",
         );
         return;
       }
@@ -200,7 +200,7 @@ export function ReviewForm({
         special_rules: chosen.specialRules,
         needs_review: chosen.needsReview,
       });
-      toast.success("Zuständige Behörde ermittelt.");
+      toast.success("Responsible authority found.");
     } finally {
       setChoosePending(false);
     }
@@ -223,9 +223,9 @@ export function ReviewForm({
   return (
     <div className="py-2">
       <form onSubmit={onSubmit} className="grid gap-4">
-        {/* Dokumenttyp */}
+        {/* Document type */}
         <FieldRow
-          label="Dokumenttyp"
+          label="Document type"
           name="dokumenten_typ"
           originalValue={original.dokumenten_typ.value}
           confidence={original.dokumenten_typ.confidence}
@@ -241,7 +241,7 @@ export function ReviewForm({
               className="w-full"
               aria-invalid={errors.dokumenten_typ ? true : undefined}
             >
-              <SelectValue placeholder="Dokumenttyp auswählen" />
+              <SelectValue placeholder="Select document type" />
             </SelectTrigger>
             <SelectContent>
               {documentTypes.map((dt) => (
@@ -253,9 +253,9 @@ export function ReviewForm({
           </Select>
         </FieldRow>
 
-        {/* Ausstellende Behörde */}
+        {/* Issuing authority */}
         <FieldRow
-          label="Ausstellende Behörde"
+          label="Issuing authority"
           name="ausstellende_behoerde"
           originalValue={original.ausstellende_behoerde.value}
           confidence={original.ausstellende_behoerde.confidence}
@@ -276,9 +276,9 @@ export function ReviewForm({
           />
         </FieldRow>
 
-        {/* Ausstellungsort */}
+        {/* Place of issue */}
         <FieldRow
-          label="Ausstellungsort"
+          label="Place of issue"
           name="ausstellungsort"
           originalValue={original.ausstellungsort.value}
           confidence={original.ausstellungsort.confidence}
@@ -295,9 +295,9 @@ export function ReviewForm({
           />
         </FieldRow>
 
-        {/* Bundesland */}
+        {/* Federal state */}
         <FieldRow
-          label="Bundesland"
+          label="Federal state"
           name="bundesland"
           originalValue={original.bundesland.value}
           confidence={original.bundesland.confidence}
@@ -313,7 +313,7 @@ export function ReviewForm({
               className="w-full"
               aria-invalid={errors.bundesland ? true : undefined}
             >
-              <SelectValue placeholder="Bundesland auswählen" />
+              <SelectValue placeholder="Select federal state" />
             </SelectTrigger>
             <SelectContent>
               {bundeslandOptions.map((s) => (
@@ -325,9 +325,9 @@ export function ReviewForm({
           </Select>
         </FieldRow>
 
-        {/* Ausstellungsdatum */}
+        {/* Date of issue */}
         <FieldRow
-          label="Ausstellungsdatum"
+          label="Date of issue"
           name="ausstellungsdatum"
           originalValue={original.ausstellungsdatum.value}
           confidence={original.ausstellungsdatum.confidence}
@@ -343,9 +343,9 @@ export function ReviewForm({
           />
         </FieldRow>
 
-        {/* Voller Name */}
+        {/* Full name */}
         <FieldRow
-          label="Voller Name"
+          label="Full name"
           name="voller_name"
           originalValue={original.voller_name.value}
           confidence={original.voller_name.confidence}
@@ -369,12 +369,12 @@ export function ReviewForm({
             disabled={!anyDirty}
             onClick={() => setConfirmDiscard(true)}
           >
-            Verwerfen
+            Discard
           </Button>
           <Button type="submit" disabled={pending}>
             {pending
-              ? "Behörde wird ermittelt …"
-              : "Speichern & Behörde ermitteln"}
+              ? "Finding authority…"
+              : "Save & find authority"}
           </Button>
         </div>
       </form>

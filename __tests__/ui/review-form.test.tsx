@@ -58,18 +58,18 @@ describe("ReviewForm — UI-SPEC Copywriting Contract", () => {
     );
 
     // German labels from UI-SPEC
-    expect(screen.getByText("Dokumenttyp")).toBeInTheDocument();
-    expect(screen.getByText("Ausstellende Behörde")).toBeInTheDocument();
-    expect(screen.getByText("Ausstellungsort")).toBeInTheDocument();
-    expect(screen.getByText("Bundesland")).toBeInTheDocument();
-    expect(screen.getByText("Ausstellungsdatum")).toBeInTheDocument();
-    expect(screen.getByText("Voller Name")).toBeInTheDocument();
+    expect(screen.getByText("Document type")).toBeInTheDocument();
+    expect(screen.getByText("Issuing authority")).toBeInTheDocument();
+    expect(screen.getByText("Place of issue")).toBeInTheDocument();
+    expect(screen.getByText("Federal state")).toBeInTheDocument();
+    expect(screen.getByText("Date of issue")).toBeInTheDocument();
+    expect(screen.getByText("Full name")).toBeInTheDocument();
 
     // CTAs
     expect(
-      screen.getByRole("button", { name: "Speichern & Behörde ermitteln" }),
+      screen.getByRole("button", { name: "Save & find authority" }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Verwerfen" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Discard" })).toBeInTheDocument();
   });
 
   it("disables 'Verwerfen' when no field has been edited", () => {
@@ -82,11 +82,11 @@ describe("ReviewForm — UI-SPEC Copywriting Contract", () => {
       />,
     );
 
-    const discard = screen.getByRole("button", { name: "Verwerfen" });
+    const discard = screen.getByRole("button", { name: "Discard" });
     expect(discard).toBeDisabled();
   });
 
-  it("shows 'Ursprünglich: …' caption and enables Verwerfen when a field is edited", async () => {
+  it("shows 'Originally: …' caption and enables Discard when a field is edited", async () => {
     render(
       <ReviewForm
         documentId="doc-1"
@@ -96,13 +96,13 @@ describe("ReviewForm — UI-SPEC Copywriting Contract", () => {
       />,
     );
 
-    const ort = screen.getByLabelText("Ausstellungsort") as HTMLInputElement;
+    const ort = screen.getByLabelText("Place of issue") as HTMLInputElement;
     fireEvent.change(ort, { target: { value: "Nürnberg" } });
 
     expect(
-      screen.getByText("Ursprünglich: München"),
+      screen.getByText("Originally: München"),
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Verwerfen" })).not.toBeDisabled();
+    expect(screen.getByRole("button", { name: "Discard" })).not.toBeDisabled();
   });
 
   it("calls approveAndResolve with corrected values and renders matched panel on success", async () => {
@@ -142,7 +142,7 @@ describe("ReviewForm — UI-SPEC Copywriting Contract", () => {
     );
 
     await user.click(
-      screen.getByRole("button", { name: "Speichern & Behörde ermitteln" }),
+      screen.getByRole("button", { name: "Save & find authority" }),
     );
 
     await waitFor(() => {
@@ -155,7 +155,7 @@ describe("ReviewForm — UI-SPEC Copywriting Contract", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByRole("heading", { name: "Zuständige Behörde ermittelt" }),
+        screen.getByRole("heading", { name: "Responsible authority found" }),
       ).toBeInTheDocument();
     });
   });
@@ -172,25 +172,25 @@ describe("ReviewForm — UI-SPEC Copywriting Contract", () => {
     );
 
     // Make a field dirty to enable Verwerfen
-    fireEvent.change(screen.getByLabelText("Ausstellungsort"), {
+    fireEvent.change(screen.getByLabelText("Place of issue"), {
       target: { value: "Nürnberg" },
     });
 
-    await user.click(screen.getByRole("button", { name: "Verwerfen" }));
+    await user.click(screen.getByRole("button", { name: "Discard" }));
 
     expect(
-      screen.getByRole("alertdialog", { name: "Änderungen verwerfen?" }),
+      screen.getByRole("alertdialog", { name: "Discard changes?" }),
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Ihre Anpassungen an den extrahierten Daten werden entfernt.",
+        "Your edits to the extracted data will be removed.",
       ),
     ).toBeInTheDocument();
     expect(
-      screen.getAllByRole("button", { name: "Verwerfen" }).length,
+      screen.getAllByRole("button", { name: "Discard" }).length,
     ).toBeGreaterThan(0);
     expect(
-      screen.getByRole("button", { name: "Abbrechen" }),
+      screen.getByRole("button", { name: "Cancel" }),
     ).toBeInTheDocument();
   });
 });

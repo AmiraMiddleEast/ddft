@@ -12,9 +12,9 @@ import { ExtractionTable } from "./_components/ExtractionTable";
 import { ReviewLinkButton } from "./_components/ReviewLinkButton";
 import { ReplaceScanDialog } from "./_components/ReplaceScanDialog";
 import { ReanalyzeButton } from "./_components/ReanalyzeButton";
-import { extractionErrorMessageDe } from "@/lib/extraction/error-code";
+import { extractionErrorMessage } from "@/lib/extraction/error-code";
 
-export const metadata = { title: "Dokument — DDFT" };
+export const metadata = { title: "Document — DDFT" };
 
 function formatDe(ts: Date) {
   // dd.MM.yyyy HH:mm — use Intl to match UI-SPEC German formatting.
@@ -93,14 +93,14 @@ export default async function DocumentDetailPage({
                     Analyse fehlgeschlagen
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    {extractionErrorMessageDe(doc.errorCode)}
+                    {extractionErrorMessage(doc.errorCode)}
                   </p>
                   {doc.errorCode === "credit" || doc.errorCode === "auth" ? (
                     <Link
                       href="/admin/settings"
                       className="text-sm underline"
                     >
-                      API-Schlüssel/Guthaben unter Einstellungen prüfen
+                      Check API key / credit under Settings
                     </Link>
                   ) : null}
                 </div>
@@ -108,7 +108,7 @@ export default async function DocumentDetailPage({
                 <>
                   {pending ? (
                     <p className="text-sm text-muted-foreground">
-                      Analyse läuft …
+                      Analysis running…
                     </p>
                   ) : null}
                   <ExtractionTable rows={rows} pending={pending} />

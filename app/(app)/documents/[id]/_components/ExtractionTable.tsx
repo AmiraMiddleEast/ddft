@@ -12,18 +12,18 @@ import { FIELD_NAMES, type FieldName } from "@/db/schema";
 import type { ExtractionRow } from "@/lib/documents/queries";
 
 const FIELD_LABEL: Record<FieldName, string> = {
-  dokumenten_typ: "Dokumenttyp",
-  ausstellende_behoerde: "Ausstellende Behörde",
-  ausstellungsort: "Ausstellungsort",
-  bundesland: "Bundesland",
-  ausstellungsdatum: "Ausstellungsdatum",
-  voller_name: "Voller Name",
+  dokumenten_typ: "Document type",
+  ausstellende_behoerde: "Issuing authority",
+  ausstellungsort: "Place of issue",
+  bundesland: "Federal state",
+  ausstellungsdatum: "Date of issue",
+  voller_name: "Full name",
 };
 
 const CONFIDENCE_LABEL = {
-  high: "Hoch",
-  medium: "Mittel",
-  low: "Niedrig",
+  high: "High",
+  medium: "Medium",
+  low: "Low",
 } as const;
 const CONFIDENCE_VARIANT = {
   high: "secondary",

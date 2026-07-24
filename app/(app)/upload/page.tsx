@@ -1,7 +1,7 @@
 import { UploadClient } from "./_components/UploadClient";
 
 export const metadata = {
-  title: "Dokumente hochladen — DDFT",
+  title: "Upload documents — DDFT",
 };
 
 export default function UploadPage() {
@@ -9,11 +9,11 @@ export default function UploadPage() {
     <main className="mx-auto w-full max-w-[720px] px-6 pt-8">
       <header className="mb-6">
         <h1 className="text-2xl font-semibold leading-tight">
-          Dokumente hochladen
+          Upload documents
         </h1>
         <p className="mt-2 text-base leading-normal text-muted-foreground">
-          PDF-Dateien per Drag-and-Drop oder über den Button auswählen. Maximal
-          25 Dateien, je 10 MB.
+          Drag and drop PDF files, or pick them with the button. Up to 25
+          files, 10 MB each.
         </p>
       </header>
       <UploadClient />

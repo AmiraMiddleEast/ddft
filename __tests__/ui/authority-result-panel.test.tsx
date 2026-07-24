@@ -25,7 +25,7 @@ function makeAuthority(overrides: Partial<AuthorityRow> = {}): AuthorityRow {
 }
 
 describe("AuthorityResultPanel — matched", () => {
-  it("renders name, routing breadcrumb, contact block, and no PRÜFEN banner", () => {
+  it("renders name, routing breadcrumb, contact block, and no review banner", () => {
     render(
       <AuthorityResultPanel
         result={{
@@ -41,7 +41,7 @@ describe("AuthorityResultPanel — matched", () => {
     );
 
     expect(
-      screen.getByRole("heading", { name: "Zuständige Behörde ermittelt" }),
+      screen.getByRole("heading", { name: "Responsible authority found" }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: "Standesamt München" }),
@@ -51,11 +51,11 @@ describe("AuthorityResultPanel — matched", () => {
     ).toBeInTheDocument();
 
     // Labels
-    expect(screen.getByText("Anschrift")).toBeInTheDocument();
-    expect(screen.getByText("Telefon")).toBeInTheDocument();
-    expect(screen.getByText("E-Mail")).toBeInTheDocument();
+    expect(screen.getByText("Address")).toBeInTheDocument();
+    expect(screen.getByText("Phone")).toBeInTheDocument();
+    expect(screen.getByText("Email")).toBeInTheDocument();
     expect(screen.getByText("Website")).toBeInTheDocument();
-    expect(screen.getByText("Öffnungszeiten")).toBeInTheDocument();
+    expect(screen.getByText("Office hours")).toBeInTheDocument();
 
     // External link has security attributes
     const link = screen.getByRole("link", {
@@ -66,11 +66,11 @@ describe("AuthorityResultPanel — matched", () => {
 
     // PRÜFEN banner absent
     expect(
-      screen.queryByText("Angaben bitte prüfen"),
+      screen.queryByText("Please verify these details"),
     ).not.toBeInTheDocument();
   });
 
-  it("renders PRÜFEN banner when needs_review=true", () => {
+  it("renders review banner when needs_review=true", () => {
     render(
       <AuthorityResultPanel
         result={{
@@ -85,15 +85,15 @@ describe("AuthorityResultPanel — matched", () => {
       />,
     );
 
-    expect(screen.getByText("Angaben bitte prüfen")).toBeInTheDocument();
+    expect(screen.getByText("Please verify these details")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Die Quelldaten sind als prüfbedürftig markiert. Bitte vor Weiterverwendung verifizieren.",
+        "The source record is flagged for review. Please verify before using it.",
       ),
     ).toBeInTheDocument();
   });
 
-  it("renders Besonderheit callout when special_rules is present", () => {
+  it("renders special-case callout when special_rules is present", () => {
     render(
       <AuthorityResultPanel
         result={{
@@ -110,7 +110,7 @@ describe("AuthorityResultPanel — matched", () => {
       />,
     );
 
-    expect(screen.getByText("Besonderheit")).toBeInTheDocument();
+    expect(screen.getByText("Special case")).toBeInTheDocument();
     expect(
       screen.getByText("Führungszeugnis geht direkt zur Apostille."),
     ).toBeInTheDocument();
@@ -161,14 +161,14 @@ describe("AuthorityResultPanel — ambiguous", () => {
     );
 
     expect(
-      screen.getByRole("heading", { name: "Mehrere Behörden möglich" }),
+      screen.getByRole("heading", { name: "Several authorities possible" }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Kandidaten")).toBeInTheDocument();
+    expect(screen.getByText("Candidates")).toBeInTheDocument();
     expect(screen.getByText("Landratsamt A")).toBeInTheDocument();
     expect(screen.getByText("Landratsamt B")).toBeInTheDocument();
 
     const buttons = screen.getAllByRole("button", {
-      name: "Diese Behörde übernehmen",
+      name: "Use this authority",
     });
     expect(buttons).toHaveLength(2);
 
@@ -192,19 +192,19 @@ describe("AuthorityResultPanel — not_found", () => {
     );
 
     expect(
-      screen.getByRole("heading", { name: "Keine Behörde gefunden" }),
+      screen.getByRole("heading", { name: "No authority found" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText("Keine Behörde gefunden. Bitte Eingaben prüfen."),
+      screen.getByText("No authority found. Please check the inputs."),
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Prüfen Sie Dokumenttyp, Bundesland und Ausstellungsort und versuchen Sie es erneut.",
+        "Check the document type, federal state and place of issue, then try again.",
       ),
     ).toBeInTheDocument();
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Eingaben anpassen" }),
+      screen.getByRole("button", { name: "Adjust inputs" }),
     );
     expect(onAdjust).toHaveBeenCalledTimes(1);
   });

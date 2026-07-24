@@ -57,22 +57,22 @@ export function classifyAnthropicError(e: unknown): ExtractionErrorCode {
  * handled by this same switch, so no migration is required. Any unrecognized
  * value falls through to the generic message.
  */
-export function extractionErrorMessageDe(
+export function extractionErrorMessage(
   code: string | null | undefined,
 ): string {
   switch (code) {
     case "auth":
-      return "API-Schlüssel ungültig";
+      return "Invalid API key";
     case "credit":
-      return "Kein Anthropic-Guthaben — bitte unter console.anthropic.com aufladen";
+      return "No Anthropic credit — top up at console.anthropic.com";
     case "rate_limited":
-      return "Rate-Limit erreicht — später erneut";
+      return "Rate limit reached — try again later";
     case "model_unavailable":
       // Page may append the model id; keep the base message model-free.
-      return "Modell nicht verfügbar";
+      return "Model unavailable";
     case "too_large":
-      return "Dokument zu groß für die Analyse";
+      return "Document too large to analyze";
     default:
-      return "Analyse fehlgeschlagen. Bitte erneut versuchen.";
+      return "Analysis failed. Please try again.";
   }
 }

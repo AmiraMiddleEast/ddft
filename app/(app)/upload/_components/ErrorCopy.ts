@@ -1,17 +1,17 @@
 import type { UploadErrorCode } from "@/lib/uploads/errors";
 
 export const ERROR_COPY: Record<UploadErrorCode | "not_found", string> = {
-  unauthenticated: "Analyse fehlgeschlagen. Bitte erneut versuchen.",
-  file_too_large: "Datei ist größer als 10 MB.",
-  invalid_pdf: "Datei ist kein gültiges PDF.",
-  encrypted_pdf: "PDF ist passwortgeschützt und kann nicht analysiert werden.",
+  unauthenticated: "Analysis failed. Please try again.",
+  file_too_large: "File is larger than 10 MB.",
+  invalid_pdf: "File is not a valid PDF.",
+  encrypted_pdf: "The PDF is password-protected and cannot be analyzed.",
   batch_limit: "Maximal 25 Dateien gleichzeitig.",
-  rate_limited: "Zu viele Anfragen. Bitte in einer Minute erneut versuchen.",
-  auth: "API-Schlüssel ungültig. Bitte unter Einstellungen prüfen.",
+  rate_limited: "Too many requests. Please try again in a minute.",
+  auth: "Invalid API key. Check it under Settings.",
   credit:
-    "Kein Anthropic-Guthaben. Bitte unter Einstellungen / console.anthropic.com aufladen.",
-  model_unavailable: "Modell nicht verfügbar. Bitte unter Einstellungen prüfen.",
-  too_large: "Dokument zu groß für die Analyse.",
-  unknown: "Analyse fehlgeschlagen. Bitte erneut versuchen.",
-  not_found: "Dokument konnte nicht analysiert werden.",
+    "No Anthropic credit left. Top up under Settings / console.anthropic.com.",
+  model_unavailable: "Model unavailable. Check it under Settings.",
+  too_large: "Document too large to analyze.",
+  unknown: "Analysis failed. Please try again.",
+  not_found: "The document could not be analyzed.",
 };

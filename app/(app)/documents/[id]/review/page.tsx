@@ -14,7 +14,7 @@ import { FIELD_NAMES, type Confidence, type FieldName } from "@/db/schema";
 import { PdfPreview } from "../_components/PdfPreview";
 import { ReviewForm } from "./_components/ReviewForm";
 
-export const metadata = { title: "Überprüfung — DDFT" };
+export const metadata = { title: "Review — DDFT" };
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -84,11 +84,11 @@ export default async function ReviewPage({ params }: Props) {
           Dokument
         </Link>
         {" / "}
-        <span aria-current="page">Überprüfung</span>
+        <span aria-current="page">Review</span>
       </nav>
 
       <header className="mb-8">
-        <h1 className="text-2xl font-semibold leading-tight">Überprüfung</h1>
+        <h1 className="text-2xl font-semibold leading-tight">Review</h1>
         <p className="mt-1 text-base text-muted-foreground">
           {doc.filename} · Hochgeladen am {formatDe(new Date(doc.uploadedAt))}
         </p>

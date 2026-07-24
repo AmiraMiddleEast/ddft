@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 import type { Confidence, FieldName } from "@/db/schema";
 
 const CONFIDENCE_LABEL: Record<Confidence, string> = {
-  high: "Hoch",
-  medium: "Mittel",
-  low: "Niedrig",
+  high: "High",
+  medium: "Medium",
+  low: "Low",
 };
 
 const CONFIDENCE_VARIANT: Record<
@@ -48,8 +48,8 @@ export function FieldRow({
 }: FieldRowProps) {
   const htmlFor = `field-${name}`;
   const captionText = originalValue
-    ? `Ursprünglich: ${originalValue}`
-    : "Ursprünglich: — nicht erkannt";
+    ? `Originally: ${originalValue}`
+    : "Originally: — not detected";
 
   return (
     <div className="grid gap-2">
@@ -66,7 +66,7 @@ export function FieldRow({
           isDirty && "border-l-2 border-primary pl-2",
         )}
         title={
-          isDirty ? "Geändert gegenüber der automatischen Analyse" : undefined
+          isDirty ? "Changed from the automatic analysis" : undefined
         }
       >
         {children}

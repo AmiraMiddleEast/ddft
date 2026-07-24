@@ -10,7 +10,7 @@ export function PdfPreview({ id, filename }: { id: string; filename: string }) {
         <p className="text-base">
           Dokument kann nicht angezeigt werden.{" "}
           <a href={src} className="underline">
-            Als PDF öffnen
+            Open as PDF
           </a>
         </p>
       </iframe>
