@@ -150,9 +150,14 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
   3. The generated Laufzettel PDF is still fully German and unchanged in content
   4. Authority names and document-type names still display in German, and authority resolution still returns the same results as before
 
-**Plans:** 0 plans
+**Plans:** 5 plans
 Plans:
-- [ ] TBD (run /gsd-plan-phase 7 to break down)
+- [ ] 07-01-PLAN.md — App shell, auth screen, all Zod validation messages (Wave 1)
+- [ ] 07-02-PLAN.md — Upload, document detail, review flow (Wave 2)
+- [ ] 07-03-PLAN.md — Cases and history (Wave 2)
+- [ ] 07-04-PLAN.md — Admin: Behörden, CoGS, settings (Wave 2)
+- [ ] 07-05-PLAN.md — Final sweep + German-output regression check + human verify (Wave 3)
+**UI hint**: yes
 
 ### Phase 8: Multi-user team workspace with attribution and user administration
 
