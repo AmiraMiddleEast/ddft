@@ -121,3 +121,64 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 3. Review & Authority Lookup | 6/6 | Complete   | 2026-04-17 |
 | 4. Laufliste Generation & Cases | 6/6 | Complete   | 2026-04-17 |
 | 5. History, Re-upload & Admin | 5/5 | Complete   | 2026-04-17 |
+
+### Phase 6: CoGS & neuer Laufzettel
+
+**Goal:** CoGS-Kammern + überarbeiteter Laufzettel (BfAA statt BVA, Botschaft/Generalkonsulat-Split, BfArM-Schritt, allgemeine Beglaubigungsstelle als Resolver-Fallback).
+**Status:** Shipped (PRs #9–#13). Plan: `.planning/phases/06-cogs-and-new-laufzettel/06-PLAN.md`.
+**Note:** Executed outside the Progress table; recorded here so phase numbering stays unique.
+
+### Phase 7: English UI - switch app interface from German to English
+
+**Goal**: Every screen the operator touches reads in English, while all German artefacts that leave the app stay German.
+**Depends on:** Phase 6
+**Requirements**: TBD
+
+**Scope** (57 of 67 UI files contain German strings; no i18n infrastructure exists):
+  - All labels, buttons, headings, placeholders, navigation, page titles
+  - All toasts and error/validation messages, including the Zod messages in `lib/validations/*`
+  - Hard replacement to English — do NOT introduce an i18n library (user decision: the app runs fully in English)
+
+**Explicitly NOT translated** (user decision, 2026-07-24):
+  - The Laufzettel/Laufliste PDF — it is read and processed by German authorities (BfAA, Beglaubigungsstellen). Stays German.
+  - Authority names, addresses and notes from the Behörden DB — proper nouns.
+  - Document-type display names — proper nouns of German certificates AND they drive resolver/dropdown matching (`lib/behoerden/match-doc-type.ts`, `resolve.ts`). Renaming them would break routing.
+
+**Success Criteria** (what must be TRUE):
+  1. A user can complete the full flow (login → upload → review → resolve authority → create case → generate Laufzettel) seeing only English UI text
+  2. Validation and error messages appear in English, including server-side Zod failures
+  3. The generated Laufzettel PDF is still fully German and unchanged in content
+  4. Authority names and document-type names still display in German, and authority resolution still returns the same results as before
+
+**Plans:** 0 plans
+Plans:
+- [ ] TBD (run /gsd-plan-phase 7 to break down)
+
+### Phase 8: Multi-user team workspace with attribution and user administration
+
+**Goal**: Several colleagues each have their own login, all of them see the same shared workload, and every record shows who did what.
+**Depends on:** Phase 7 (so the new admin UI is written in English immediately)
+**Requirements**: TBD
+
+**Starting point** (verified 2026-07-24):
+  - The schema ALREADY carries attribution: `document.userId`, `caseTable.userId`, `laufliste.userId`, `documentReview.approvedByUserId`.
+  - BUT 29 query sites filter `userId = session.user.id`, so a second user would see nothing of the first user's work (hard silos). This is the central change.
+  - Signup is disabled in production by design (`disableSignUp: true` in `lib/auth.ts`, guarded by `ALLOW_SIGNUP`); users are currently created only via `scripts/seed-user.ts` on the server.
+
+**User decisions (2026-07-24)**:
+  - **Shared team workspace**: every authenticated user sees all cases and documents. Convert the 29 owner-only filters to "any authenticated user" while KEEPING `userId` for attribution. Ownership must not be dropped from the data.
+  - **Attribution on records only** — no separate activity-log table/page. Show uploaded-by / reviewed-by / created-by with timestamps using the existing columns.
+  - **User administration inside the app** — the operator creates colleagues (email + password), lists accounts and can deactivate them. Must not require server/SSH access (the customer's SSH is broken; only the Hetzner web console is available).
+
+**Security note for planning**: this widens data visibility. Every converted query must still require an authenticated session — the change is owner-scoped → login-scoped, never → public. Admin-only endpoints (user creation/deactivation) need their own authorization check, since any logged-in user must NOT be able to create accounts.
+
+**Success Criteria** (what must be TRUE):
+  1. An operator can create a second account from inside the app, and that colleague can log in
+  2. Both users see the same cases, documents and Lauflisten
+  3. Each case/document/Laufzettel visibly shows which user uploaded, reviewed and created it, with a timestamp
+  4. A logged-out visitor still sees nothing; a normal (non-admin) user cannot create or deactivate accounts
+  5. Existing records created before this phase still display correctly (their original owner remains attributed)
+
+**Plans:** 0 plans
+Plans:
+- [ ] TBD (run /gsd-plan-phase 8 to break down)

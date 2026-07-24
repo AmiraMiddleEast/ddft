@@ -82,6 +82,13 @@ Progress: [..........] 0%
 
 ## Accumulated Context
 
+### Roadmap Evolution
+
+- Phase 6 recorded retroactively: CoGS & neuer Laufzettel (was executed outside the Progress table; PRs #9–#13).
+- Phase 7 added: English UI — switch app interface from German to English.
+- Phase 8 added: Multi-user team workspace with attribution and user administration.
+- Order rationale: English (7) precedes multi-user (8) so the new user-administration UI is written in English once instead of being built in German and immediately retranslated.
+
 ### Decisions
 
 Decisions are logged in PROJECT.md Key Decisions table.
