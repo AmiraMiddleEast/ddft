@@ -18,13 +18,13 @@ vi.mock("sonner", () => ({
 }));
 
 describe("LoginForm — UI-SPEC Copywriting Contract", () => {
-  it("renders German labels and CTA", () => {
+  it("renders English labels and CTA", () => {
     render(<LoginForm />);
-    expect(screen.getByLabelText("E-Mail")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("name@beispiel.de")).toBeInTheDocument();
-    expect(screen.getByLabelText("Passwort")).toBeInTheDocument();
+    expect(screen.getByLabelText("Email")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("name@example.com")).toBeInTheDocument();
+    expect(screen.getByLabelText("Password")).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "Anmelden" })
+      screen.getByRole("button", { name: "Sign in" })
     ).toBeInTheDocument();
   });
 

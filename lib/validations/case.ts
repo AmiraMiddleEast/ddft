@@ -37,26 +37,26 @@ export const CreateCaseSchema = z
     personName: z
       .string()
       .trim()
-      .min(1, "Bitte den Namen der Person angeben.")
-      .max(200, "Name zu lang (max. 200 Zeichen)."),
+      .min(1, "Enter the person's name.")
+      .max(200, "Name is too long (max. 200 characters)."),
     personBirthdate: z
       .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/, "Bitte ein gültiges Datum eingeben.")
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Enter a valid date.")
       .optional()
       .or(z.literal("")),
     notes: z
       .string()
-      .max(2000, "Notizen zu lang (max. 2000 Zeichen).")
+      .max(2000, "Notes are too long (max. 2000 characters).")
       .optional(),
     beruf: z.enum(["arzt", "zahnarzt"], {
-      message: "Bitte Beruf auswählen (Arzt oder Zahnarzt).",
+      message: "Select a profession (physician or dentist).",
     }),
     wohnsitzBundesland: z.enum(BL_KEYS, {
-      message: "Bitte Wohnsitz-Bundesland auswählen.",
+      message: "Select the federal state of residence.",
     }),
     arbeitsortBundesland: z
       .enum([...BL_KEYS, "AUSLAND"], {
-        message: "Bitte Arbeitsort auswählen (Bundesland oder 'im Ausland').",
+        message: "Select the place of work (federal state or abroad).",
       }),
     nrwSubregion: z
       .enum(["nordrhein", "westfalen-lippe"])
@@ -71,7 +71,7 @@ export const CreateCaseSchema = z
         code: "custom",
         path: ["nrwSubregion"],
         message:
-          "Bei NRW bitte Nordrhein oder Westfalen-Lippe auswählen.",
+          "For NRW, select Nordrhein or Westfalen-Lippe.",
       });
     }
   });
@@ -82,8 +82,8 @@ export const AddDocumentsToCaseSchema = z.object({
   caseId: z.string().min(1).max(100),
   documentIds: z
     .array(z.string().min(1).max(100))
-    .min(1, "Mindestens ein Dokument auswählen.")
-    .max(50, "Maximal 50 Dokumente pro Aktion."),
+    .min(1, "Select at least one document.")
+    .max(50, "At most 50 documents per action."),
 });
 
 export type AddDocumentsToCaseInput = z.infer<typeof AddDocumentsToCaseSchema>;

@@ -24,7 +24,7 @@ export function LoginForm() {
     // Client-side validation
     const parsed = loginSchema.safeParse({ email, password });
     if (!parsed.success) {
-      setError("E-Mail oder Passwort ungültig.");
+      setError("Invalid email or password.");
       emailRef.current?.focus();
       return;
     }
@@ -38,11 +38,11 @@ export function LoginForm() {
 
     if (signInError) {
       if (signInError.status === 429) {
-        setError("Zu viele Anmeldeversuche. Bitte warten Sie eine Minute.");
+        setError("Too many sign-in attempts. Please wait a minute.");
       } else if (signInError.status === 401 || signInError.status === 400) {
-        setError("E-Mail oder Passwort ungültig.");
+        setError("Invalid email or password.");
       } else {
-        toast.error("Anmeldung fehlgeschlagen. Bitte erneut versuchen.");
+        toast.error("Sign-in failed. Please try again.");
       }
       emailRef.current?.focus();
       return;
@@ -56,13 +56,13 @@ export function LoginForm() {
     <form onSubmit={onSubmit} className="space-y-4" noValidate>
       <div className="space-y-2">
         <Label htmlFor="email" className="text-sm font-semibold">
-          E-Mail
+          Email
         </Label>
         <Input
           id="email"
           type="email"
           autoComplete="email"
-          placeholder="name@beispiel.de"
+          placeholder="name@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           ref={emailRef}
@@ -72,7 +72,7 @@ export function LoginForm() {
       </div>
       <div className="space-y-2">
         <Label htmlFor="password" className="text-sm font-semibold">
-          Passwort
+          Password
         </Label>
         <Input
           id="password"
@@ -119,10 +119,10 @@ export function LoginForm() {
                 className="opacity-75"
               />
             </svg>
-            Anmelden…
+            Signing in…
           </>
         ) : (
-          "Anmelden"
+          "Sign in"
         )}
       </Button>
     </form>
