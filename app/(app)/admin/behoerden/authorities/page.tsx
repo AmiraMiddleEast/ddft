@@ -22,7 +22,7 @@ import {
 
 import { AuthoritiesFilters } from "./AuthoritiesFilters";
 
-export const metadata = { title: "Behörden bearbeiten — DDFT" };
+export const metadata = { title: "Edit authorities — DDFT" };
 
 const PAGE_SIZE = 20;
 
@@ -70,26 +70,26 @@ export default async function AuthoritiesAdminPage({
     <main className="mx-auto w-full max-w-[1200px] px-6 pt-8 pb-16">
       <nav className="mb-2 text-sm text-muted-foreground">
         <Link href="/admin/behoerden" className="underline-offset-2 hover:underline">
-          Behörden
+          Authorities
         </Link>
         {" / "}
-        <span aria-current="page">Behörden bearbeiten</span>
+        <span aria-current="page">Edit authorities</span>
       </nav>
 
       <section className="mb-6 flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold leading-tight">
-            Behörden bearbeiten
+            Edit authorities
           </h1>
           <p className="mt-1 text-base text-muted-foreground">
-            Suchen, filtern, ergänzen und einzelne Kontaktdaten aktualisieren.
+            Search, filter, add and update individual contact details.
           </p>
         </div>
         <Link
           href="/admin/behoerden/authorities/new"
           className={buttonVariants({ variant: "default" })}
         >
-          Neue Behörde
+          New authority
         </Link>
       </section>
 
@@ -121,7 +121,7 @@ export default async function AuthoritiesAdminPage({
                 <TableHead>Bundesland</TableHead>
                 <TableHead>Dokumentenart</TableHead>
                 <TableHead>Regierungsbezirk</TableHead>
-                <TableHead>Prüfen</TableHead>
+                <TableHead>Review</TableHead>
                 <TableHead className="text-right" />
               </TableRow>
             </TableHeader>
@@ -136,7 +136,7 @@ export default async function AuthoritiesAdminPage({
                   <TableCell>{a.regierungsbezirkName ?? "—"}</TableCell>
                   <TableCell>
                     {a.needsReview ? (
-                      <Badge variant="warning">Prüfen</Badge>
+                      <Badge variant="warning">Review</Badge>
                     ) : (
                       <span className="text-muted-foreground">—</span>
                     )}
@@ -165,7 +165,7 @@ export default async function AuthoritiesAdminPage({
           className="mt-4 flex items-center justify-between text-sm"
         >
           <span className="text-muted-foreground">
-            Seite {page} von {totalPages} · {result.totalCount} Einträge
+            Page {page} of {totalPages} · {result.totalCount} entries
           </span>
           <div className="flex gap-2">
             {page > 1 ? (
@@ -181,7 +181,7 @@ export default async function AuthoritiesAdminPage({
                 href={buildHref(sp, page + 1)}
                 className={buttonVariants({ variant: "outline", size: "sm" })}
               >
-                Nächste
+                Next
               </Link>
             ) : null}
           </div>

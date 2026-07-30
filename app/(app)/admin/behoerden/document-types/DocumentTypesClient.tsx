@@ -42,7 +42,7 @@ export function DocumentTypesClient({
     startTransition(async () => {
       const res = await createDocumentTypeAction({ displayName: newName.trim() });
       if (res.ok) {
-        toast.success("Dokumentenart hinzugefügt.");
+        toast.success("Document type added.");
         setNewName("");
         router.refresh();
       } else {
@@ -50,7 +50,7 @@ export function DocumentTypesClient({
           res.error === "DUPLICATE"
             ? "Ein Eintrag mit diesem Namen existiert bereits."
             : res.error === "VALIDATION"
-              ? "Bitte einen gültigen Namen angeben."
+              ? "Enter a valid name."
               : res.error === "UNAUTHORIZED"
                 ? "Bitte erneut anmelden."
                 : "Fehler beim Speichern.";
@@ -101,7 +101,7 @@ export function DocumentTypesClient({
             ) : null}
             <div className="flex justify-end">
               <Button type="submit" disabled={isPending || !newName.trim()}>
-                {isPending ? "Wird gespeichert …" : "Hinzufügen"}
+                {isPending ? "Saving…" : "Add"}
               </Button>
             </div>
           </form>

@@ -65,7 +65,7 @@ export function AuthoritiesFilters({
         <Input
           id="adm-q"
           type="search"
-          placeholder="Name der Behörde"
+          placeholder="Authority name"
           value={qDraft}
           onChange={(e) => setQDraft(e.target.value)}
         />
@@ -109,7 +109,7 @@ export function AuthoritiesFilters({
         </select>
       </div>
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="adm-needs">Prüfen</Label>
+        <Label htmlFor="adm-needs">Needs review</Label>
         <select
           id="adm-needs"
           className="h-9 rounded-md border border-input bg-transparent px-3 text-sm"
@@ -125,7 +125,7 @@ export function AuthoritiesFilters({
         </select>
       </div>
       <Button type="button" variant="outline" onClick={reset}>
-        Zurücksetzen
+        Reset
       </Button>
     </div>
   );

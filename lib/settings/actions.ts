@@ -41,7 +41,7 @@ export async function saveAndTestSettingsAction(
   // b. Validate input.
   const parsed = SettingsSchema.safeParse(input);
   if (!parsed.success) {
-    return { status: "validation", message: "Eingabe ungültig." };
+    return { status: "validation", message: "Invalid input." };
   }
 
   // c. SAVE FIRST. Blank key = keep existing (never overwrite with empty).
@@ -55,7 +55,7 @@ export async function saveAndTestSettingsAction(
   const key = await resolveAnthropicKey();
   const model = await resolveClaudeModel();
   if (!key) {
-    return { status: "no_key", message: "Kein Schlüssel gesetzt." };
+    return { status: "no_key", message: "No key set." };
   }
 
   // e. Real minimal validation call.
@@ -68,20 +68,20 @@ export async function saveAndTestSettingsAction(
     });
     return {
       status: "ok",
-      message: "✓ Schlüssel gültig, Guthaben vorhanden",
+      message: "✓ Key valid, credit available",
       model,
     };
   } catch (e) {
     const code = classifyAnthropicError(e);
     const message =
       code === "auth"
-        ? "API-Schlüssel ungültig"
+        ? "Invalid API key"
         : code === "credit"
           ? "Kein Anthropic-Guthaben — bitte unter console.anthropic.com aufladen"
           : code === "model_unavailable"
-            ? `Modell nicht verfügbar: ${model}`
+            ? `Model unavailable: ${model}`
             : code === "rate_limited"
-              ? "Rate-Limit erreicht — später erneut"
+              ? "Rate limit reached — try again later"
               : // "other" → surface the API message (never the key)
                 ((e as { message?: string }).message ?? "Unbekannter Fehler");
     const status: TestStatus =

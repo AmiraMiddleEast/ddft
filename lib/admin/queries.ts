@@ -12,7 +12,7 @@ import {
 /**
  * Phase 5 Plan 04 — Behörden admin read queries.
  *
- * Behörden data is shared reference data (not user-owned). These queries
+ * Authority data is shared reference data (not user-owned). These queries
  * perform NO ownership check — the caller (Server Component) is expected to
  * have already required a valid session.
  *

@@ -11,7 +11,7 @@ import {
 
 import { NewAuthorityForm } from "./NewAuthorityForm";
 
-export const metadata = { title: "Neue Behörde — DDFT" };
+export const metadata = { title: "New authority — DDFT" };
 
 export default async function NewAuthorityPage() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -30,16 +30,16 @@ export default async function NewAuthorityPage() {
           href="/admin/behoerden/authorities"
           className="underline-offset-2 hover:underline"
         >
-          Behörden bearbeiten
+          Edit authorities
         </Link>
         {" / "}
-        <span aria-current="page">Neue Behörde</span>
+        <span aria-current="page">New authority</span>
       </nav>
 
       <section className="mb-6">
-        <h1 className="text-2xl font-semibold leading-tight">Neue Behörde</h1>
+        <h1 className="text-2xl font-semibold leading-tight">New authority</h1>
         <p className="mt-1 text-base text-muted-foreground">
-          Legen Sie eine zusätzliche Beglaubigungsstelle für ein Bundesland und
+          Add an additional certification office for a federal state and
           eine Dokumentenart an.
         </p>
       </section>

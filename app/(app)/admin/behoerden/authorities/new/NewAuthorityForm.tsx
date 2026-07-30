@@ -70,13 +70,13 @@ export function NewAuthorityForm({
     startTransition(async () => {
       const res = await createAuthorityAction(form);
       if (res.ok) {
-        toast.success("Behörde angelegt.");
+        toast.success("Authority created.");
         router.push("/admin/behoerden/authorities");
         router.refresh();
       } else {
         const msg =
           res.error === "VALIDATION"
-            ? "Bitte Bundesland, Dokumentenart, Name und Adresse ausfüllen."
+            ? "Fill in federal state, document type, name and address."
             : res.error === "UNKNOWN_STATE"
               ? "Unbekanntes Bundesland."
               : res.error === "UNKNOWN_DOC_TYPE"
@@ -107,7 +107,7 @@ export function NewAuthorityForm({
                   setForm((prev) => ({ ...prev, stateId, regierungsbezirkId: "" }));
                 }}
               >
-                <option value="">— wählen —</option>
+                <option value="">— select —</option>
                 {states.map((s) => (
                   <option key={s.id} value={s.id}>
                     {s.name}
@@ -123,7 +123,7 @@ export function NewAuthorityForm({
                 value={form.documentTypeId}
                 onChange={bind("documentTypeId")}
               >
-                <option value="">— wählen —</option>
+                <option value="">— select —</option>
                 {docTypes.map((d) => (
                   <option key={d.id} value={d.id}>
                     {d.displayName}
@@ -224,7 +224,7 @@ export function NewAuthorityForm({
                 setForm((prev) => ({ ...prev, needsReview: v === true }))
               }
             />
-            <span>Zur Überprüfung markieren</span>
+            <span>Mark for review</span>
           </label>
 
           {error ? (
@@ -241,7 +241,7 @@ export function NewAuthorityForm({
               Abbrechen
             </Link>
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Wird angelegt …" : "Behörde anlegen"}
+              {isPending ? "Creating…" : "Create authority"}
             </Button>
           </div>
         </form>

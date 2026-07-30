@@ -47,19 +47,19 @@ export function SettingsForm({
       <CardContent>
         <form onSubmit={onSubmit} className="flex flex-col gap-5">
           <div className="flex flex-col gap-1">
-            <Label htmlFor="apiKey">Anthropic API-Schlüssel</Label>
+            <Label htmlFor="apiKey">Anthropic API key</Label>
             <Input
               id="apiKey"
               type="password"
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               disabled={pending}
-              placeholder="Leer lassen = Schlüssel behalten"
+              placeholder="Leave empty = keep current key"
               autoComplete="off"
             />
             <p className="text-sm text-muted-foreground">Aktuell: {keyHint}</p>
             <p className="text-xs text-muted-foreground">
-              Der gespeicherte Schlüssel wird nie vollständig angezeigt.
+              The stored key is never shown in full.
             </p>
           </div>
 
@@ -73,7 +73,7 @@ export function SettingsForm({
               disabled={pending}
             />
             <p className="text-xs text-muted-foreground">
-              Standard: {defaultModel}. Frei änderbar für neue Modell-IDs.
+              Default: {defaultModel}. Editable for new model IDs.
             </p>
           </div>
 

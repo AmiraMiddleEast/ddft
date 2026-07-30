@@ -26,7 +26,7 @@ export default async function SettingsPage() {
       <header className="mb-6">
         <h1 className="text-2xl font-semibold leading-tight">Einstellungen</h1>
         <p className="mt-1 text-base text-muted-foreground">
-          Anthropic API-Schlüssel und Claude-Modell konfigurieren.
+          Configure the Anthropic API key and Claude model.
         </p>
       </header>
       <SettingsForm
