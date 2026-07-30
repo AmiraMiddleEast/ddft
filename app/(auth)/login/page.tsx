@@ -10,7 +10,7 @@ import {
 import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = {
-  title: "Anmelden — DDFT",
+  title: "Sign in — DDFT",
 };
 
 export default function LoginPage() {
@@ -28,10 +28,10 @@ export default function LoginPage() {
       <Card className="w-full max-w-[360px] bg-muted">
         <CardHeader className="space-y-2">
           <CardTitle className="text-2xl font-semibold leading-tight">
-            Anmelden
+            Sign in
           </CardTitle>
           <CardDescription className="text-sm text-muted-foreground leading-normal">
-            Bitte melden Sie sich mit Ihrem Konto an.
+            Sign in with your account.
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
