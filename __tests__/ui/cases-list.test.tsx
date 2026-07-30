@@ -49,21 +49,21 @@ describe("CasesListPage — UI-SPEC Copywriting", () => {
     render(Page);
 
     expect(
-      screen.getByRole("heading", { name: "Fälle", level: 1 }),
+      screen.getByRole("heading", { name: "Cases", level: 1 }),
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Fälle bündeln Dokumente einer Person zu einer gemeinsamen Laufliste.",
+        "Cases group one person's documents into a single Laufliste.",
       ),
     ).toBeInTheDocument();
-    expect(screen.getByText("Noch keine Fälle")).toBeInTheDocument();
+    expect(screen.getByText("No cases yet")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Legen Sie einen Fall an, um Dokumente zu einer Person zusammenzufassen.",
+        "Create a case to group documents for one person together.",
       ),
     ).toBeInTheDocument();
-    // Two "Neuen Fall anlegen" links are expected (header CTA + empty-state CTA).
-    expect(screen.getAllByText("Neuen Fall anlegen").length).toBeGreaterThan(0);
+    // Two "Create new case" links are expected (header CTA + empty-state CTA).
+    expect(screen.getAllByText("Create new case").length).toBeGreaterThan(0);
   });
 
   it("renders cases table with person + status + Öffnen action", async () => {
@@ -86,7 +86,7 @@ describe("CasesListPage — UI-SPEC Copywriting", () => {
     expect(screen.getByText("Dr. Sandra Hertel")).toBeInTheDocument();
     // Status badge — open → "In Bearbeitung".
     expect(screen.getByText("In Bearbeitung")).toBeInTheDocument();
-    expect(screen.getByText("Öffnen")).toBeInTheDocument();
+    expect(screen.getByText("Open")).toBeInTheDocument();
     // Column headers.
     expect(
       screen.getByRole("columnheader", { name: "Person" }),
@@ -95,7 +95,7 @@ describe("CasesListPage — UI-SPEC Copywriting", () => {
       screen.getByRole("columnheader", { name: "Status" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("columnheader", { name: "Aktualisiert" }),
+      screen.getByRole("columnheader", { name: "Updated" }),
     ).toBeInTheDocument();
   });
 });

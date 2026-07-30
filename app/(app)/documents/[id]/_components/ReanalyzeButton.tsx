@@ -15,10 +15,10 @@ export function ReanalyzeButton({ documentId }: { documentId: string }) {
     startTransition(async () => {
       const res = await reanalyzeDocumentAction(documentId);
       if (res.ok) {
-        toast.success("Neu analysiert.");
+        toast.success("Re-analyzed.");
         router.refresh();
       } else {
-        toast.error("Erneute Analyse fehlgeschlagen.");
+        toast.error("Re-analysis failed.");
       }
     });
   };
@@ -30,7 +30,7 @@ export function ReanalyzeButton({ documentId }: { documentId: string }) {
       onClick={handleClick}
       disabled={isPending}
     >
-      {isPending ? "Wird analysiert …" : "Neu analysieren"}
+      {isPending ? "Analyzing…" : "Re-analyze"}
     </Button>
   );
 }

@@ -23,7 +23,7 @@ import { slugify } from "@/lib/behoerden/slug";
  * Phase 3 Plan 04 — review Server Actions.
  *
  * Two entry points:
- *   - approveAndResolve: the primary "Speichern & Behörde ermitteln" action.
+ *   - approveAndResolve: the primary "Save & find authority" action.
  *     Validates input, checks ownership, resolves the Vorbeglaubigung
  *     authority, and persists the review in a single sync SQLite transaction.
  *   - chooseAmbiguousAuthority: follow-up action when the resolver returned
@@ -145,7 +145,7 @@ export async function approveAndResolve(input: {
  * chooseAmbiguousAuthority
  *
  * Follow-up to an approveAndResolve that returned status='ambiguous'. The
- * UI surfaces the candidate list; clicking "Diese Behörde übernehmen" calls
+ * UI surfaces the candidate list; clicking "Use this authority" calls
  * this action with the chosen authority id.
  *
  * Transitions the existing document_review row from ambiguous → matched and

@@ -14,18 +14,18 @@ export function LogoutButton() {
     setPending(true);
     try {
       await authClient.signOut();
-      toast.success("Sie wurden abgemeldet.");
+      toast.success("You have been signed out.");
       router.push("/login");
       router.refresh();
     } catch {
-      toast.error("Abmeldung fehlgeschlagen. Bitte erneut versuchen.");
+      toast.error("Sign-out failed. Please try again.");
       setPending(false);
     }
   }
 
   return (
     <Button variant="ghost" size="sm" onClick={onClick} disabled={pending}>
-      Abmelden
+      Sign out
     </Button>
   );
 }

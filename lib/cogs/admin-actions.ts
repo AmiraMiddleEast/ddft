@@ -20,7 +20,7 @@ const PatchSchema = z.object({
   fuehrungszeugnisOErforderlich: z.string().optional().or(z.literal("")),
   fuehrungszeugnisOEmpfaenger: z
     .string()
-    .min(1, "Empfängerbehörde für Führungszeugnis O ist Pflicht."),
+    .min(1, "Recipient authority for Führungszeugnis O is required."),
   kontaktEmail: z.string().optional().or(z.literal("")),
   kontaktTelefon: z.string().optional().or(z.literal("")),
   kontaktAdresse: z.string().optional().or(z.literal("")),

@@ -26,9 +26,9 @@ export function ReviewLinkButton({
           "pointer-events-none opacity-50",
         )}
         aria-disabled="true"
-        title="Verfügbar nach erfolgreicher Analyse."
+        title="Available once the analysis succeeds."
       >
-        Zur Überprüfung
+        Review
       </span>
     );
   }
@@ -38,7 +38,7 @@ export function ReviewLinkButton({
       href={`/documents/${documentId}/review`}
       className={buttonVariants({ variant: "default" })}
     >
-      Zur Überprüfung
+      Review
     </Link>
   );
 }

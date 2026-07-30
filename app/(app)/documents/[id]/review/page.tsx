@@ -14,7 +14,7 @@ import { FIELD_NAMES, type Confidence, type FieldName } from "@/db/schema";
 import { PdfPreview } from "../_components/PdfPreview";
 import { ReviewForm } from "./_components/ReviewForm";
 
-export const metadata = { title: "Überprüfung — DDFT" };
+export const metadata = { title: "Review — DDFT" };
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -74,23 +74,23 @@ export default async function ReviewPage({ params }: Props) {
       {/* Breadcrumb */}
       <nav className="mb-2 text-sm text-muted-foreground">
         <Link href="/" className="underline-offset-2 hover:underline">
-          Übersicht
+          Overview
         </Link>
         {" / "}
         <Link
           href={`/documents/${id}`}
           className="underline-offset-2 hover:underline"
         >
-          Dokument
+          Document
         </Link>
         {" / "}
-        <span aria-current="page">Überprüfung</span>
+        <span aria-current="page">Review</span>
       </nav>
 
       <header className="mb-8">
-        <h1 className="text-2xl font-semibold leading-tight">Überprüfung</h1>
+        <h1 className="text-2xl font-semibold leading-tight">Review</h1>
         <p className="mt-1 text-base text-muted-foreground">
-          {doc.filename} · Hochgeladen am {formatDe(new Date(doc.uploadedAt))}
+          {doc.filename} · Uploaded {formatDe(new Date(doc.uploadedAt))}
         </p>
       </header>
 
@@ -100,7 +100,7 @@ export default async function ReviewPage({ params }: Props) {
             id="section-pdf"
             className="mb-4 text-2xl font-semibold leading-tight"
           >
-            Originaldokument
+            Original document
           </h2>
           <Card className="p-0 overflow-hidden">
             <div className="min-h-[640px]">
@@ -114,7 +114,7 @@ export default async function ReviewPage({ params }: Props) {
             id="section-review"
             className="mb-4 text-2xl font-semibold leading-tight"
           >
-            Extrahierte Daten
+            Extracted data
           </h2>
           <Card className="px-6">
             <ReviewForm

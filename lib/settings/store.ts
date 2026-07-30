@@ -59,7 +59,7 @@ export async function resolveClaudeModel(): Promise<string> {
  * Render-safe hint for the UI. NEVER returns the full key.
  */
 export function maskKey(key: string | null): string {
-  if (!key || key.length === 0) return "Kein Schlüssel gesetzt";
+  if (!key || key.length === 0) return "No key set";
   const last4 = key.slice(-4);
   return `Gesetzt: sk-ant-…${last4}`;
 }

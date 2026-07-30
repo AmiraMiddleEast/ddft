@@ -30,7 +30,7 @@ export function HistoryFilters() {
 
   useEffect(() => {
     // Keep local draft in sync when URL changes outside this component
-    // (e.g. Zurücksetzen click).
+    // (e.g. Reset click).
     setQDraft(q);
   }, [q]);
 
@@ -54,11 +54,11 @@ export function HistoryFilters() {
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-end md:gap-6">
       <div className="flex min-w-[240px] flex-1 flex-col gap-1.5">
-        <Label htmlFor="history-q">Suchen</Label>
+        <Label htmlFor="history-q">Search</Label>
         <Input
           id="history-q"
           type="search"
-          placeholder="Personenname"
+          placeholder="Person name"
           value={qDraft}
           onChange={(e) => setQDraft(e.target.value)}
         />
@@ -88,7 +88,7 @@ export function HistoryFilters() {
         />
       </div>
       <Button type="button" variant="outline" onClick={reset}>
-        Zurücksetzen
+        Reset
       </Button>
     </div>
   );

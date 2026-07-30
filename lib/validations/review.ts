@@ -19,18 +19,18 @@ import { z } from "zod";
 export const CorrectedFieldsSchema = z.object({
   dokumenten_typ: z
     .string()
-    .min(1, "Bitte einen Dokumenttyp auswählen.")
+    .min(1, "Select a document type.")
     .max(200),
   ausstellende_behoerde: z.string().max(300),
   ausstellungsort: z
     .string()
-    .min(1, "Bitte einen Ausstellungsort angeben.")
+    .min(1, "Enter a place of issue.")
     .max(200),
-  bundesland: z.string().min(1, "Bitte ein Bundesland auswählen.").max(100),
+  bundesland: z.string().min(1, "Select a federal state.").max(100),
   ausstellungsdatum: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, {
-      message: "Bitte ein gültiges Datum eingeben.",
+      message: "Enter a valid date.",
     })
     .or(z.literal("")),
   voller_name: z.string().max(300),
@@ -51,7 +51,7 @@ export type ApproveInput = z.infer<typeof ApproveSchema>;
 /**
  * Schema for the chooseAmbiguousAuthority Server Action — used when an
  * ambiguous approval result surfaces multiple candidates and the operator
- * picks one via the UI's "Diese Behörde übernehmen" CTA.
+ * picks one via the UI's "Use this authority" CTA.
  */
 export const ChooseAuthoritySchema = z.object({
   documentId: z.string().min(1),

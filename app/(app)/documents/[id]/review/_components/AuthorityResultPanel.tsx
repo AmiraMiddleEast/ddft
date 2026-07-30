@@ -26,7 +26,7 @@ type AuthorityResultPanelProps = {
 const BREADCRUMB_SEP = " › "; // U+203A
 
 function EmptyValue() {
-  return <span className="text-muted-foreground">— nicht hinterlegt</span>;
+  return <span className="text-muted-foreground">— not provided</span>;
 }
 
 /**
@@ -42,7 +42,7 @@ function PruefenBanner({ subtext }: { subtext: string }) {
         "bg-[--color-warning]/30 border-[--color-warning]",
       )}
     >
-      <p className="text-sm font-semibold">Angaben bitte prüfen</p>
+      <p className="text-sm font-semibold">Please verify these details</p>
       <p className="mt-1 text-sm text-muted-foreground">{subtext}</p>
     </div>
   );
@@ -58,10 +58,10 @@ function RoutingBreadcrumb({ path }: { path: string[] }) {
 function ContactBlock({ authority }: { authority: AuthorityRow }) {
   return (
     <dl className="grid gap-2 sm:grid-cols-[128px_1fr]">
-      <dt className="text-sm font-semibold">Anschrift</dt>
+      <dt className="text-sm font-semibold">Address</dt>
       <dd className="text-base whitespace-pre-line">{authority.address}</dd>
 
-      <dt className="text-sm font-semibold">Telefon</dt>
+      <dt className="text-sm font-semibold">Phone</dt>
       <dd className="text-base">
         {authority.phone ? (
           <a href={`tel:${authority.phone}`} className="underline-offset-2 hover:underline">
@@ -72,7 +72,7 @@ function ContactBlock({ authority }: { authority: AuthorityRow }) {
         )}
       </dd>
 
-      <dt className="text-sm font-semibold">E-Mail</dt>
+      <dt className="text-sm font-semibold">Email</dt>
       <dd className="text-base">
         {authority.email ? (
           <a
@@ -102,7 +102,7 @@ function ContactBlock({ authority }: { authority: AuthorityRow }) {
         )}
       </dd>
 
-      <dt className="text-sm font-semibold">Öffnungszeiten</dt>
+      <dt className="text-sm font-semibold">Office hours</dt>
       <dd className="text-base whitespace-pre-line">
         {authority.officeHours ? authority.officeHours : <EmptyValue />}
       </dd>
@@ -124,11 +124,11 @@ function MatchedVariant({
   return (
     <Card className="gap-4 p-6">
       <h2 className="text-2xl font-semibold leading-tight">
-        Zuständige Behörde ermittelt
+        Responsible authority found
       </h2>
 
       {needsReview ? (
-        <PruefenBanner subtext="Die Quelldaten sind als prüfbedürftig markiert. Bitte vor Weiterverwendung verifizieren." />
+        <PruefenBanner subtext="The source record is flagged for review. Please verify before using it." />
       ) : null}
 
       <RoutingBreadcrumb path={routing} />
@@ -139,7 +139,7 @@ function MatchedVariant({
 
       {specialRules ? (
         <div className="mt-2 flex flex-col gap-2">
-          <Badge variant="warning">Besonderheit</Badge>
+          <Badge variant="warning">Special case</Badge>
           <p className="text-base whitespace-pre-line">{specialRules}</p>
         </div>
       ) : null}
@@ -161,21 +161,21 @@ function AmbiguousVariant({
   return (
     <Card className="gap-4 p-6">
       <h2 className="text-2xl font-semibold leading-tight">
-        Mehrere Behörden möglich
+        Several authorities possible
       </h2>
 
-      <PruefenBanner subtext="Für die Eingaben wurden mehrere zuständige Behörden gefunden. Bitte die korrekte Behörde auswählen oder die Eingaben präzisieren." />
+      <PruefenBanner subtext="Several responsible authorities match these inputs. Pick the correct one, or refine the inputs." />
 
       <RoutingBreadcrumb path={routing} />
 
       <div>
-        <h3 className="mb-2 text-sm font-semibold">Kandidaten</h3>
+        <h3 className="mb-2 text-sm font-semibold">Candidates</h3>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Behörde</TableHead>
+              <TableHead>Authority</TableHead>
               <TableHead>Routing</TableHead>
-              <TableHead className="text-right">Aktion</TableHead>
+              <TableHead className="text-right">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -195,7 +195,7 @@ function AmbiguousVariant({
                       disabled={choosePending}
                       onClick={() => onChooseAuthority(c.id)}
                     >
-                      Diese Behörde übernehmen
+                      Use this authority
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -220,17 +220,17 @@ function NotFoundVariant({
         aria-hidden="true"
       />
       <h2 className="text-2xl font-semibold leading-tight text-destructive">
-        Keine Behörde gefunden
+        No authority found
       </h2>
       <p className="text-base">
-        Keine Behörde gefunden. Bitte Eingaben prüfen.
+        No authority found. Please check the inputs.
       </p>
       <p className="text-sm text-muted-foreground">
-        Prüfen Sie Dokumenttyp, Bundesland und Ausstellungsort und versuchen Sie
-        es erneut.
+        Check the document type, federal state and place of issue, then try
+        again.
       </p>
       <Button variant="outline" onClick={onAdjustInputs}>
-        Eingaben anpassen
+        Adjust inputs
       </Button>
     </Card>
   );

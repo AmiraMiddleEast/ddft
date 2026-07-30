@@ -40,10 +40,10 @@ export function UploadClient() {
     if (lastBatchSignal.current === signal) return;
     lastBatchSignal.current = signal;
     if (errorCount === 0) {
-      toast.success("Analyse abgeschlossen.");
+      toast.success("Analysis complete.");
     } else {
       toast.error(
-        `Analyse abgeschlossen. ${errorCount} Datei(en) mit Fehler.`,
+        `Analysis complete. ${errorCount} file(s) with errors.`,
       );
     }
   }, [pendingCount, totalCount, errorCount]);
@@ -150,16 +150,16 @@ export function UploadClient() {
         )}
         role="button"
         tabIndex={0}
-        aria-label="Dateien hochladen — Drop-Zone"
+        aria-label="Upload files — drop zone"
       >
         <CardContent className="flex min-h-[192px] flex-col items-center justify-center gap-2 py-6">
           <input {...getInputProps()} />
           <Upload className="size-6 text-muted-foreground" aria-hidden />
           <p className="text-base">
-            {isDragActive ? "Zum Hochladen loslassen" : "PDFs hierher ziehen"}
+            {isDragActive ? "Drop to upload" : "Drag PDFs here"}
           </p>
-          <p className="text-sm text-muted-foreground">oder</p>
-          <Button type="button">Dateien auswählen</Button>
+          <p className="text-sm text-muted-foreground">or</p>
+          <Button type="button">Choose files</Button>
         </CardContent>
       </Card>
       {rejectMsg ? (
@@ -172,11 +172,11 @@ export function UploadClient() {
 
       <div>
         <h2 className="mb-4 text-2xl font-semibold leading-tight">
-          Aktuelle Uploads
+          Current uploads
         </h2>
         {rows.length === 0 ? (
           <p className="text-base text-muted-foreground">
-            Noch keine Dateien ausgewählt.
+            No files selected yet.
           </p>
         ) : (
           <Card>

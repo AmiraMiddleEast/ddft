@@ -7,7 +7,7 @@ import { getAuthorityByIdAdmin } from "@/lib/admin/queries";
 
 import { EditAuthorityForm } from "./EditAuthorityForm";
 
-export const metadata = { title: "Behörde bearbeiten — DDFT" };
+export const metadata = { title: "Edit authority — DDFT" };
 
 export default async function EditAuthorityPage({
   params,
@@ -25,14 +25,14 @@ export default async function EditAuthorityPage({
     <main className="mx-auto w-full max-w-[760px] px-6 pt-8 pb-16">
       <nav className="mb-2 text-sm text-muted-foreground">
         <Link href="/admin/behoerden" className="underline-offset-2 hover:underline">
-          Behörden
+          Authorities
         </Link>
         {" / "}
         <Link
           href="/admin/behoerden/authorities"
           className="underline-offset-2 hover:underline"
         >
-          Behörden bearbeiten
+          Edit authorities
         </Link>
         {" / "}
         <span aria-current="page">{authority.name}</span>
@@ -40,7 +40,7 @@ export default async function EditAuthorityPage({
 
       <section className="mb-6">
         <h1 className="text-2xl font-semibold leading-tight">
-          Behörde bearbeiten
+          Edit authority
         </h1>
         <p className="mt-1 text-base text-muted-foreground">{authority.name}</p>
       </section>

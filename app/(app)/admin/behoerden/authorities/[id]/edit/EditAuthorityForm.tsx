@@ -61,14 +61,14 @@ export function EditAuthorityForm({ authority }: { authority: Authority }) {
       } else {
         setError(
           res.error === "VALIDATION"
-            ? "Bitte Pflichtfelder ausfüllen."
+            ? "Please fill in the required fields."
             : res.error === "UNAUTHORIZED"
-              ? "Bitte erneut anmelden."
+              ? "Please sign in again."
               : res.error === "NOT_FOUND"
-                ? "Behörde nicht gefunden."
-                : "Speichern fehlgeschlagen.",
+                ? "Authority not found."
+                : "Save failed.",
         );
-        toast.error("Speichern fehlgeschlagen.");
+        toast.error("Save failed.");
       }
     });
   };
@@ -147,7 +147,7 @@ export function EditAuthorityForm({ authority }: { authority: Authority }) {
                 setForm((prev) => ({ ...prev, needsReview: v === true }))
               }
             />
-            <span>Zur Überprüfung markieren</span>
+            <span>Mark for review</span>
           </label>
 
           {error ? (
@@ -161,10 +161,10 @@ export function EditAuthorityForm({ authority }: { authority: Authority }) {
               href="/admin/behoerden/authorities"
               className={buttonVariants({ variant: "outline" })}
             >
-              Zurück
+              Back
             </Link>
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Wird gespeichert …" : "Speichern"}
+              {isPending ? "Saving…" : "Save"}
             </Button>
           </div>
         </form>

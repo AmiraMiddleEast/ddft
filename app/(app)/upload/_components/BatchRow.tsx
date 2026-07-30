@@ -24,10 +24,10 @@ export type BatchRowData = {
 
 const STATUS_COPY: Record<RowStatus, string> = {
   queued: "In Warteschlange",
-  uploading: "Wird hochgeladen",
-  extracting: "Wird analysiert",
-  done: "Fertig",
-  error: "Fehler",
+  uploading: "Uploading",
+  extracting: "Analyzing",
+  done: "Done",
+  error: "Error",
 };
 
 export function BatchRow({

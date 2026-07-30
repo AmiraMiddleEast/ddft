@@ -28,7 +28,7 @@ export default async function EditCogsKammerPage({
     <main className="mx-auto w-full max-w-[900px] px-6 pt-8">
       <header className="mb-6">
         <p className="text-sm text-muted-foreground">
-          ← <a href="/admin/cogs" className="underline">Zurück zur Übersicht</a>
+          ← <a href="/admin/cogs" className="underline">Back to overview</a>
         </p>
         <h1 className="mt-2 text-2xl font-semibold leading-tight">
           {row.bundeslandName} · {row.beruf === "arzt" ? "Arzt" : "Zahnarzt"}

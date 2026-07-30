@@ -33,20 +33,20 @@ describe("HomePage — UI-SPEC Copywriting Contract", () => {
     vi.clearAllMocks();
   });
 
-  it("renders Übersicht heading and upload CTA verbatim", async () => {
+  it("renders Overview heading and upload CTA verbatim", async () => {
     const Page = await HomePage();
     render(Page);
 
     expect(
-      screen.getByRole("heading", { name: "Übersicht" })
+      screen.getByRole("heading", { name: "Overview" })
     ).toBeInTheDocument();
 
     // Upload CTA button (appears in the top bar)
-    expect(screen.getAllByText("Dokumente hochladen").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Upload documents").length).toBeGreaterThan(0);
 
     // Section heading for the recent-documents list
     expect(
-      screen.getByRole("heading", { name: "Zuletzt hochgeladen" })
+      screen.getByRole("heading", { name: "Recently uploaded" })
     ).toBeInTheDocument();
   });
 });

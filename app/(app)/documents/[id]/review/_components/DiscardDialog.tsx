@@ -12,7 +12,7 @@ type DiscardDialogProps = {
 };
 
 /**
- * Minimal accessible confirmation dialog for the "Verwerfen" (discard edits)
+ * Minimal accessible confirmation dialog for the "Discard" (discard edits)
  * action. No AlertDialog primitive is vendored in this phase (CONTEXT D-17 —
  * only `select` is added for Phase 3), so we build a small dialog over a
  * backdrop with focus trapping via auto-focus on the confirm button.
@@ -71,15 +71,15 @@ export function DiscardDialog({
           id={headingId}
           className="text-lg font-semibold leading-tight"
         >
-          Änderungen verwerfen?
+          Discard changes?
         </h2>
         <p id={descId} className="mt-2 text-sm text-muted-foreground">
-          Ihre Anpassungen an den extrahierten Daten werden entfernt.
+          Your edits to the extracted data will be removed.
         </p>
 
         <div className="mt-6 flex items-center justify-end gap-3">
           <Button type="button" variant="outline" onClick={onCancel}>
-            Abbrechen
+            Cancel
           </Button>
           <Button
             ref={confirmRef}
@@ -87,7 +87,7 @@ export function DiscardDialog({
             variant="destructive"
             onClick={onConfirm}
           >
-            Verwerfen
+            Discard
           </Button>
         </div>
       </div>

@@ -30,8 +30,8 @@ export default async function CogsAdminPage() {
           Certificate of Good Standing — Verwaltung
         </h1>
         <p className="mt-2 text-base leading-normal text-muted-foreground">
-          Verfahren, Kontaktdaten und Empfängeradressen für das CoGS je
-          Bundesland × Beruf. {complete} von {total} Einträgen vollständig.
+          Procedure, contact details and recipient addresses for the CoGS per
+          federal state × profession. {complete} of {total} entries complete.
         </p>
       </header>
 
@@ -41,7 +41,7 @@ export default async function CogsAdminPage() {
             <tr>
               <th className="px-3 py-2 font-semibold">Bundesland</th>
               <th className="px-3 py-2 font-semibold">Beruf</th>
-              <th className="px-3 py-2 font-semibold">Zuständige Stelle</th>
+              <th className="px-3 py-2 font-semibold">Responsible office</th>
               <th className="px-3 py-2 font-semibold">Status</th>
               <th className="px-3 py-2 font-semibold"></th>
             </tr>
@@ -57,11 +57,11 @@ export default async function CogsAdminPage() {
                 <td className="px-3 py-2">
                   {r.datenVollstaendig ? (
                     <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-800">
-                      vollständig
+                      complete
                     </span>
                   ) : (
                     <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-800">
-                      Lücken
+                      gaps
                     </span>
                   )}
                 </td>

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /**
- * Phase 5 Plan 04 — Zod schemas for Behörden admin mutations.
+ * Phase 5 Plan 04 — Zod schemas for authority admin mutations.
  *
  * All optional string fields allow empty string → persisted as NULL so the
  * UI can clear a field by submitting an empty input.
@@ -11,8 +11,8 @@ import { z } from "zod";
  */
 
 export const AuthorityPatchSchema = z.object({
-  name: z.string().trim().min(1, "Name darf nicht leer sein.").max(300),
-  address: z.string().trim().min(1, "Adresse darf nicht leer sein.").max(500),
+  name: z.string().trim().min(1, "Name must not be empty.").max(300),
+  address: z.string().trim().min(1, "Address must not be empty.").max(500),
   phone: z.string().trim().max(100).optional().nullable().or(z.literal("")),
   email: z
     .string()
@@ -20,7 +20,7 @@ export const AuthorityPatchSchema = z.object({
     .max(200)
     .refine(
       (v) => !v || /.+@.+\..+/.test(v),
-      "Bitte eine gültige E-Mail-Adresse angeben.",
+      "Enter a valid email address.",
     )
     .optional()
     .nullable()
@@ -52,8 +52,8 @@ export type AuthorityPatch = z.infer<typeof AuthorityPatchSchema>;
  * an optional Regierungsbezirk. Empty string on the optional RB → NULL.
  */
 export const AuthorityCreateSchema = AuthorityPatchSchema.extend({
-  stateId: z.string().trim().min(1, "Bitte ein Bundesland wählen."),
-  documentTypeId: z.string().trim().min(1, "Bitte eine Dokumentenart wählen."),
+  stateId: z.string().trim().min(1, "Select a federal state."),
+  documentTypeId: z.string().trim().min(1, "Select a document type."),
   regierungsbezirkId: z
     .string()
     .trim()
@@ -68,8 +68,8 @@ export const DocumentTypeSchema = z.object({
   displayName: z
     .string()
     .trim()
-    .min(1, "Bitte einen Anzeigenamen angeben.")
-    .max(100, "Anzeigename ist zu lang (max. 100 Zeichen)."),
+    .min(1, "Enter a display name.")
+    .max(100, "Display name is too long (max. 100 characters)."),
 });
 
 export type DocumentTypeInput = z.infer<typeof DocumentTypeSchema>;

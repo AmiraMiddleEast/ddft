@@ -21,10 +21,10 @@ export function RegenerateDialog({ open, onOpenChange, onConfirm }: Props) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Laufliste erneut erstellen?</DialogTitle>
+          <DialogTitle>Regenerate Laufliste?</DialogTitle>
           <DialogDescription>
-            Eine neue Laufliste wird erzeugt. Die bisherige bleibt im Verlauf
-            verfügbar.
+            A new Laufliste is generated. The previous one stays available in the
+            available.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -33,10 +33,10 @@ export function RegenerateDialog({ open, onOpenChange, onConfirm }: Props) {
             variant="ghost"
             onClick={() => onOpenChange(false)}
           >
-            Abbrechen
+            Cancel
           </Button>
           <Button type="button" onClick={onConfirm}>
-            Erneut generieren
+            Regenerate
           </Button>
         </DialogFooter>
       </DialogContent>

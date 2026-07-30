@@ -50,20 +50,20 @@ export function CreateCaseForm() {
   function validateLocal(): FieldErrors {
     const next: FieldErrors = {};
     const trimmedName = personName.trim();
-    if (trimmedName.length === 0) next.personName = "Pflichtfeld.";
+    if (trimmedName.length === 0) next.personName = "Required field.";
     else if (trimmedName.length > 200)
-      next.personName = "Eingabe ist zu lang.";
+      next.personName = "Input is too long.";
     if (personBirthdate && !/^\d{4}-\d{2}-\d{2}$/.test(personBirthdate))
-      next.personBirthdate = "Bitte ein gültiges Datum eingeben.";
-    if (notes.length > 2000) next.notes = "Eingabe ist zu lang.";
-    if (!beruf) next.beruf = "Bitte Beruf auswählen.";
-    if (!wohnsitzBl) next.wohnsitzBundesland = "Bitte Wohnsitz auswählen.";
+      next.personBirthdate = "Enter a valid date.";
+    if (notes.length > 2000) next.notes = "Input is too long.";
+    if (!beruf) next.beruf = "Select a profession.";
+    if (!wohnsitzBl) next.wohnsitzBundesland = "Select the place of residence.";
     if (!arbeitsortBl)
       next.arbeitsortBundesland =
-        "Bitte Arbeitsort auswählen (Bundesland oder 'im Ausland').";
+        "Select the place of work (federal state or abroad).";
     if (needsNrw && !nrwSubregion)
       next.nrwSubregion =
-        "Bitte Nordrhein oder Westfalen-Lippe auswählen.";
+        "Select Nordrhein or Westfalen-Lippe.";
     return next;
   }
 
@@ -107,7 +107,7 @@ export function CreateCaseForm() {
       });
 
       if (result.ok) {
-        toast.success("Fall angelegt.");
+        toast.success("Case created.");
         router.push(`/cases/${result.data.caseId}`);
         return;
       }
@@ -138,7 +138,7 @@ export function CreateCaseForm() {
       }
 
       toast.error(
-        "Fall konnte nicht angelegt werden. Bitte erneut versuchen.",
+        "Could not create the case. Please try again.",
       );
     });
   }
@@ -146,7 +146,7 @@ export function CreateCaseForm() {
   return (
     <form className="flex flex-col gap-4" onSubmit={onSubmit} noValidate>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="case-field-personName">Name der Person</Label>
+        <Label htmlFor="case-field-personName">Person's name</Label>
         <Input
           id="case-field-personName"
           name="personName"
@@ -198,9 +198,9 @@ export function CreateCaseForm() {
             disabled={pending}
             className="border-input bg-background flex h-9 w-full rounded-md border px-3 py-1 text-base shadow-xs"
           >
-            <option value="">— auswählen —</option>
-            <option value="arzt">Arzt / Ärztin</option>
-            <option value="zahnarzt">Zahnarzt / Zahnärztin</option>
+            <option value="">— select —</option>
+            <option value="arzt">Physician</option>
+            <option value="zahnarzt">Dentist</option>
           </select>
           {errors.beruf ? (
             <p className="text-sm text-destructive">{errors.beruf}</p>
@@ -216,7 +216,7 @@ export function CreateCaseForm() {
             disabled={pending}
             className="border-input bg-background flex h-9 w-full rounded-md border px-3 py-1 text-base shadow-xs"
           >
-            <option value="">— Bundesland auswählen —</option>
+            <option value="">— select federal state —</option>
             {BUNDESLAND_OPTIONS.map((b) => (
               <option key={b.key} value={b.key}>
                 {b.name}
@@ -241,7 +241,7 @@ export function CreateCaseForm() {
             disabled={pending}
             className="border-input bg-background flex h-9 w-full rounded-md border px-3 py-1 text-base shadow-xs"
           >
-            <option value="">— auswählen —</option>
+            <option value="">— select —</option>
             {BUNDESLAND_OPTIONS.map((b) => (
               <option key={b.key} value={b.key}>
                 {b.name}
@@ -255,7 +255,7 @@ export function CreateCaseForm() {
             </p>
           ) : (
             <p className="text-sm text-muted-foreground">
-              Maßgeblich für die Zuständigkeit des Certificate of Good Standing
+              Determines which chamber issues the Certificate of Good Standing
             </p>
           )}
         </div>
@@ -274,7 +274,7 @@ export function CreateCaseForm() {
               disabled={pending}
               className="border-input bg-background flex h-9 w-full rounded-md border px-3 py-1 text-base shadow-xs"
             >
-              <option value="">— auswählen —</option>
+              <option value="">— select —</option>
               <option value="nordrhein">Nordrhein</option>
               <option value="westfalen-lippe">Westfalen-Lippe</option>
             </select>
@@ -286,7 +286,7 @@ export function CreateCaseForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="case-field-notes">Notizen</Label>
+        <Label htmlFor="case-field-notes">Notes</Label>
         <Textarea
           id="case-field-notes"
           name="notes"
@@ -309,10 +309,10 @@ export function CreateCaseForm() {
           className={buttonVariants({ variant: "ghost" })}
           aria-disabled={pending}
         >
-          Abbrechen
+          Cancel
         </Link>
         <Button type="submit" disabled={pending}>
-          {pending ? "Wird angelegt …" : "Fall anlegen"}
+          {pending ? "Creating…" : "Create case"}
         </Button>
       </div>
     </form>

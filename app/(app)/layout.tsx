@@ -35,25 +35,25 @@ export default async function AppLayout({
               href="/cases"
               className="font-medium text-muted-foreground hover:text-foreground"
             >
-              Fälle
+              Cases
             </Link>
             <Link
               href="/upload"
               className="font-medium text-muted-foreground hover:text-foreground"
             >
-              Hochladen
+              Upload
             </Link>
             <Link
               href="/history"
               className="font-medium text-muted-foreground hover:text-foreground"
             >
-              Historie
+              History
             </Link>
             <Link
               href="/admin/behoerden"
               className="font-medium text-muted-foreground hover:text-foreground"
             >
-              Behörden
+              Authorities
             </Link>
             <Link
               href="/admin/cogs"
@@ -65,7 +65,7 @@ export default async function AppLayout({
               href="/admin/settings"
               className="font-medium text-muted-foreground hover:text-foreground"
             >
-              Einstellungen
+              Settings
             </Link>
           </nav>
         </div>

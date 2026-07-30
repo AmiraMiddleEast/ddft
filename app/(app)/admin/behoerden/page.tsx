@@ -7,7 +7,7 @@ import { getAdminStats } from "@/lib/admin/queries";
 import { Card, CardContent } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 
-export const metadata = { title: "Behörden — DDFT" };
+export const metadata = { title: "Authorities — DDFT" };
 
 export default async function AdminBehoerdenPage() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -22,7 +22,7 @@ export default async function AdminBehoerdenPage() {
     hint: string;
   }> = [
     {
-      label: "Bundesländer",
+      label: "Federal states",
       value: stats.states,
       href: null,
       hint: "Fest seeded",
@@ -31,19 +31,19 @@ export default async function AdminBehoerdenPage() {
       label: "Dokumentenarten",
       value: stats.documentTypes,
       href: "/admin/behoerden/document-types",
-      hint: "Bearbeiten / Hinzufügen",
+      hint: "Edit / Add",
     },
     {
-      label: "Behörden",
+      label: "Authorities",
       value: stats.authorities,
       href: "/admin/behoerden/authorities",
       hint: "Durchsuchen & bearbeiten",
     },
     {
-      label: "Zur Überprüfung",
+      label: "For review",
       value: stats.needsReview,
       href: `/admin/behoerden/authorities?needsReview=1`,
-      hint: "Prüfen-Flag gesetzt",
+      hint: "Review flag set",
     },
   ];
 
@@ -54,13 +54,13 @@ export default async function AdminBehoerdenPage() {
           Übersicht
         </Link>
         {" / "}
-        <span aria-current="page">Behörden</span>
+        <span aria-current="page">Authorities</span>
       </nav>
 
       <section className="mb-6">
-        <h1 className="text-2xl font-semibold leading-tight">Behörden</h1>
+        <h1 className="text-2xl font-semibold leading-tight">Authorities</h1>
         <p className="mt-1 text-base text-muted-foreground">
-          Dashboard für die Pflege der Behörden-Datenbank.
+          Dashboard for maintaining the authority database.
         </p>
       </section>
 

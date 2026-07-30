@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Dubai Docs Fast Track",
-  description: "Dokumentenlegalisation — interne Anwendung",
+  description: "Document legalization — internal tool",
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de">
+    <html lang="en">
       <body className="antialiased">
         <NuqsAdapter>{children}</NuqsAdapter>
         <Toaster richColors position="top-right" />

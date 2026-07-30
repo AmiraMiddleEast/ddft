@@ -89,16 +89,16 @@ export function EditCogsKammerForm({ row }: { row: Row }) {
         />
       </Section>
 
-      <Section title="Zuständige Stelle für das Certificate of Good Standing">
+      <Section title="Responsible office for the Certificate of Good Standing">
         <TextField
-          label="Zuständige Stelle *"
+          label="Responsible office *"
           value={state.zustaendigeStelle}
           onChange={(v) => set("zustaendigeStelle", v)}
           required
           disabled={pending}
         />
         <TextareaField
-          label="Hinweis zur zuständigen Stelle"
+          label="Note on the responsible office"
           value={state.zustaendigeStelleHinweis}
           onChange={(v) => set("zustaendigeStelleHinweis", v)}
           disabled={pending}
@@ -131,15 +131,15 @@ export function EditCogsKammerForm({ row }: { row: Row }) {
           value={state.fuehrungszeugnisOErforderlich}
           onChange={(v) => set("fuehrungszeugnisOErforderlich", v)}
           disabled={pending}
-          placeholder="z.B. 'Ja, Belegart O'"
+          placeholder="e.g. 'Yes, Belegart O'"
         />
         <TextField
-          label="Empfängerbehörde (Name + Anschrift) *"
+          label="Recipient authority (name + address) *"
           value={state.fuehrungszeugnisOEmpfaenger}
           onChange={(v) => set("fuehrungszeugnisOEmpfaenger", v)}
           required
           disabled={pending}
-          placeholder="z.B. 'Ärztekammer Berlin, Friedrichstraße 16, 10969 Berlin'"
+          placeholder="e.g. 'Ärztekammer Berlin, Friedrichstraße 16, 10969 Berlin'"
         />
       </Section>
 
@@ -157,7 +157,7 @@ export function EditCogsKammerForm({ row }: { row: Row }) {
           disabled={pending}
         />
         <TextareaField
-          label="Anschrift"
+          label="Address"
           value={state.kontaktAdresse}
           onChange={(v) => set("kontaktAdresse", v)}
           disabled={pending}
@@ -180,7 +180,7 @@ export function EditCogsKammerForm({ row }: { row: Row }) {
             disabled={pending}
           />
           <span className="text-sm">
-            Daten vollständig recherchiert — das Verfahren kann vollständig auf
+            Data fully researched — the procedure can be handled entirely on
             dem Laufzettel ausgegeben werden.
           </span>
         </label>
@@ -191,7 +191,7 @@ export function EditCogsKammerForm({ row }: { row: Row }) {
           Abbrechen
         </a>
         <Button type="submit" disabled={pending}>
-          {pending ? "Wird gespeichert …" : "Speichern"}
+          {pending ? "Saving…" : "Save"}
         </Button>
       </div>
     </form>

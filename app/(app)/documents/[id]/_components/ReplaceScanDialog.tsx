@@ -23,15 +23,15 @@ import { replaceDocumentPdfAction } from "@/lib/uploads/replace";
 import { MAX_FILE_BYTES } from "@/lib/validations/upload";
 
 const ERROR_COPY: Record<string, string> = {
-  unauthenticated: "Bitte erneut anmelden.",
-  not_found: "Dokument nicht gefunden.",
-  no_file: "Bitte eine Datei auswählen.",
-  file_too_large: "Datei ist zu groß (max. 10 MB).",
-  invalid_pdf: "Die Datei ist keine gültige PDF.",
-  encrypted_pdf: "Verschlüsselte PDFs können nicht hochgeladen werden.",
-  db_error: "Fehler beim Hochladen.",
-  rate_limited: "Zu viele Anfragen. Bitte später erneut versuchen.",
-  unknown: "Fehler beim Hochladen.",
+  unauthenticated: "Please sign in again.",
+  not_found: "Document not found.",
+  no_file: "Select a file.",
+  file_too_large: "File is too large (max. 10 MB).",
+  invalid_pdf: "The file is not a valid PDF.",
+  encrypted_pdf: "Encrypted PDFs cannot be uploaded.",
+  db_error: "Upload failed.",
+  rate_limited: "Too many requests. Please try again later.",
+  unknown: "Upload failed.",
 };
 
 export function ReplaceScanDialog({ documentId }: { documentId: string }) {
@@ -74,14 +74,14 @@ export function ReplaceScanDialog({ documentId }: { documentId: string }) {
       fd.append("file", pendingFile);
       const res = await replaceDocumentPdfAction(documentId, fd);
       if (res.ok) {
-        toast.success("Neuer Scan hochgeladen.");
+        toast.success("New scan uploaded.");
         setOpen(false);
         setPendingFile(null);
         router.refresh();
       } else {
         const msg = ERROR_COPY[res.error] ?? ERROR_COPY.unknown;
         setError(msg);
-        toast.error("Fehler beim Hochladen.");
+        toast.error("Upload failed.");
       }
     });
   };
@@ -98,14 +98,14 @@ export function ReplaceScanDialog({ documentId }: { documentId: string }) {
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="outline">Neuer Scan hochladen</Button>
+        <Button variant="outline">Upload new scan</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Neuer Scan hochladen</DialogTitle>
+          <DialogTitle>Upload new scan</DialogTitle>
           <DialogDescription>
-            Ersetzt die aktuelle PDF-Datei. Die bisherige Version bleibt
-            gespeichert und kann über die Versionshistorie geöffnet werden.
+            Replaces the current PDF. The previous version is kept and stays
+            available in the version history.
           </DialogDescription>
         </DialogHeader>
         <Card
@@ -116,7 +116,7 @@ export function ReplaceScanDialog({ documentId }: { documentId: string }) {
           )}
           role="button"
           tabIndex={0}
-          aria-label="Neue PDF auswählen"
+          aria-label="Choose new PDF"
         >
           <CardContent className="flex min-h-[160px] flex-col items-center justify-center gap-2 py-6 text-center">
             <input {...getInputProps()} />
@@ -130,12 +130,12 @@ export function ReplaceScanDialog({ documentId }: { documentId: string }) {
               <>
                 <p className="text-base">
                   {isDragActive
-                    ? "Zum Hochladen loslassen"
-                    : "PDF hierher ziehen"}
+                    ? "Drop to upload"
+                    : "Drag a PDF here"}
                 </p>
-                <p className="text-sm text-muted-foreground">oder</p>
+                <p className="text-sm text-muted-foreground">or</p>
                 <Button type="button" size="sm">
-                  Datei auswählen
+                  Choose file
                 </Button>
               </>
             )}
@@ -157,7 +157,7 @@ export function ReplaceScanDialog({ documentId }: { documentId: string }) {
             onClick={handleSubmit}
             disabled={!pendingFile || isPending}
           >
-            {isPending ? "Wird hochgeladen …" : "Hochladen"}
+            {isPending ? "Uploading…" : "Upload"}
           </Button>
         </DialogFooter>
       </DialogContent>

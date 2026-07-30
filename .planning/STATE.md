@@ -4,14 +4,14 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Completed 04-05-PLAN.md
-last_updated: "2026-04-17T14:02:50.854Z"
-last_activity: 2026-04-17
+last_updated: "2026-07-24T05:56:07.654Z"
+last_activity: 2026-07-24 -- Phase 7 planning complete
 progress:
-  total_phases: 5
+  total_phases: 8
   completed_phases: 5
-  total_plans: 29
+  total_plans: 35
   completed_plans: 29
-  percent: 100
+  percent: 83
 ---
 
 # Project State
@@ -27,8 +27,8 @@ See: .planning/PROJECT.md (updated 2026-04-16)
 
 Phase: 05
 Plan: Not started
-Status: Executing Phase 5
-Last activity: 2026-06-26 - Completed quick task 260626-wou: Einstellungs-Seite (API-Key + Modell) + spezifische Fehlermeldungen
+Status: Ready to execute
+Last activity: 2026-07-24 -- Phase 7 planning complete
 
 Progress: [..........] 0%
 
@@ -81,6 +81,13 @@ Progress: [..........] 0%
 | Phase 04 P05 | 9m | 3 tasks | 11 files |
 
 ## Accumulated Context
+
+### Roadmap Evolution
+
+- Phase 6 recorded retroactively: CoGS & neuer Laufzettel (was executed outside the Progress table; PRs #9–#13).
+- Phase 7 added: English UI — switch app interface from German to English.
+- Phase 8 added: Multi-user team workspace with attribution and user administration.
+- Order rationale: English (7) precedes multi-user (8) so the new user-administration UI is written in English once instead of being built in German and immediately retranslated.
 
 ### Decisions
 

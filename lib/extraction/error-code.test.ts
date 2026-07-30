@@ -2,7 +2,7 @@
 import { describe, it, expect } from "vitest";
 import {
   classifyAnthropicError,
-  extractionErrorMessageDe,
+  extractionErrorMessage,
 } from "./error-code";
 
 function err(message: string, status?: number) {
@@ -62,50 +62,50 @@ describe("classifyAnthropicError", () => {
   });
 });
 
-describe("extractionErrorMessageDe", () => {
+describe("extractionErrorMessage", () => {
   it("returns the auth message", () => {
-    expect(extractionErrorMessageDe("auth")).toBe("API-Schlüssel ungültig");
+    expect(extractionErrorMessage("auth")).toBe("Invalid API key");
   });
 
   it("returns the credit message", () => {
-    expect(extractionErrorMessageDe("credit")).toBe(
-      "Kein Anthropic-Guthaben — bitte unter console.anthropic.com aufladen",
+    expect(extractionErrorMessage("credit")).toBe(
+      "No Anthropic credit — top up at console.anthropic.com",
     );
   });
 
   it("returns the rate_limited message", () => {
-    expect(extractionErrorMessageDe("rate_limited")).toBe(
-      "Rate-Limit erreicht — später erneut",
+    expect(extractionErrorMessage("rate_limited")).toBe(
+      "Rate limit reached — try again later",
     );
   });
 
   it("returns the model_unavailable message", () => {
-    expect(extractionErrorMessageDe("model_unavailable")).toBe(
-      "Modell nicht verfügbar",
+    expect(extractionErrorMessage("model_unavailable")).toBe(
+      "Model unavailable",
     );
   });
 
   it("returns the too_large message", () => {
-    expect(extractionErrorMessageDe("too_large")).toBe(
-      "Dokument zu groß für die Analyse",
+    expect(extractionErrorMessage("too_large")).toBe(
+      "Document too large to analyze",
     );
   });
 
   it("returns the generic message for unknown", () => {
-    expect(extractionErrorMessageDe("unknown")).toBe(
-      "Analyse fehlgeschlagen. Bitte erneut versuchen.",
+    expect(extractionErrorMessage("unknown")).toBe(
+      "Analysis failed. Please try again.",
     );
   });
 
   it("returns the generic message for null/undefined/legacy", () => {
-    expect(extractionErrorMessageDe(null)).toBe(
-      "Analyse fehlgeschlagen. Bitte erneut versuchen.",
+    expect(extractionErrorMessage(null)).toBe(
+      "Analysis failed. Please try again.",
     );
-    expect(extractionErrorMessageDe(undefined)).toBe(
-      "Analyse fehlgeschlagen. Bitte erneut versuchen.",
+    expect(extractionErrorMessage(undefined)).toBe(
+      "Analysis failed. Please try again.",
     );
-    expect(extractionErrorMessageDe("some-legacy-code")).toBe(
-      "Analyse fehlgeschlagen. Bitte erneut versuchen.",
+    expect(extractionErrorMessage("some-legacy-code")).toBe(
+      "Analysis failed. Please try again.",
     );
   });
 });

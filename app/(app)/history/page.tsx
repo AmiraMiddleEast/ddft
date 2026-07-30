@@ -92,7 +92,7 @@ export default async function HistoryPage({
     <main className="mx-auto w-full max-w-[1080px] px-6 pt-8 pb-16">
       <nav className="mb-2 text-sm text-muted-foreground">
         <Link href="/" className="underline-offset-2 hover:underline">
-          Übersicht
+          Overview
         </Link>
         {" / "}
         <span aria-current="page">Historie</span>
@@ -101,7 +101,7 @@ export default async function HistoryPage({
       <section className="mb-6 flex flex-col gap-1">
         <h1 className="text-2xl font-semibold leading-tight">Historie</h1>
         <p className="text-base text-muted-foreground">
-          Alle bisher erstellten Lauflisten — durchsuchbar nach Person und
+          All Lauflisten created so far — searchable by person and
           Zeitraum.
         </p>
       </section>
@@ -117,7 +117,7 @@ export default async function HistoryPage({
           <CardContent>
             <div className="flex flex-col items-center gap-2 py-12 text-center">
               <p className="text-2xl font-semibold leading-tight">
-                Keine Einträge gefunden
+                No entries found
               </p>
               <p className="text-base text-muted-foreground">
                 Passen Sie die Filter an oder erstellen Sie zuerst eine
@@ -133,8 +133,8 @@ export default async function HistoryPage({
               <TableRow>
                 <TableHead>Erstellt</TableHead>
                 <TableHead>Person</TableHead>
-                <TableHead>Dokumente</TableHead>
-                <TableHead>Größe</TableHead>
+                <TableHead>Documents</TableHead>
+                <TableHead>Size</TableHead>
                 <TableHead className="text-right" />
               </TableRow>
             </TableHeader>
@@ -158,7 +158,7 @@ export default async function HistoryPage({
                           size: "sm",
                         })}
                       >
-                        Herunterladen
+                        Download
                       </a>
                       <Link
                         href={`/cases/${r.caseId}`}
@@ -167,7 +167,7 @@ export default async function HistoryPage({
                           size: "sm",
                         })}
                       >
-                        Zum Fall
+                        Open case
                       </Link>
                     </div>
                   </TableCell>
@@ -184,7 +184,7 @@ export default async function HistoryPage({
           className="mt-4 flex items-center justify-between text-sm"
         >
           <span className="text-muted-foreground">
-            Seite {page} von {totalPages} · {result.totalCount} Einträge
+            Page {page} of {totalPages} · {result.totalCount} entries
           </span>
           <div className="flex gap-2">
             {page > 1 ? (
@@ -200,7 +200,7 @@ export default async function HistoryPage({
                 href={buildHref(sp, page + 1)}
                 className={buttonVariants({ variant: "outline", size: "sm" })}
               >
-                Nächste
+                Next
               </Link>
             ) : null}
           </div>
