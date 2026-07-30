@@ -63,12 +63,12 @@ export function EditAuthorityForm({ authority }: { authority: Authority }) {
           res.error === "VALIDATION"
             ? "Please fill in the required fields."
             : res.error === "UNAUTHORIZED"
-              ? "Bitte erneut anmelden."
+              ? "Please sign in again."
               : res.error === "NOT_FOUND"
                 ? "Authority not found."
-                : "Speichern fehlgeschlagen.",
+                : "Save failed.",
         );
-        toast.error("Speichern fehlgeschlagen.");
+        toast.error("Save failed.");
       }
     });
   };
@@ -164,7 +164,7 @@ export function EditAuthorityForm({ authority }: { authority: Authority }) {
               Back
             </Link>
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Wird gespeichert …" : "Speichern"}
+              {isPending ? "Saving…" : "Save"}
             </Button>
           </div>
         </form>

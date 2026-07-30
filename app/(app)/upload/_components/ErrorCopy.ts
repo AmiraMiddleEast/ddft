@@ -5,7 +5,7 @@ export const ERROR_COPY: Record<UploadErrorCode | "not_found", string> = {
   file_too_large: "File is larger than 10 MB.",
   invalid_pdf: "File is not a valid PDF.",
   encrypted_pdf: "The PDF is password-protected and cannot be analyzed.",
-  batch_limit: "Maximal 25 Dateien gleichzeitig.",
+  batch_limit: "At most 25 files at once.",
   rate_limited: "Too many requests. Please try again in a minute.",
   auth: "Invalid API key. Check it under Settings.",
   credit:

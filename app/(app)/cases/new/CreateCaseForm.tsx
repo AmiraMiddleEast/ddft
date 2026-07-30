@@ -50,12 +50,12 @@ export function CreateCaseForm() {
   function validateLocal(): FieldErrors {
     const next: FieldErrors = {};
     const trimmedName = personName.trim();
-    if (trimmedName.length === 0) next.personName = "Pflichtfeld.";
+    if (trimmedName.length === 0) next.personName = "Required field.";
     else if (trimmedName.length > 200)
-      next.personName = "Eingabe ist zu lang.";
+      next.personName = "Input is too long.";
     if (personBirthdate && !/^\d{4}-\d{2}-\d{2}$/.test(personBirthdate))
       next.personBirthdate = "Enter a valid date.";
-    if (notes.length > 2000) next.notes = "Eingabe ist zu lang.";
+    if (notes.length > 2000) next.notes = "Input is too long.";
     if (!beruf) next.beruf = "Select a profession.";
     if (!wohnsitzBl) next.wohnsitzBundesland = "Select the place of residence.";
     if (!arbeitsortBl)

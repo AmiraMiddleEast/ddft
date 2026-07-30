@@ -150,7 +150,7 @@ export function UploadClient() {
         )}
         role="button"
         tabIndex={0}
-        aria-label="Dateien hochladen — Drop-Zone"
+        aria-label="Upload files — drop zone"
       >
         <CardContent className="flex min-h-[192px] flex-col items-center justify-center gap-2 py-6">
           <input {...getInputProps()} />

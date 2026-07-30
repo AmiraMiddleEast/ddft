@@ -79,7 +79,7 @@ export function SettingsForm({
 
           <div className="flex items-center justify-end">
             <Button type="submit" disabled={pending}>
-              {pending ? "Wird getestet …" : "Speichern & testen"}
+              {pending ? "Testing…" : "Save & test"}
             </Button>
           </div>
 

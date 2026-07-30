@@ -131,7 +131,7 @@ export function EditCogsKammerForm({ row }: { row: Row }) {
           value={state.fuehrungszeugnisOErforderlich}
           onChange={(v) => set("fuehrungszeugnisOErforderlich", v)}
           disabled={pending}
-          placeholder="z.B. 'Ja, Belegart O'"
+          placeholder="e.g. 'Yes, Belegart O'"
         />
         <TextField
           label="Recipient authority (name + address) *"
@@ -157,7 +157,7 @@ export function EditCogsKammerForm({ row }: { row: Row }) {
           disabled={pending}
         />
         <TextareaField
-          label="Anschrift"
+          label="Address"
           value={state.kontaktAdresse}
           onChange={(v) => set("kontaktAdresse", v)}
           disabled={pending}
@@ -191,7 +191,7 @@ export function EditCogsKammerForm({ row }: { row: Row }) {
           Abbrechen
         </a>
         <Button type="submit" disabled={pending}>
-          {pending ? "Wird gespeichert …" : "Speichern"}
+          {pending ? "Saving…" : "Save"}
         </Button>
       </div>
     </form>

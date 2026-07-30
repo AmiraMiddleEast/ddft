@@ -52,10 +52,10 @@ export function DocumentTypesClient({
             : res.error === "VALIDATION"
               ? "Enter a valid name."
               : res.error === "UNAUTHORIZED"
-                ? "Bitte erneut anmelden."
-                : "Fehler beim Speichern.";
+                ? "Please sign in again."
+                : "Save failed.";
         setAddError(msg);
-        toast.error("Fehler beim Speichern.");
+        toast.error("Save failed.");
       }
     });
   };
@@ -72,7 +72,7 @@ export function DocumentTypesClient({
         setEditDraft("");
         router.refresh();
       } else {
-        toast.error("Fehler beim Speichern.");
+        toast.error("Save failed.");
       }
     });
   };

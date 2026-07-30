@@ -74,7 +74,7 @@ export function ReplaceScanDialog({ documentId }: { documentId: string }) {
       fd.append("file", pendingFile);
       const res = await replaceDocumentPdfAction(documentId, fd);
       if (res.ok) {
-        toast.success("Neuer Scan hochgeladen.");
+        toast.success("New scan uploaded.");
         setOpen(false);
         setPendingFile(null);
         router.refresh();

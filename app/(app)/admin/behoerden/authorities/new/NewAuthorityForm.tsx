@@ -82,10 +82,10 @@ export function NewAuthorityForm({
               : res.error === "UNKNOWN_DOC_TYPE"
                 ? "Unbekannte Dokumentenart."
                 : res.error === "UNAUTHORIZED"
-                  ? "Bitte erneut anmelden."
-                  : "Speichern fehlgeschlagen.";
+                  ? "Please sign in again."
+                  : "Save failed.";
         setError(msg);
-        toast.error("Speichern fehlgeschlagen.");
+        toast.error("Save failed.");
       }
     });
   };
