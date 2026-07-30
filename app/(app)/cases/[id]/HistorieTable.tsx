@@ -53,7 +53,7 @@ export function HistorieTable({
   if (lauflisten.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">
-        Noch keine früheren Lauflisten vorhanden.
+        No earlier Lauflisten yet.
       </p>
     );
   }
@@ -62,10 +62,10 @@ export function HistorieTable({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Erstellt am</TableHead>
-          <TableHead>Dokumente</TableHead>
-          <TableHead>Größe</TableHead>
-          <TableHead className="text-right">Aktion</TableHead>
+          <TableHead>Created</TableHead>
+          <TableHead>Documents</TableHead>
+          <TableHead>Size</TableHead>
+          <TableHead className="text-right">Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -81,7 +81,7 @@ export function HistorieTable({
                 href={`/api/cases/${caseId}/laufliste/${l.id}/download`}
                 className={buttonVariants({ variant: "outline", size: "sm" })}
               >
-                Herunterladen
+                Download
               </a>
             </TableCell>
           </TableRow>

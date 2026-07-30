@@ -47,14 +47,14 @@ export default async function DocumentDetailPage({
     <main className="mx-auto w-full max-w-[1200px] px-6 pt-8">
       <nav className="mb-2 text-sm text-muted-foreground">
         <Link href="/" className="underline-offset-2 hover:underline">
-          Übersicht
+          Overview
         </Link>
         {" / "}
-        <span>Dokument</span>
+        <span>Document</span>
       </nav>
       <header className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold leading-tight">Dokument</h1>
+          <h1 className="text-2xl font-semibold leading-tight">Document</h1>
           <p className="mt-1 text-base text-muted-foreground">
             {doc.filename} · Hochgeladen am{" "}
             {formatDe(new Date(doc.uploadedAt))} · Version {doc.version}

@@ -19,7 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export const metadata = { title: "Fälle — DDFT" };
+export const metadata = { title: "Cases — DDFT" };
 
 function formatDe(ts: Date) {
   return new Intl.DateTimeFormat("de-DE", {
@@ -39,7 +39,7 @@ const STATUS_COPY: Record<
 > = {
   open: { label: "In Bearbeitung", variant: "warning" },
   ready_for_pdf: { label: "Bereit", variant: "outline" },
-  pdf_generated: { label: "Laufliste erstellt", variant: "secondary" },
+  pdf_generated: { label: "Laufliste created", variant: "secondary" },
 };
 
 export default async function CasesListPage() {
@@ -63,21 +63,21 @@ export default async function CasesListPage() {
     <main className="mx-auto w-full max-w-[1080px] px-6 pt-8">
       <nav className="mb-2 text-sm text-muted-foreground">
         <Link href="/" className="underline-offset-2 hover:underline">
-          Übersicht
+          Overview
         </Link>
         {" / "}
-        <span aria-current="page">Fälle</span>
+        <span aria-current="page">Cases</span>
       </nav>
 
       <section className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-semibold leading-tight">Fälle</h1>
+          <h1 className="text-2xl font-semibold leading-tight">Cases</h1>
           <p className="text-base text-muted-foreground">
-            Fälle bündeln Dokumente einer Person zu einer gemeinsamen Laufliste.
+            Cases group one person's documents into a single Laufliste.
           </p>
         </div>
         <Link href="/cases/new" className={buttonVariants()}>
-          Neuen Fall anlegen
+          Create new case
         </Link>
       </section>
 
@@ -86,14 +86,14 @@ export default async function CasesListPage() {
           <CardContent>
             <div className="flex flex-col items-center gap-4 py-12 text-center">
               <p className="text-2xl font-semibold leading-tight">
-                Noch keine Fälle
+                No cases yet
               </p>
               <p className="text-base text-muted-foreground">
-                Legen Sie einen Fall an, um Dokumente zu einer Person
-                zusammenzufassen.
+                Create a case to group documents for one person
+                together.
               </p>
               <Link href="/cases/new" className={buttonVariants()}>
-                Neuen Fall anlegen
+                Create new case
               </Link>
             </div>
           </CardContent>
@@ -104,9 +104,9 @@ export default async function CasesListPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Person</TableHead>
-                <TableHead>Dokumente</TableHead>
+                <TableHead>Documents</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Aktualisiert</TableHead>
+                <TableHead>Updated</TableHead>
                 <TableHead className="text-right" />
               </TableRow>
             </TableHeader>
@@ -133,7 +133,7 @@ export default async function CasesListPage() {
                           size: "sm",
                         })}
                       >
-                        Öffnen
+                        Open
                       </Link>
                     </TableCell>
                   </TableRow>

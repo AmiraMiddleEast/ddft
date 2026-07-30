@@ -39,12 +39,12 @@ export function RemoveDocumentDialog({
         caseDocumentId,
       });
       if (result.ok) {
-        toast.success("Dokument entfernt.");
+        toast.success("Document removed.");
         onOpenChange(false);
         router.refresh();
       } else {
         toast.error(
-          "Dokument konnte nicht entfernt werden. Bitte erneut versuchen.",
+          "Could not remove the document. Please try again.",
         );
       }
     });
@@ -54,9 +54,9 @@ export function RemoveDocumentDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Dokument aus Fall entfernen?</DialogTitle>
+          <DialogTitle>Remove document from case?</DialogTitle>
           <DialogDescription>
-            Das Dokument bleibt erhalten und kann einem anderen Fall zugeordnet
+            The document itself is kept and can be assigned to another case
             werden.
           </DialogDescription>
         </DialogHeader>
@@ -67,7 +67,7 @@ export function RemoveDocumentDialog({
             onClick={() => onOpenChange(false)}
             disabled={pending}
           >
-            Abbrechen
+            Cancel
           </Button>
           <Button
             type="button"
@@ -75,7 +75,7 @@ export function RemoveDocumentDialog({
             onClick={onConfirm}
             disabled={pending || !caseDocumentId}
           >
-            Entfernen
+            Remove
           </Button>
         </DialogFooter>
       </DialogContent>

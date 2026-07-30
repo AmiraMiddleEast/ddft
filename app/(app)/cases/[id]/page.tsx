@@ -58,7 +58,7 @@ const STATUS_COPY: Record<
 > = {
   open: { label: "In Bearbeitung", variant: "warning" },
   ready_for_pdf: { label: "Bereit", variant: "outline" },
-  pdf_generated: { label: "Laufliste erstellt", variant: "secondary" },
+  pdf_generated: { label: "Laufliste created", variant: "secondary" },
 };
 
 export async function generateMetadata({
@@ -68,9 +68,9 @@ export async function generateMetadata({
 }) {
   const { id } = await params;
   const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) return { title: "Fall — DDFT" };
+  if (!session) return { title: "Case — DDFT" };
   const caseRow = await getCaseForUser(id, session.user.id, db);
-  if (!caseRow) return { title: "Fall — DDFT" };
+  if (!caseRow) return { title: "Case — DDFT" };
   return { title: `${caseRow.personName} — DDFT` };
 }
 
@@ -108,11 +108,11 @@ export default async function CaseDetailPage({
     <main className="mx-auto w-full max-w-[1080px] px-6 pt-8 pb-16">
       <nav className="mb-2 text-sm text-muted-foreground">
         <Link href="/" className="underline-offset-2 hover:underline">
-          Übersicht
+          Overview
         </Link>
         {" / "}
         <Link href="/cases" className="underline-offset-2 hover:underline">
-          Fälle
+          Cases
         </Link>
         {" / "}
         <span aria-current="page">{caseRow.personName}</span>
@@ -129,15 +129,15 @@ export default async function CaseDetailPage({
               <Badge variant={status.variant}>{status.label}</Badge>
             </div>
             <p className="text-sm text-muted-foreground">
-              Erstellt am {formatDateDe(new Date(caseRow.createdAt))}
-              {docs.length > 0 ? ` · ${docs.length} Dokumente` : null}
+              Created {formatDateDe(new Date(caseRow.createdAt))}
+              {docs.length > 0 ? ` · ${docs.length} Documents` : null}
             </p>
             <dl className="grid grid-cols-[128px_1fr] gap-x-4 gap-y-2 text-sm">
               <dt className="font-semibold">Geburtsdatum</dt>
               <dd className={birthdate ? "" : "text-muted-foreground"}>
-                {birthdate ?? "— nicht hinterlegt"}
+                {birthdate ?? "— not provided"}
               </dd>
-              <dt className="font-semibold">Notizen</dt>
+              <dt className="font-semibold">Notes</dt>
               <dd
                 className={
                   caseRow.notes
@@ -145,7 +145,7 @@ export default async function CaseDetailPage({
                     : "text-muted-foreground"
                 }
               >
-                {caseRow.notes ?? "— nicht hinterlegt"}
+                {caseRow.notes ?? "— not provided"}
               </dd>
             </dl>
           </CardContent>
@@ -157,14 +157,14 @@ export default async function CaseDetailPage({
             role="status"
             className="rounded-md border border-transparent bg-[--color-warning]/20 p-4 text-sm font-medium text-foreground"
           >
-            Bitte mindestens ein Dokument hinzufügen.
+            Add at least one document.
           </div>
         ) : hasUnreviewed ? (
           <div
             role="status"
             className="rounded-md border border-transparent bg-[--color-warning]/20 p-4 text-sm font-medium text-foreground"
           >
-            Mindestens ein Dokument ist noch nicht geprüft.
+            At least one document has not been reviewed yet.
           </div>
         ) : null}
 
@@ -174,16 +174,16 @@ export default async function CaseDetailPage({
             <div className="flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
               <div className="flex flex-col gap-1">
                 <h2 className="text-2xl font-semibold leading-tight">
-                  Dokumente
+                  Documents
                 </h2>
                 <p className="text-sm text-muted-foreground">
-                  Reihenfolge in der Laufliste — mit den Pfeilen anpassen.
+                  Order within the Laufliste — adjust with the arrows.
                 </p>
               </div>
               <AddDocumentsSheet
                 caseId={id}
                 assignableDocs={assignableDocs}
-                triggerLabel="Dokumente hinzufügen"
+                triggerLabel="Add documents"
               />
             </div>
             <DocumentsTable
@@ -202,12 +202,12 @@ export default async function CaseDetailPage({
               <p className="text-sm text-muted-foreground">
                 Zuletzt erstellt am{" "}
                 {formatDateTimeDe(new Date(latestLaufliste.generatedAt))} ·{" "}
-                {latestLaufliste.documentCount} Dokumente ·{" "}
+                {latestLaufliste.documentCount} Documents ·{" "}
                 {formatBytes(latestLaufliste.fileSize)}
               </p>
             ) : (
               <p className="text-sm text-muted-foreground">
-                Noch keine Laufliste erstellt.
+                No Laufliste created yet.
               </p>
             )}
             <CaseDetailClient
@@ -226,7 +226,7 @@ export default async function CaseDetailPage({
             <div className="flex flex-col gap-1">
               <h2 className="text-2xl font-semibold leading-tight">Historie</h2>
               <p className="text-sm text-muted-foreground">
-                Frühere Lauflisten dieses Falls.
+                Earlier Lauflisten for this case.
               </p>
             </div>
             <HistorieTable caseId={id} lauflisten={historie} />

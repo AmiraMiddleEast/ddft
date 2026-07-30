@@ -116,7 +116,7 @@ describe("AuthorityResultPanel — matched", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders '— nicht hinterlegt' placeholder for missing contact fields", () => {
+  it("renders '— not provided' placeholder for missing contact fields", () => {
     render(
       <AuthorityResultPanel
         result={{
@@ -137,7 +137,7 @@ describe("AuthorityResultPanel — matched", () => {
     );
 
     expect(
-      screen.getAllByText("— nicht hinterlegt").length,
+      screen.getAllByText("— not provided").length,
     ).toBeGreaterThanOrEqual(4);
   });
 });

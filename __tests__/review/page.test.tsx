@@ -196,13 +196,13 @@ describe("ReviewPage — Server Component branching", () => {
     render(jsx);
 
     // Breadcrumb — Übersicht / Dokument / Überprüfung
-    expect(screen.getByText("Übersicht")).toBeInTheDocument();
-    expect(screen.getByText("Dokument")).toBeInTheDocument();
+    expect(screen.getByText("Overview")).toBeInTheDocument();
+    expect(screen.getByText("Document")).toBeInTheDocument();
     // "Überprüfung" appears in both breadcrumb and <h1>; assert >= 1.
-    expect(screen.getAllByText("Überprüfung").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Review").length).toBeGreaterThanOrEqual(1);
 
     // Main heading
-    const h1 = screen.getByRole("heading", { level: 1, name: "Überprüfung" });
+    const h1 = screen.getByRole("heading", { level: 1, name: "Review" });
     expect(h1).toBeInTheDocument();
 
     // PDF preview testid (via mocked component)
@@ -210,14 +210,14 @@ describe("ReviewPage — Server Component branching", () => {
 
     // Form section heading
     expect(
-      screen.getByRole("heading", { level: 2, name: "Extrahierte Daten" }),
+      screen.getByRole("heading", { level: 2, name: "Extracted data" }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 2, name: "Originaldokument" }),
+      screen.getByRole("heading", { level: 2, name: "Original document" }),
     ).toBeInTheDocument();
 
     // Field labels from UI-SPEC
-    expect(screen.getByText("Dokumenttyp")).toBeInTheDocument();
-    expect(screen.getByText("Bundesland")).toBeInTheDocument();
+    expect(screen.getByText("Document type")).toBeInTheDocument();
+    expect(screen.getByText("Federal state")).toBeInTheDocument();
   });
 });

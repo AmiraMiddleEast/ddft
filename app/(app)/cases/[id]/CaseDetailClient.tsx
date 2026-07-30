@@ -35,22 +35,22 @@ export function CaseDetailClient({
   const [confirmRegenerate, setConfirmRegenerate] = React.useState(false);
 
   const hasLatest = latestLauflisteId !== null;
-  const primaryLabel = hasLatest ? "Erneut generieren" : "Laufliste generieren";
+  const primaryLabel = hasLatest ? "Regenerate" : "Generate Laufliste";
   const tooltip = isEmpty
-    ? "Bitte mindestens ein Dokument hinzufügen."
+    ? "Add at least one document."
     : hasUnreviewed
-      ? "Alle Dokumente müssen geprüft sein."
+      ? "All documents must be reviewed."
       : undefined;
 
   function runGenerate() {
     startTransition(async () => {
       const result = await generateLauflisteAction(caseId);
       if (result.ok) {
-        toast.success("Laufliste erstellt.");
+        toast.success("Laufliste created.");
         router.refresh();
       } else {
         toast.error(
-          "Laufliste konnte nicht erzeugt werden. Bitte erneut versuchen.",
+          "Could not generate the Laufliste. Please try again.",
         );
       }
     });
@@ -76,7 +76,7 @@ export function CaseDetailClient({
           {pending ? (
             <>
               <Loader2Icon className="animate-spin" aria-hidden />
-              Laufliste wird erstellt …
+              Generating Laufliste…
             </>
           ) : (
             primaryLabel
@@ -87,7 +87,7 @@ export function CaseDetailClient({
             href={`/api/cases/${caseId}/laufliste/${latestLauflisteId}/download`}
             className={buttonVariants({ variant: "outline" })}
           >
-            Herunterladen
+            Download
           </a>
         ) : null}
       </div>

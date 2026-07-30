@@ -74,14 +74,14 @@ export default async function ReviewPage({ params }: Props) {
       {/* Breadcrumb */}
       <nav className="mb-2 text-sm text-muted-foreground">
         <Link href="/" className="underline-offset-2 hover:underline">
-          Übersicht
+          Overview
         </Link>
         {" / "}
         <Link
           href={`/documents/${id}`}
           className="underline-offset-2 hover:underline"
         >
-          Dokument
+          Document
         </Link>
         {" / "}
         <span aria-current="page">Review</span>
@@ -90,7 +90,7 @@ export default async function ReviewPage({ params }: Props) {
       <header className="mb-8">
         <h1 className="text-2xl font-semibold leading-tight">Review</h1>
         <p className="mt-1 text-base text-muted-foreground">
-          {doc.filename} · Hochgeladen am {formatDe(new Date(doc.uploadedAt))}
+          {doc.filename} · Uploaded {formatDe(new Date(doc.uploadedAt))}
         </p>
       </header>
 
@@ -100,7 +100,7 @@ export default async function ReviewPage({ params }: Props) {
             id="section-pdf"
             className="mb-4 text-2xl font-semibold leading-tight"
           >
-            Originaldokument
+            Original document
           </h2>
           <Card className="p-0 overflow-hidden">
             <div className="min-h-[640px]">
@@ -114,7 +114,7 @@ export default async function ReviewPage({ params }: Props) {
             id="section-review"
             className="mb-4 text-2xl font-semibold leading-tight"
           >
-            Extrahierte Daten
+            Extracted data
           </h2>
           <Card className="px-6">
             <ReviewForm

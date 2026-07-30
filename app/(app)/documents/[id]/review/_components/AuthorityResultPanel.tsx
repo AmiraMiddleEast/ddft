@@ -26,7 +26,7 @@ type AuthorityResultPanelProps = {
 const BREADCRUMB_SEP = " › "; // U+203A
 
 function EmptyValue() {
-  return <span className="text-muted-foreground">— nicht hinterlegt</span>;
+  return <span className="text-muted-foreground">— not provided</span>;
 }
 
 /**

@@ -101,12 +101,12 @@ describe("CaseDetailPage — UI-SPEC Copywriting", () => {
 
     // Blocker banner copy verbatim.
     expect(
-      screen.getByText("Bitte mindestens ein Dokument hinzufügen."),
+      screen.getByText("Add at least one document."),
     ).toBeInTheDocument();
 
     // Section headings.
     expect(
-      screen.getByRole("heading", { name: "Dokumente", level: 2 }),
+      screen.getByRole("heading", { name: "Documents", level: 2 }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: "Laufliste", level: 2 }),
@@ -117,17 +117,17 @@ describe("CaseDetailPage — UI-SPEC Copywriting", () => {
 
     // Generate CTA exists and is disabled (empty case).
     const generateBtn = screen.getByRole("button", {
-      name: /Laufliste generieren/,
+      name: /Generate Laufliste/,
     });
     expect(generateBtn).toBeDisabled();
 
     // Historie empty state.
     expect(
-      screen.getByText("Noch keine früheren Lauflisten vorhanden."),
+      screen.getByText("No earlier Lauflisten yet."),
     ).toBeInTheDocument();
 
     // Person meta shows empty placeholders for birthdate + notes.
-    expect(screen.getAllByText("— nicht hinterlegt").length).toBe(2);
+    expect(screen.getAllByText("— not provided").length).toBe(2);
   });
 
   it("renders unreviewed-docs banner when at least one doc is not approved", async () => {
@@ -166,20 +166,20 @@ describe("CaseDetailPage — UI-SPEC Copywriting", () => {
 
     expect(
       screen.getByText(
-        "Mindestens ein Dokument ist noch nicht geprüft.",
+        "At least one document has not been reviewed yet.",
       ),
     ).toBeInTheDocument();
 
     // Document row visible with unreviewed badge.
     expect(screen.getByText("geburtsurkunde.pdf")).toBeInTheDocument();
-    expect(screen.getByText("Noch nicht geprüft")).toBeInTheDocument();
+    expect(screen.getByText("Not reviewed yet")).toBeInTheDocument();
 
     // Notes visible.
     expect(screen.getByText("Eilfall")).toBeInTheDocument();
 
     // Generate disabled because of unreviewed doc.
     const generateBtn = screen.getByRole("button", {
-      name: /Laufliste generieren/,
+      name: /Generate Laufliste/,
     });
     expect(generateBtn).toBeDisabled();
   });

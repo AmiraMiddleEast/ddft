@@ -71,7 +71,7 @@ export function DocumentsTable({ caseId, docs, assignableDocs }: Props) {
       if (!result.ok) {
         setOptimisticDocs(prev);
         toast.error(
-          "Reihenfolge konnte nicht gespeichert werden. Bitte erneut versuchen.",
+          "Could not save the order. Please try again.",
         );
         return;
       }
@@ -83,12 +83,12 @@ export function DocumentsTable({ caseId, docs, assignableDocs }: Props) {
     return (
       <div className="flex flex-col items-center gap-4 py-12 text-center">
         <p className="text-base text-muted-foreground">
-          Noch keine Dokumente zugeordnet.
+          No documents assigned yet.
         </p>
         <AddDocumentsSheet
           caseId={caseId}
           assignableDocs={assignableDocs}
-          triggerLabel="Dokumente hinzufügen"
+          triggerLabel="Add documents"
         />
       </div>
     );
@@ -103,8 +103,8 @@ export function DocumentsTable({ caseId, docs, assignableDocs }: Props) {
         <TableHeader>
           <TableRow>
             <TableHead className="w-12">#</TableHead>
-            <TableHead>Dokument</TableHead>
-            <TableHead>Dokumenttyp</TableHead>
+            <TableHead>Document</TableHead>
+            <TableHead>Documenttyp</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right" />
           </TableRow>
@@ -123,9 +123,9 @@ export function DocumentsTable({ caseId, docs, assignableDocs }: Props) {
                 <TableCell className="text-muted-foreground">—</TableCell>
                 <TableCell>
                   {approved ? (
-                    <Badge variant="outline">Geprüft</Badge>
+                    <Badge variant="outline">Reviewed</Badge>
                   ) : (
-                    <Badge variant="warning">Noch nicht geprüft</Badge>
+                    <Badge variant="warning">Not reviewed yet</Badge>
                   )}
                 </TableCell>
                 <TableCell className="text-right">
@@ -170,7 +170,7 @@ export function DocumentsTable({ caseId, docs, assignableDocs }: Props) {
                       }
                       disabled={pending}
                     >
-                      Entfernen
+                      Remove
                     </Button>
                   </div>
                 </TableCell>

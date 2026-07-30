@@ -75,8 +75,8 @@ export function AddDocumentsSheet({
         const n = result.data.inserted;
         toast.success(
           n === 1
-            ? "Dokument hinzugefügt."
-            : `${n} Dokumente hinzugefügt.`,
+            ? "Document added."
+            : `${n} documents added.`,
         );
         reset();
         setOpen(false);
@@ -85,19 +85,19 @@ export function AddDocumentsSheet({
       }
       if (result.error === "DOC_ALREADY_ASSIGNED") {
         toast.error(
-          "Dokument ist bereits einem anderen Fall zugeordnet.",
+          "The document is already assigned to another case.",
         );
         router.refresh();
         return;
       }
       toast.error(
-        "Dokumente konnten nicht hinzugefügt werden. Bitte erneut versuchen.",
+        "Could not add the documents. Please try again.",
       );
     });
   }
 
   const count = selected.size;
-  const addLabel = count === 0 ? "Hinzufügen" : `${count} hinzufügen`;
+  const addLabel = count === 0 ? "Add" : `Add ${count}`;
 
   return (
     <Sheet
@@ -118,9 +118,9 @@ export function AddDocumentsSheet({
         className="w-full sm:max-w-[480px] flex flex-col gap-0"
       >
         <SheetHeader className="gap-2 p-6 pb-4">
-          <SheetTitle>Dokumente hinzufügen</SheetTitle>
+          <SheetTitle>Add documents</SheetTitle>
           <SheetDescription>
-            Dokumente mit abgeschlossener Analyse, die keinem anderen Fall
+            Documents with a completed analysis that are not assigned to another case
             zugeordnet sind.
           </SheetDescription>
         </SheetHeader>
@@ -129,10 +129,10 @@ export function AddDocumentsSheet({
           {assignableDocs.length === 0 ? (
             <div className="flex flex-col items-center gap-4 py-12 text-center px-4">
               <p className="text-base text-muted-foreground">
-                Keine Dokumente verfügbar. Bitte zuerst ein Dokument hochladen.
+                No documents available. Upload a document first.
               </p>
               <Link href="/upload" className={buttonVariants()}>
-                Dokument hochladen
+                Upload document
               </Link>
             </div>
           ) : (
@@ -140,8 +140,8 @@ export function AddDocumentsSheet({
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-8" />
-                  <TableHead>Dokument</TableHead>
-                  <TableHead>Dokumenttyp</TableHead>
+                  <TableHead>Document</TableHead>
+                  <TableHead>Documenttyp</TableHead>
                   <TableHead>Hochgeladen</TableHead>
                 </TableRow>
               </TableHeader>
@@ -157,7 +157,7 @@ export function AddDocumentsSheet({
                         <Checkbox
                           checked={checked}
                           onCheckedChange={() => toggle(d.id)}
-                          aria-label={`${d.filename} auswählen`}
+                          aria-label={`${d.filename} select`}
                         />
                       </TableCell>
                       <TableCell
@@ -190,7 +190,7 @@ export function AddDocumentsSheet({
             }}
             disabled={pending}
           >
-            Abbrechen
+            Cancel
           </Button>
           <Button
             type="button"
