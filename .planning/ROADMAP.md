@@ -152,11 +152,11 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 **Plans:** 5 plans
 Plans:
-- [ ] 07-01-PLAN.md — App shell, auth screen, all Zod validation messages (Wave 1)
-- [ ] 07-02-PLAN.md — Upload, document detail, review flow (Wave 2)
-- [ ] 07-03-PLAN.md — Cases and history (Wave 2)
-- [ ] 07-04-PLAN.md — Admin: Behörden, CoGS, settings (Wave 2)
-- [ ] 07-05-PLAN.md — Final sweep + German-output regression check + human verify (Wave 3)
+- [x] 07-01-PLAN.md — App shell, auth screen, all Zod validation messages (Wave 1)
+- [x] 07-02-PLAN.md — Upload, document detail, review flow (Wave 2)
+- [x] 07-03-PLAN.md — Cases and history (Wave 2)
+- [x] 07-04-PLAN.md — Admin: Behörden, CoGS, settings (Wave 2)
+- [x] 07-05-PLAN.md — Final sweep + regression check done; human-verify checkpoint pending deploy (Wave 3)
 **UI hint**: yes
 
 ### Phase 8: Multi-user team workspace with attribution and user administration
